@@ -6,6 +6,33 @@ const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
 const videoCards = document.querySelectorAll(".video-card");
 
+const videos = {
+  1: {
+    title: "Jannat Full Movie | Emraan Hashmi",
+    url: "https://youtu.be/rdDSok6g1LI?si=g5i3DvlkaO555qY0",
+  },
+
+  2: {
+    title: "Aashiq Banaya Aapne | HD Video Song",
+    url: "https://www.youtube.com/embed/VIDEO_ID_2",
+  },
+
+  3: {
+    title: "Murder (2004) Best Scenes",
+    url: "https://www.youtube.com/embed/VIDEO_ID_3",
+  },
+
+  4: {
+    title: "Hamari Adhuri Kahani | Official Trailer",
+    url: "https://www.youtube.com/embed/VIDEO_ID_4",
+  },
+
+  5: {
+    title: "Emraan Hashmi Exclusive Interview",
+    url: "https://www.youtube.com/embed/VIDEO_ID_5",
+  },
+};
+
 function searchVideos() {
   const value = searchInput.value.toLowerCase();
 
@@ -30,7 +57,6 @@ searchInput.addEventListener("keyup", function (e) {
 
 searchInput.addEventListener("input", searchVideos);
 
-
 // ===============================
 // Profile Menu
 // ===============================
@@ -51,9 +77,6 @@ profileBtn.addEventListener("click", function (e) {
 document.addEventListener("click", function () {
   profileMenu.style.display = "none";
 });
-
-
-
 // ===============================
 // Sidebar
 // ===============================
@@ -88,18 +111,18 @@ menuBtn.addEventListener("click", function () {
     }
   });
 });
-
 // ===============================
 // Video Click
 // ===============================
-
 const articles = document.querySelectorAll("article");
 
-articles.forEach(function (article) {
-  article.addEventListener("click", function () {
-    const title = this.querySelector("h3").textContent;
+articles.forEach((article) => {
+  article.style.cursor = "pointer";
 
-    alert("Now Playing:\n\n" + title);
+  article.addEventListener("click", () => {
+    const id = article.dataset.id;
+
+    window.open("video.html?id=" + id, "_blank");
   });
 });
 
