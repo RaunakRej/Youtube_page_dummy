@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="youtube_style.css">
-    <script src="Youtube_javascript.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dummy YouTube</title>
-     <link rel="icon" type="image/png"
+    <link rel="icon" type="image/png"
         href="https://www.freepnglogos.com/uploads/youtube-logo-png/youtube-transparent-youtube-icon-download-clipart-with-transparent-25.png">
 </head>
 
@@ -23,7 +22,7 @@
 
         <!-- Center -->
         <div>
-            <input type="text" id="searchBox" placeholder="Search videos...">
+            <input type="text" id="searchInput" placeholder="Search videos...">
             <button id="searchBtn">Search</button>
         </div>
 
@@ -66,85 +65,74 @@
 
             <h2>Recommended Videos</h2>
 
-            <!-- Video Card 1 -->
-            <!-- Video Card 1 -->
-            <article>
-
-                <img src="images/emraan1.jpg" alt="Emraan Hashmi Movie">
-
-                <div>
-                    <h3>Jannat Full Movie | Emraan Hashmi</h3>
-                    <p>T-Series Movies</p>
-                    <p>25M views • 2 years ago</p>
-                </div>
-
-            </article>
+            <div class="video-card">
+                <article>
+                    <img
+                        src="https://cdn.cinematerial.com/p/297x/iajmjaap/jannat-indian-movie-poster-md.jpg?v=1456298328">
+                    <div>
+                        <h3>Jannat Full Movie | Emraan Hashmi</h3>
+                        <p>T-Series Movies</p>
+                        <p>25M views • 2 years ago</p>
+                    </div>
+                </article>
+            </div>
 
             <hr>
 
-            <!-- Video Card 2 -->
-            <!-- Video Card 2 -->
-            <article>
-
-                <img src="images/emraan2.jpg" alt="Emraan Hashmi Song">
-
-                <div>
-                    <h3>Aashiq Banaya Aapne | HD Video Song</h3>
-                    <p>Bollywood Hits</p>
-                    <p>120M views • 4 years ago</p>
-                </div>
-
-            </article>
+            <div class="video-card">
+                <article>
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS42lvnHL2Hnqnjocbv1Q9vMdhVQEsehl34HcLcrfSHyg&s=10">
+                    <div>
+                        <h3>Aashiq Banaya Aapne | HD Video Song</h3>
+                        <p>Bollywood Hits</p>
+                        <p>120M views • 4 years ago</p>
+                    </div>
+                </article>
+            </div>
 
             <hr>
 
-            <!-- Video Card 3 -->
-            <!-- Video Card 3 -->
-            <article>
-
-                <img src="images/emraan3.jpg" alt="Murder Movie">
-
-                <div>
-                    <h3>Murder (2004) Best Scenes</h3>
-                    <p>Movie Clips</p>
-                    <p>15M views • 1 year ago</p>
-                </div>
-
-            </article>
-            <hr>
-
-            <!-- Video Card 4 -->
-            <!-- Video Card 4 -->
-            <article>
-
-                <img src="images/emraan4.jpg" alt="Hamari Adhuri Kahani">
-
-                <div>
-                    <h3>Hamari Adhuri Kahani | Official Trailer</h3>
-                    <p>Movie Trailers</p>
-                    <p>45M views • 5 years ago</p>
-                </div>
-
-            </article>
+            <div class="video-card">
+                <article>
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvSOC3si4jKR47IV6FprMm03f3dcYL5GoGmZEZQvebmg&s=10">
+                    <div>
+                        <h3>Murder (2004) Best Scenes</h3>
+                        <p>Movie Clips</p>
+                        <p>15M views • 1 year ago</p>
+                    </div>
+                </article>
+            </div>
 
             <hr>
 
-            <!-- Video Card 5 -->
-            <!-- Video Card 5 -->
-            <article>
+            <div class="video-card">
+                <article>
+                    <img src="https://picsum.photos/300/180">
+                    <div>
+                        <h3>Hamari Adhuri Kahani | Official Trailer</h3>
+                        <p>Movie Trailers</p>
+                        <p>45M views • 5 years ago</p>
+                    </div>
+                </article>
+            </div>
 
-                <img src="images/emraan5.jpg" alt="Emraan Hashmi Interview">
+            <hr>
 
-                <div>
-                    <h3>Emraan Hashmi Exclusive Interview</h3>
-                    <p>Film Companion</p>
-                    <p>3.5M views • 6 months ago</p>
-                </div>
-
-            </article>
+            <div class="video-card">
+                <article>
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXip1tYlrJ4pef4ugmcjnHD7na_C_I8Eia4FzfLFLU6Q&s=10">
+                    <div>
+                        <h3>Emraan Hashmi Exclusive Interview</h3>
+                        <p>Film Companion</p>
+                        <p>3.5M views • 6 months ago</p>
+                    </div>
+                </article>
+            </div>
 
         </section>
-
     </main>
 
     <hr>
@@ -152,10 +140,10 @@
     <!-- Footer -->
     <footer>
 
-        <p>&copy; 2026 MyTube. This is a dummy webpage created for learning purposes.</p>
+        <p>&copy; 2026 RTube. This is a dummy webpage created for learning purposes.</p>
 
     </footer>
-
+    <script src="Youtube_javascript.js"></script>
 </body>
 
 </html>
