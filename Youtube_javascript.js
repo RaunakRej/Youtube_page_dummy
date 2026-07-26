@@ -71,6 +71,25 @@ menuItems.forEach(function (item) {
 });
 
 // ===============================
+// Sidebar Toggle
+// ===============================
+const menuBtn = document.getElementById("menuBtn");
+const sidebar = document.getElementById("sidebar");
+const hideItems = document.querySelectorAll(".hide-item");
+
+menuBtn.addEventListener("click", function () {
+  sidebar.classList.toggle("small");
+
+  hideItems.forEach(function (item) {
+    if (item.style.display === "none") {
+      item.style.display = "block";
+    } else {
+      item.style.display = "none";
+    }
+  });
+});
+
+// ===============================
 // Video Click
 // ===============================
 
