@@ -10,6 +10,98 @@ body {
   color: white;
 }
 
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-container {
+  position: relative;
+}
+
+.profile-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.profile-btn img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.profile-menu {
+  position: absolute;
+
+  right: 0;
+
+  top: 55px;
+
+  width: 260px;
+
+  background: #222;
+
+  color: white;
+
+  border-radius: 10px;
+
+  display: none;
+
+  overflow: hidden;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+  z-index: 999;
+}
+
+.profile-menu a {
+  display: block;
+
+  color: white;
+
+  text-decoration: none;
+
+  padding: 12px 15px;
+}
+
+.profile-menu a:hover {
+  background: #444;
+}
+
+.profile-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 15px;
+}
+
+.profile-header img {
+  width: 60px;
+
+  height: 60px;
+
+  border-radius: 50%;
+}
+
+.profile-header h4 {
+  margin: 0;
+}
+
+.profile-header p {
+  margin: 5px 0 0;
+
+  color: #ccc;
+
+  font-size: 14px;
+}
+
+
 /* ===========================
    Header
 =========================== */
