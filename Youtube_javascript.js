@@ -30,6 +30,30 @@ searchInput.addEventListener("keyup", function (e) {
 
 searchInput.addEventListener("input", searchVideos);
 
+
+// ===============================
+// Profile Menu
+// ===============================
+
+const profileBtn = document.getElementById("profileBtn");
+const profileMenu = document.getElementById("profileMenu");
+
+profileBtn.addEventListener("click", function (e) {
+  e.stopPropagation();
+
+  if (profileMenu.style.display === "block") {
+    profileMenu.style.display = "none";
+  } else {
+    profileMenu.style.display = "block";
+  }
+});
+
+document.addEventListener("click", function () {
+  profileMenu.style.display = "none";
+});
+
+
+
 // ===============================
 // Sidebar
 // ===============================
