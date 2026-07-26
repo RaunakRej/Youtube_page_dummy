@@ -2,39 +2,36 @@
 // Search Videos
 // ===============================
 
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+const videoCards = document.querySelectorAll(".video-card");
+
 function searchVideos() {
-  const input = document.querySelector("header input");
-  const filter = input.value.toLowerCase();
+  const value = searchInput.value.toLowerCase();
 
-  const videos = document.querySelectorAll("article");
+  videoCards.forEach(function (card) {
+    const title = card.querySelector("h3").textContent.toLowerCase();
 
-  videos.forEach(function (video) {
-    const title = video.querySelector("h3").textContent.toLowerCase();
-
-    if (title.includes(filter)) {
-      video.style.display = "flex";
+    if (title.includes(value)) {
+      card.style.display = "block";
     } else {
-      video.style.display = "none";
+      card.style.display = "none";
     }
   });
 }
 
-// Search when button is clicked
-const searchButton = document.querySelector("header input + button");
+searchBtn.addEventListener("click", searchVideos);
 
-searchButton.addEventListener("click", searchVideos);
+searchInput.addEventListener("keyup", function (e) {
+  if (e.key === "Enter") {
+    searchVideos();
+  }
+});
 
-// Search when Enter key is pressed
-document
-  .querySelector("header input")
-  .addEventListener("keyup", function (event) {
-    if (event.key === "Enter") {
-      searchVideos();
-    }
-  });
+searchInput.addEventListener("input", searchVideos);
 
 // ===============================
-// Sidebar Active Menu
+// Sidebar
 // ===============================
 
 const menuItems = document.querySelectorAll("aside li");
@@ -45,18 +42,18 @@ menuItems.forEach(function (item) {
       li.style.background = "";
     });
 
-    this.style.background = "#ff0000";
+    this.style.background = "red";
   });
 });
 
 // ===============================
-// Video Card Click
+// Video Click
 // ===============================
 
-const videos = document.querySelectorAll("article");
+const articles = document.querySelectorAll("article");
 
-videos.forEach(function (video) {
-  video.addEventListener("click", function () {
+articles.forEach(function (article) {
+  article.addEventListener("click", function () {
     const title = this.querySelector("h3").textContent;
 
     alert("Now Playing:\n\n" + title);
@@ -64,15 +61,15 @@ videos.forEach(function (video) {
 });
 
 // ===============================
-// Hover Animation
+// Hover
 // ===============================
 
-videos.forEach(function (video) {
-  video.addEventListener("mouseenter", function () {
+articles.forEach(function (article) {
+  article.addEventListener("mouseenter", function () {
     this.style.transform = "scale(1.02)";
   });
 
-  video.addEventListener("mouseleave", function () {
+  article.addEventListener("mouseleave", function () {
     this.style.transform = "scale(1)";
   });
 });
@@ -85,26 +82,18 @@ const headerButtons = document.querySelectorAll("header button");
 
 headerButtons.forEach(function (btn) {
   btn.addEventListener("click", function () {
-    if (this.innerHTML.includes("📹")) {
+    if (this.innerHTML.includes("📹"))
       alert("Create Video feature coming soon!");
-    }
 
-    if (this.innerHTML.includes("🔔")) {
-      alert("No new notifications.");
-    }
+    if (this.innerHTML.includes("🔔")) alert("No new notifications.");
 
-    if (this.innerHTML.includes("👤")) {
-      alert("User Profile");
-    }
+    if (this.innerHTML.includes("👤")) alert("User Profile");
   });
 });
 
 // ===============================
-// Footer Year
+// Footer
 // ===============================
 
-const footer = document.querySelector("footer p");
-
-const year = new Date().getFullYear();
-
-footer.innerHTML = `&copy; ${year} MyTube. This is a dummy webpage created for learning purposes.`;
+document.querySelector("footer p").innerHTML =
+  `&copy; ${new Date().getFullYear()} RTube. This is a dummy webpage created for learning purposes.`;
