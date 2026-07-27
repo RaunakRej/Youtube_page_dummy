@@ -21,9 +21,14 @@
         </div>
 
         <!-- Center -->
-        <div>
-            <input type="text" id="searchInput" placeholder="Search videos...">
+        <div class="search-container">
+
+            <input type="text" id="searchInput" placeholder="Search videos..." oninput="toggleClearButton()">
+
+            <span id="clearBtn" onclick="clearSearch()">✖</span>
+
             <button id="searchBtn">Search</button>
+
         </div>
 
         <!-- Right -->
