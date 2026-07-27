@@ -157,6 +157,30 @@ headerButtons.forEach(function (btn) {
   });
 });
 
+function toggleClearButton() {
+  const input = document.getElementById("searchInput");
+  const clearBtn = document.getElementById("clearBtn");
+
+  if (input.value.trim() !== "") {
+    clearBtn.style.display = "flex";
+  } else {
+    clearBtn.style.display = "none";
+  }
+}
+function clearSearch() {
+  const input = document.getElementById("searchInput");
+
+  input.value = "";
+
+  document.getElementById("clearBtn").style.display = "none";
+
+  videoCards.forEach(function (card) {
+    card.style.display = "block";
+  });
+
+  input.focus();
+}
+
 // ===============================
 // Footer
 // ===============================
