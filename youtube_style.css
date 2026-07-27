@@ -297,3 +297,39 @@ footer {
     height: auto;
   }
 }
+
+
+/* Search Container */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Search Box */
+#searchInput {
+  width: 420px;
+  padding: 12px 40px 12px 15px;
+}
+
+/* Clear Button */
+#clearBtn {
+  position: absolute;
+  right: 95px; /* Adjust if necessary */
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #3a3a3a;
+  color: white;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 13px;
+  user-select: none;
+}
+
+#clearBtn:hover {
+  background: #5a5a5a;
+}
+
