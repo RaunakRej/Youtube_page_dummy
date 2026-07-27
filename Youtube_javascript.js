@@ -185,13 +185,42 @@ function clearSearch() {
 // Footer
 // ===============================
 
+// trending //// Handle Trending click
 document.getElementById("trending").addEventListener("click", function () {
   const trendingSection = document.getElementById("trending-section");
   const recommendedSection = document.querySelector("main section"); // first section
+  const musicSection = document.getElementById("music-section");
 
-  // Hide recommended, show trending
+  // Hide other sections
   recommendedSection.style.display = "none";
+  if (musicSection) musicSection.style.display = "none";
+
+  // Show only trending
   trendingSection.style.display = "block";
 });
+
+/// Music ///
+document.getElementById("music").addEventListener("click", function () {
+  const musicSection = document.getElementById("music-section");
+  const recommendedSection = document.querySelector("main section"); // first section
+  const trendingSection = document.getElementById("trending-section"); // add this if you have trending
+
+  // Hide other sections
+  recommendedSection.style.display = "none";
+  if (trendingSection) trendingSection.style.display = "none";
+
+  // Show music section
+  musicSection.style.display = "block";
+});
+
+// main //
+document.getElementById("home").addEventListener("click", function () {
+  const trendingSection = document.getElementById("trending-section");
+  const recommendedSection = document.querySelector("main section"); // first section
+
+  trendingSection.style.display = "none";
+  recommendedSection.style.display = "block";
+});
+
 document.querySelector("footer p").innerHTML =
   `&copy; ${new Date().getFullYear()} RTube. This is a dummy webpage created for learning purposes.`;
