@@ -185,5 +185,13 @@ function clearSearch() {
 // Footer
 // ===============================
 
+document.getElementById("trending").addEventListener("click", function () {
+  const trendingSection = document.getElementById("trending-section");
+  const recommendedSection = document.querySelector("main section"); // first section
+
+  // Hide recommended, show trending
+  recommendedSection.style.display = "none";
+  trendingSection.style.display = "block";
+});
 document.querySelector("footer p").innerHTML =
   `&copy; ${new Date().getFullYear()} RTube. This is a dummy webpage created for learning purposes.`;
