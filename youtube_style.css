@@ -484,3 +484,30 @@ footer {
     height: auto;
   }
 }
+
+
+
+
+#voiceBtn {
+  margin: 0 8px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  background: #f1f1f1;
+  transition: 0.3s;
+}
+
+#voiceBtn:hover {
+  background: #dddddd;
+}
+
+body.dark-mode #voiceBtn {
+  background: #303030;
+  color: white;
+}
+
+body.dark-mode #voiceBtn:hover {
+  background: #444;
+}
