@@ -93,6 +93,36 @@ menuItems.forEach(function (item) {
   });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  const appearanceBtn = document.getElementById("appearanceBtn");
+  const appearanceMenu = document.getElementById("appearanceMenu");
+  const backAppearance = document.getElementById("backAppearance");
+
+  appearanceBtn.addEventListener("click", () => {
+    appearanceMenu.style.display = "block";
+  });
+
+  backAppearance.addEventListener("click", () => {
+    appearanceMenu.style.display = "none";
+  });
+
+  document.querySelectorAll('input[name="theme"]').forEach((item) => {
+    item.addEventListener("change", function () {
+      if (this.value === "dark") {
+        document.body.classList.add("dark-mode");
+      } else if (this.value === "light") {
+        document.body.classList.remove("dark-mode");
+      } else {
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.body.classList.add("dark-mode");
+        } else {
+          document.body.classList.remove("dark-mode");
+        }
+      }
+    });
+  });
+});
+
 // ===============================
 // Sidebar Toggle
 // ===============================
@@ -186,40 +216,60 @@ function clearSearch() {
 // ===============================
 
 // trending //// Handle Trending click
+// ===============================
+// Trending
+// ===============================
+
 document.getElementById("trending").addEventListener("click", function () {
-  const trendingSection = document.getElementById("trending-section");
-  const recommendedSection = document.querySelector("main section"); // first section
-  const musicSection = document.getElementById("music-section");
+  document.getElementById("recommended-section").style.display = "none";
 
-  // Hide other sections
-  recommendedSection.style.display = "none";
-  if (musicSection) musicSection.style.display = "none";
+  document.getElementById("music-section").style.display = "none";
 
-  // Show only trending
-  trendingSection.style.display = "block";
+  document.getElementById("movies").style.display = "none";
+
+  document.getElementById("trending-section").style.display = "block";
 });
 
-/// Music ///
+/// Music ///// ===============================
+// Music
+// ===============================
+
 document.getElementById("music").addEventListener("click", function () {
-  const musicSection = document.getElementById("music-section");
-  const recommendedSection = document.querySelector("main section"); // first section
-  const trendingSection = document.getElementById("trending-section"); // add this if you have trending
+  document.getElementById("recommended-section").style.display = "none";
 
-  // Hide other sections
-  recommendedSection.style.display = "none";
-  if (trendingSection) trendingSection.style.display = "none";
+  document.getElementById("trending-section").style.display = "none";
 
-  // Show music section
-  musicSection.style.display = "block";
+  document.getElementById("movies").style.display = "none";
+
+  document.getElementById("music-section").style.display = "block";
 });
 
-// main //
-document.getElementById("home").addEventListener("click", function () {
-  const trendingSection = document.getElementById("trending-section");
-  const recommendedSection = document.querySelector("main section"); // first section
+/// Movies ///// ===============================
+// Movies
+// ===============================
 
-  trendingSection.style.display = "none";
-  recommendedSection.style.display = "block";
+document.getElementById("moviesBtn").addEventListener("click", function () {
+  document.getElementById("recommended-section").style.display = "none";
+
+  document.getElementById("trending-section").style.display = "none";
+
+  document.getElementById("music-section").style.display = "none";
+
+  document.getElementById("movies").style.display = "block";
+});
+
+// main //// ===============================
+// Home
+// ===============================
+
+document.getElementById("home").addEventListener("click", function () {
+  document.getElementById("recommended-section").style.display = "block";
+
+  document.getElementById("trending-section").style.display = "none";
+
+  document.getElementById("music-section").style.display = "none";
+
+  document.getElementById("movies").style.display = "none";
 });
 
 document.querySelector("footer p").innerHTML =
