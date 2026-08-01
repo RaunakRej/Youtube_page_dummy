@@ -32,11 +32,27 @@ const videos = {
     url: "https://www.youtube.com/embed/VIDEO_ID_5",
   },
 };
-
 function searchVideos() {
-  const value = searchInput.value.toLowerCase();
+  const value = searchInput.value.trim().toLowerCase();
 
-  videoCards.forEach(function (card) {
+  // Find the section that is currently visible
+  let activeSection = document.getElementById("recommended-section");
+
+  if (document.getElementById("trending-section").style.display === "block") {
+    activeSection = document.getElementById("trending-section");
+  }
+
+  if (document.getElementById("music-section").style.display === "block") {
+    activeSection = document.getElementById("music-section");
+  }
+
+  if (document.getElementById("movies").style.display === "block") {
+    activeSection = document.getElementById("movies");
+  }
+
+  const cards = activeSection.querySelectorAll(".video-card");
+
+  cards.forEach(function (card) {
     const title = card.querySelector("h3").textContent.toLowerCase();
 
     if (title.includes(value)) {
@@ -198,17 +214,15 @@ function toggleClearButton() {
   }
 }
 function clearSearch() {
-  const input = document.getElementById("searchInput");
-
-  input.value = "";
+  searchInput.value = "";
 
   document.getElementById("clearBtn").style.display = "none";
 
-  videoCards.forEach(function (card) {
+  document.querySelectorAll(".video-card").forEach(function (card) {
     card.style.display = "block";
   });
 
-  input.focus();
+  searchInput.focus();
 }
 
 // ===============================
@@ -221,40 +235,35 @@ function clearSearch() {
 // ===============================
 
 document.getElementById("trending").addEventListener("click", function () {
+  resetSearch();
+
   document.getElementById("recommended-section").style.display = "none";
-
   document.getElementById("music-section").style.display = "none";
-
   document.getElementById("movies").style.display = "none";
-
   document.getElementById("trending-section").style.display = "block";
 });
 
 /// Music ///// ===============================
 // Music
 // ===============================
-
 document.getElementById("music").addEventListener("click", function () {
+  resetSearch();
+
   document.getElementById("recommended-section").style.display = "none";
-
   document.getElementById("trending-section").style.display = "none";
-
   document.getElementById("movies").style.display = "none";
-
   document.getElementById("music-section").style.display = "block";
 });
 
 /// Movies ///// ===============================
 // Movies
 // ===============================
-
 document.getElementById("moviesBtn").addEventListener("click", function () {
+  resetSearch();
+
   document.getElementById("recommended-section").style.display = "none";
-
   document.getElementById("trending-section").style.display = "none";
-
   document.getElementById("music-section").style.display = "none";
-
   document.getElementById("movies").style.display = "block";
 });
 
@@ -263,14 +272,72 @@ document.getElementById("moviesBtn").addEventListener("click", function () {
 // ===============================
 
 document.getElementById("home").addEventListener("click", function () {
+  resetSearch();
+
   document.getElementById("recommended-section").style.display = "block";
-
   document.getElementById("trending-section").style.display = "none";
-
   document.getElementById("music-section").style.display = "none";
-
   document.getElementById("movies").style.display = "none";
 });
 
 document.querySelector("footer p").innerHTML =
   `&copy; ${new Date().getFullYear()} RTube. This is a dummy webpage created for learning purposes.`;
+
+/// footer ///
+
+function resetSearch() {
+  searchInput.value = "";
+
+  document.getElementById("clearBtn").style.display = "none";
+
+  document.querySelectorAll(".video-card").forEach(function (card) {
+    card.style.display = "block";
+  });
+}
+
+// ===============================
+// Voice Search
+// ===============================
+
+const voiceBtn = document.getElementById("voiceBtn");
+
+const SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+  const recognition = new SpeechRecognition();
+
+  recognition.lang = "en-US";
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  voiceBtn.addEventListener("click", () => {
+    recognition.start();
+
+    voiceBtn.innerHTML = "🎙️";
+  });
+
+  recognition.addEventListener("result", (event) => {
+    const transcript = event.results[0][0].transcript;
+
+    searchInput.value = transcript;
+
+    toggleClearButton();
+
+    searchVideos();
+  });
+
+  recognition.addEventListener("end", () => {
+    voiceBtn.innerHTML = "🎤";
+  });
+
+  recognition.addEventListener("error", () => {
+    voiceBtn.innerHTML = "🎤";
+
+    alert("Voice recognition failed.");
+  });
+} else {
+  voiceBtn.style.display = "none";
+
+  console.log("Speech Recognition not supported.");
+}
