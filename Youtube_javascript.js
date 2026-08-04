@@ -76,7 +76,6 @@ searchInput.addEventListener("input", searchVideos);
 // ===============================
 // Profile Menu
 // ===============================
-
 const profileBtn = document.getElementById("profileBtn");
 const profileMenu = document.getElementById("profileMenu");
 
@@ -90,9 +89,16 @@ profileBtn.addEventListener("click", function (e) {
   }
 });
 
+// Prevent clicks inside the menu from closing it
+profileMenu.addEventListener("click", function (e) {
+  e.stopPropagation();
+});
+
+// Close only when clicking outside
 document.addEventListener("click", function () {
   profileMenu.style.display = "none";
 });
+
 // ===============================
 // Sidebar
 // ===============================
