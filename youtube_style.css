@@ -485,9 +485,6 @@ footer {
   }
 }
 
-
-
-
 #voiceBtn {
   margin: 0 8px;
   padding: 8px 12px;
@@ -510,4 +507,140 @@ body.dark-mode #voiceBtn {
 
 body.dark-mode #voiceBtn:hover {
   background: #444;
+}
+
+/* ===== IMPROVED RESPONSIVE DESIGN ===== */
+
+img {
+  max-width: 100%;
+  display: block;
+}
+body {
+  overflow-x: hidden;
+}
+
+main {
+  display: flex;
+  align-items: flex-start;
+}
+aside {
+  min-width: 220px;
+  flex-shrink: 0;
+}
+.search-container {
+  flex: 1;
+  max-width: 550px;
+}
+#searchInput {
+  width: 100%;
+  max-width: 100%;
+}
+header input {
+  width: 100%;
+  max-width: 450px;
+}
+article {
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+article img {
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+}
+#clearBtn {
+  right: 55px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 992px) {
+  header {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px;
+  }
+  .search-container {
+    order: 3;
+    width: 100%;
+    max-width: none;
+  }
+  main {
+    flex-direction: column;
+  }
+  aside {
+    width: 100%;
+    min-height: auto;
+    position: relative;
+    top: 0;
+  }
+  aside ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  section {
+    padding: 15px;
+  }
+  article {
+    flex-direction: column;
+  }
+  article img {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  header h2 {
+    font-size: 20px;
+  }
+  .header-right {
+    gap: 8px;
+  }
+  header button,
+  #voiceBtn {
+    padding: 8px 10px;
+    height: 42px;
+  }
+  .profile-btn img {
+    width: 34px;
+    height: 34px;
+  }
+  .profile-menu,
+  .appearance-menu {
+    width: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  header > div,
+  .header-right {
+    width: 100%;
+    justify-content: center;
+  }
+  .search-container {
+    width: 100%;
+  }
+  #searchInput {
+    font-size: 14px;
+  }
+  aside li {
+    text-align: center;
+  }
+  .profile-menu,
+  .appearance-menu {
+    width: 95%;
+    max-width: 280px;
+  }
+  article h3 {
+    font-size: 16px;
+  }
+  article p,
+  footer {
+    font-size: 13px;
+  }
 }
