@@ -9,48 +9,62 @@
    THEME VARIABLES
 ========================== */
 
-:root {
-  --bg: #ffffff;
-  --text: #000000;
+:root{
 
-  --header: #ffffff;
-  --sidebar: #f5f5f5;
+--bg:#f9f9f9;
+--text:#0f0f0f;
 
-  --card: #ffffff;
-  --card-hover: #eeeeee;
+--header:#ffffff;
+--sidebar:#ffffff;
 
-  --menu: #ffffff;
+--card:#ffffff;
+--card-hover:#f2f2f2;
 
-  --button: #e5e5e5;
-  --button-hover: #d4d4d4;
+--menu:#ffffff;
 
-  --input-bg: #f0f0f0;
+--button:#f2f2f2;
+--button-hover:#e5e5e5;
 
-  --border: #cccccc;
+--input-bg:#ffffff;
 
-  --secondary-text: #555555;
+--border:#e6e6e6;
+
+--secondary-text:#606060;
+
+--primary:#ff0000;
+
+--shadow:0 3px 12px rgba(0,0,0,.08);
+
+--radius:16px;
+
 }
 
-body.dark-mode {
-  --bg: #0f0f0f;
-  --text: #ffffff;
+body.dark-mode{
 
-  --header: #202020;
-  --sidebar: #181818;
+--bg:#0f0f0f;
+--text:#ffffff;
 
-  --card: #202020;
-  --card-hover: #2b2b2b;
+--header:#202020;
+--sidebar:#181818;
 
-  --menu: #222222;
+--card:#202020;
+--card-hover:#2f2f2f;
 
-  --button: #333333;
-  --button-hover: #444444;
+--menu:#282828;
 
-  --input-bg: #121212;
+--button:#303030;
+--button-hover:#404040;
 
-  --border: #444444;
+--input-bg:#121212;
 
-  --secondary-text: #b0b0b0;
+--border:#3c3c3c;
+
+--secondary-text:#aaaaaa;
+
+--primary:#ff3b3b;
+
+--shadow:0 4px 18px rgba(0,0,0,.45);
+
 }
 
 /* ==========================
@@ -67,19 +81,24 @@ body {
    HEADER
 ========================== */
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 25px;
+header{
 
-  background: var(--header);
+display:flex;
+justify-content:space-between;
+align-items:center;
 
-  position: sticky;
-  top: 0;
-  z-index: 100;
+padding:14px 28px;
 
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+background:var(--header);
+
+box-shadow:var(--shadow);
+
+position:sticky;
+
+top:0;
+
+z-index:100;
+
 }
 
 header div {
@@ -395,9 +414,30 @@ article p {
   align-items: center;
 }
 
-#searchInput {
-  width: 420px;
-  padding: 12px 40px 12px 15px;
+#searchInput{
+
+height:45px;
+
+padding:0 20px;
+
+border-radius:999px;
+
+border:1px solid var(--border);
+
+background:var(--input-bg);
+
+font-size:15px;
+
+transition:.25s;
+
+}
+
+#searchInput:focus{
+
+border-color:#3ea6ff;
+
+box-shadow:0 0 0 3px rgba(62,166,255,.18);
+
 }
 
 #clearBtn {
