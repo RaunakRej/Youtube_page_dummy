@@ -90,7 +90,7 @@ searchInput.addEventListener("input", searchVideos);
 const profileBtn = document.getElementById("profileBtn");
 const profileMenu = document.getElementById("profileMenu");
 
-profileBn.addEventListener("click", function (e) {
+profileBtn.addEventListener("click", function (e) {
   e.stopPropagation();
 
   if (profileMenu.style.display === "block") {
