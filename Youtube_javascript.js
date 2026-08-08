@@ -1,10 +1,11 @@
 // ===============================
-// Search Videos
+// Search Videos with Spinner
 // ===============================
 
 const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
 const videoCards = document.querySelectorAll(".video-card");
+const spinner = document.getElementById("spinner");
 
 const videos = {
   1: {
@@ -32,35 +33,45 @@ const videos = {
     url: "https://www.youtube.com/embed/VIDEO_ID_5",
   },
 };
+
 function searchVideos() {
   const value = searchInput.value.trim().toLowerCase();
 
-  // Find the section that is currently visible
-  let activeSection = document.getElementById("recommended-section");
+  // Show spinner
+  spinner.style.display = "flex";
 
-  if (document.getElementById("trending-section").style.display === "block") {
-    activeSection = document.getElementById("trending-section");
-  }
+  // Simulate search delay
+  setTimeout(() => {
+    // Find the section that is currently visible
+    let activeSection = document.getElementById("recommended-section");
 
-  if (document.getElementById("music-section").style.display === "block") {
-    activeSection = document.getElementById("music-section");
-  }
-
-  if (document.getElementById("movies").style.display === "block") {
-    activeSection = document.getElementById("movies");
-  }
-
-  const cards = activeSection.querySelectorAll(".video-card");
-
-  cards.forEach(function (card) {
-    const title = card.querySelector("h3").textContent.toLowerCase();
-
-    if (title.includes(value)) {
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
+    if (document.getElementById("trending-section").style.display === "block") {
+      activeSection = document.getElementById("trending-section");
     }
-  });
+
+    if (document.getElementById("music-section").style.display === "block") {
+      activeSection = document.getElementById("music-section");
+    }
+
+    if (document.getElementById("movies").style.display === "block") {
+      activeSection = document.getElementById("movies");
+    }
+
+    const cards = activeSection.querySelectorAll(".video-card");
+
+    cards.forEach(function (card) {
+      const title = card.querySelector("h3").textContent.toLowerCase();
+
+      if (title.includes(value)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    // Hide spinner after search
+    spinner.style.display = "none";
+  }, 800); // 0.8 second delay for spinner effect
 }
 
 searchBtn.addEventListener("click", searchVideos);
@@ -79,7 +90,7 @@ searchInput.addEventListener("input", searchVideos);
 const profileBtn = document.getElementById("profileBtn");
 const profileMenu = document.getElementById("profileMenu");
 
-profileBtn.addEventListener("click", function (e) {
+profileBn.addEventListener("click", function (e) {
   e.stopPropagation();
 
   if (profileMenu.style.display === "block") {
@@ -228,6 +239,9 @@ function clearSearch() {
     card.style.display = "block";
   });
 
+  // Hide spinner when clearing search
+  spinner.style.display = "none";
+
   searchInput.focus();
 }
 
@@ -295,6 +309,9 @@ function resetSearch() {
   searchInput.value = "";
 
   document.getElementById("clearBtn").style.display = "none";
+
+  // Hide spinner when resetting
+  spinner.style.display = "none";
 
   document.querySelectorAll(".video-card").forEach(function (card) {
     card.style.display = "block";
