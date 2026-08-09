@@ -364,3 +364,55 @@ if (SpeechRecognition) {
 
   console.log("Speech Recognition not supported.");
 }
+
+/* ==========================
+   ADDED: Help panel JS
+   ========================== */
+
+// Help panel toggle (keeps behavior consistent with profile menu)
+const helpBtn = document.getElementById('helpBtn');
+const helpMenu = document.getElementById('helpMenu');
+const closeHelp = document.getElementById('closeHelp');
+
+if (helpBtn && helpMenu) {
+  helpBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+
+    // hide profileMenu if open
+    if (profileMenu) profileMenu.style.display = 'none';
+
+    const isOpen = helpMenu.style.display === 'block';
+    helpMenu.style.display = isOpen ? 'none' : 'block';
+    helpMenu.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
+  });
+
+  // prevent clicks inside helpMenu from closing it
+  helpMenu.addEventListener('click', (e) => e.stopPropagation());
+
+  // close button inside help panel
+  if (closeHelp) {
+    closeHelp.addEventListener('click', (e) => {
+      e.stopPropagation();
+      helpMenu.style.display = 'none';
+      helpMenu.setAttribute('aria-hidden', 'true');
+    });
+  }
+
+  // click outside should close help
+  document.addEventListener('click', () => {
+    helpMenu.style.display = 'none';
+    helpMenu.setAttribute('aria-hidden', 'true');
+  });
+
+  // Optional: basic search/filter for help list
+  const helpSearch = document.getElementById('helpSearch');
+  if (helpSearch) {
+    helpSearch.addEventListener('input', () => {
+      const q = helpSearch.value.trim().toLowerCase();
+      document.querySelectorAll('#helpMenu .help-item').forEach(item => {
+        const text = item.textContent.trim().toLowerCase();
+        item.style.display = text.includes(q) ? 'flex' : 'none';
+      });
+    });
+  }
+}
