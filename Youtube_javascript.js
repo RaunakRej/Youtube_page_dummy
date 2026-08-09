@@ -110,6 +110,70 @@ document.addEventListener("click", function () {
   profileMenu.style.display = "none";
 });
 
+// ===== Namespaced Help panel JS (non-invasive) =====
+(function () {
+  const profileContainer = document.querySelector(".profile-container");
+  if (!profileContainer) return;
+
+  const helpBtn = profileContainer.querySelector("#helpBtn");
+  const helpMenu = profileContainer.querySelector("#helpMenu");
+  const closeHelp = profileContainer.querySelector("#closeHelp");
+  const helpSearch = profileContainer.querySelector("#helpSearch");
+
+  if (!helpBtn || !helpMenu) return;
+
+  // Toggle help open/close
+  helpBtn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    const open = helpMenu.classList.contains("is-open");
+    if (open) {
+      helpMenu.classList.remove("is-open");
+      helpMenu.setAttribute("aria-hidden", "true");
+    } else {
+      // show help panel without forcing profile menu to close
+      helpMenu.classList.add("is-open");
+      helpMenu.setAttribute("aria-hidden", "false");
+
+      // move focus to search input for accessibility
+      const input = helpMenu.querySelector("#helpSearch");
+      if (input) input.focus();
+    }
+  });
+
+  // Prevent clicks inside the help panel from closing it
+  helpMenu.addEventListener("click", function (e) {
+    e.stopPropagation();
+  });
+
+  // Close help using the close button
+  if (closeHelp) {
+    closeHelp.addEventListener("click", function (e) {
+      e.stopPropagation();
+      helpMenu.classList.remove("is-open");
+      helpMenu.setAttribute("aria-hidden", "true");
+    });
+  }
+
+  // Clicking outside closes help (does not affect other handlers)
+  document.addEventListener("click", function () {
+    if (helpMenu.classList.contains("is-open")) {
+      helpMenu.classList.remove("is-open");
+      helpMenu.setAttribute("aria-hidden", "true");
+    }
+  });
+
+  // Optional: simple search/filter within help items
+  if (helpSearch) {
+    helpSearch.addEventListener("input", function () {
+      const q = helpSearch.value.trim().toLowerCase();
+      const items = helpMenu.querySelectorAll(".help-item");
+      items.forEach(function (item) {
+        const txt = item.textContent.trim().toLowerCase();
+        item.style.display = txt.includes(q) ? "flex" : "none";
+      });
+    });
+  }
+})();
 // ===============================
 // Sidebar
 // ===============================
@@ -363,56 +427,4 @@ if (SpeechRecognition) {
   voiceBtn.style.display = "none";
 
   console.log("Speech Recognition not supported.");
-}
-
-/* ==========================
-   ADDED: Help panel JS
-   ========================== */
-
-// Help panel toggle (keeps behavior consistent with profile menu)
-const helpBtn = document.getElementById('helpBtn');
-const helpMenu = document.getElementById('helpMenu');
-const closeHelp = document.getElementById('closeHelp');
-
-if (helpBtn && helpMenu) {
-  helpBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-
-    // hide profileMenu if open
-    if (profileMenu) profileMenu.style.display = 'none';
-
-    const isOpen = helpMenu.style.display === 'block';
-    helpMenu.style.display = isOpen ? 'none' : 'block';
-    helpMenu.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
-  });
-
-  // prevent clicks inside helpMenu from closing it
-  helpMenu.addEventListener('click', (e) => e.stopPropagation());
-
-  // close button inside help panel
-  if (closeHelp) {
-    closeHelp.addEventListener('click', (e) => {
-      e.stopPropagation();
-      helpMenu.style.display = 'none';
-      helpMenu.setAttribute('aria-hidden', 'true');
-    });
-  }
-
-  // click outside should close help
-  document.addEventListener('click', () => {
-    helpMenu.style.display = 'none';
-    helpMenu.setAttribute('aria-hidden', 'true');
-  });
-
-  // Optional: basic search/filter for help list
-  const helpSearch = document.getElementById('helpSearch');
-  if (helpSearch) {
-    helpSearch.addEventListener('input', () => {
-      const q = helpSearch.value.trim().toLowerCase();
-      document.querySelectorAll('#helpMenu .help-item').forEach(item => {
-        const text = item.textContent.trim().toLowerCase();
-        item.style.display = text.includes(q) ? 'flex' : 'none';
-      });
-    });
-  }
 }
