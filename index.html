@@ -102,77 +102,61 @@
 
                     </div>
                     <a href="settings.html">⚙ Settings</a>
-                    <a href="#" id="helpBtn">❓ Help</a>
+                    <a href="#" id="helpBtn" class="profile-help-link">❓ Help</a>
+                    <div id="helpMenu" class="help-menu" aria-hidden="true" role="dialog" aria-label="Help">
+                        <div class="help-header">
+                            <span>Help</span>
+                            <button id="closeHelp" aria-label="Close help">✖</button>
+                        </div>
 
+                        <div class="help-content">
+                            <div class="help-section">
+                                <h4>Popular help resources</h4>
+                                <ul class="help-list">
+                                    <li class="help-item"><span class="help-icon">📄</span>
+                                        <div><a href="#" class="help-link">YouTube access restrictions for users under
+                                                the age of 16 in ...</a></div>
+                                    </li>
+                                    <li class="help-item"><span class="help-icon">📄</span>
+                                        <div><a href="#" class="help-link">Delete or hide your YouTube channel</a></div>
+                                    </li>
+                                    <li class="help-item"><span class="help-icon">📄</span>
+                                        <div><a href="#" class="help-link">Turn Restricted mode on or off on YouTube</a>
+                                        </div>
+                                    </li>
+                                    <li class="help-item"><span class="help-icon">📄</span>
+                                        <div><a href="#" class="help-link">Sign in and out of YouTube</a></div>
+                                    </li>
+                                    <li class="help-item"><span class="help-icon">📄</span>
+                                        <div><a href="#" class="help-link">Update the YouTube and YouTube Studio app</a>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <a class="help-forum" href="#" target="_blank" rel="noopener">Visit help forum ↗</a>
+
+                                <div class="help-search">
+                                    <input id="helpSearch" type="text" placeholder="Search Help"
+                                        aria-label="Search Help">
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="help-more">
+                                <h5>Need more help?</h5>
+                                <a href="#" class="help-link">Ask the Help Community</a>
+                            </div>
+                        </div>
+                    </div>
                     <hr>
 
                     <a href="#">🚪 Logout</a>
 
-                </div>
-
-                <!-- Help Panel (new) -->
-                <div id="helpMenu" class="help-menu" aria-hidden="true">
-                    <div class="help-header">
-                        <span>Help</span>
-                        <button id="closeHelp">✖</button>
-                    </div>
-
-                    <div class="help-content">
-                        <div class="help-section">
-                            <h4>Popular help resources</h4>
-                            <ul class="help-list">
-                                <li class="help-item">
-                                    <span class="help-icon">📄</span>
-                                    <div>
-                                        <strong>YouTube access restrictions for users under the age of 16 in ...</strong>
-                                    </div>
-                                </li>
-                                <li class="help-item">
-                                    <span class="help-icon">📄</span>
-                                    <div>
-                                        <strong>Delete or hide your YouTube channel</strong>
-                                    </div>
-                                </li>
-                                <li class="help-item">
-                                    <span class="help-icon">📄</span>
-                                    <div>
-                                        <strong>Turn Restricted mode on or off on YouTube</strong>
-                                    </div>
-                                </li>
-                                <li class="help-item">
-                                    <span class="help-icon">📄</span>
-                                    <div>
-                                        <strong>Sign in and out of YouTube</strong>
-                                    </div>
-                                </li>
-                                <li class="help-item">
-                                    <span class="help-icon">📄</span>
-                                    <div>
-                                        <strong>Update the YouTube and YouTube Studio app</strong>
-                                    </div>
-                                </li>
-                            </ul>
-
-                            <a class="help-forum" href="#">Visit help forum ↗</a>
-
-                            <div class="help-search">
-                                <input type="text" placeholder="Search Help" id="helpSearch">
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="help-more">
-                            <h5>Need more help?</h5>
-                            <a href="#">Ask the Help Community</a>
-                        </div>
-                    </div>
 
                 </div>
 
             </div>
-
-        </div>
 
     </header>
 
