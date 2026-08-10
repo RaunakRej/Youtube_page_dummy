@@ -36,9 +36,27 @@
         <!-- Right -->
         <!-- Right -->
         <div class="header-right">
+            <button id="createBtn">📹</button>
+            <div id="createMenu" class="create-menu">
 
-            <button>📹</button>
+                <div class="create-option" id="uploadVideoBtn">
+                    <span class="create-icon">▣</span>
+                    <span>Upload video</span>
+                    <span class="create-arrow">›</span>
+                </div>
 
+                <div class="create-option" id="goLiveBtn">
+                    <span class="create-icon">◉</span>
+                    <span>Go live</span>
+                    <span class="create-arrow">›</span>
+                </div>
+
+                <div class="create-option" id="createPostBtn">
+                    <span class="create-icon">📝</span>
+                    <span>Create post</span>
+                </div>
+
+            </div>
             <button>🔔</button>
 
             <div class="profile-container">
@@ -201,6 +219,11 @@
                 </li>
 
                 <li id="subscription">📺 Subscriptions</li>
+                <li class="sidebar-link" onclick="window.location.href='downloads.html'">
+                    <span style="font-size:22px;">⬇️</span>
+                    <span>Downloads</span>
+                </li>
+
 
             </ul>
 
