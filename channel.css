@@ -1,0 +1,1102 @@
+/* =====================================================
+   CHANNEL PAGE
+===================================================== */
+
+
+/* =========================
+   ROOT VARIABLES
+========================= */
+
+:root {
+
+    --bg: #f8f8f8;
+
+    --card: #ffffff;
+
+    --text: #111111;
+
+    --secondary: #606060;
+
+    --border: #e5e5e5;
+
+    --hover: #f1f1f1;
+
+    --accent: #111111;
+
+    --subscribe: #0f0f0f;
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: var(--bg);
+
+    color: var(--text);
+
+}
+
+
+/* =========================
+   TOP HEADER
+========================= */
+
+.channel-topbar {
+
+    min-height: 88px;
+
+    background: var(--card);
+
+    border-bottom:
+        1px solid var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding:
+        0 32px;
+
+}
+
+
+.channel-topbar h1 {
+
+    font-size: 32px;
+
+    font-weight: 700;
+
+}
+
+
+/* Back Home */
+
+.back-home {
+
+    text-decoration: none;
+
+    color: var(--text);
+
+    background: #f1f1f1;
+
+    padding:
+        11px 18px;
+
+    border-radius: 24px;
+
+    font-size: 16px;
+
+    transition:
+        background 0.2s ease;
+
+}
+
+
+.back-home:hover {
+
+    background: #e2e2e2;
+
+}
+
+
+/* =========================
+   MAIN PAGE
+========================= */
+
+.channel-page {
+
+    width:
+        min(
+            1200px,
+            calc(100% - 40px)
+        );
+
+    margin:
+        24px auto 50px;
+
+}
+
+
+/* =========================
+   CHANNEL HERO
+========================= */
+
+.channel-hero {
+
+    background:
+        var(--card);
+
+    border-radius:
+        16px;
+
+    overflow:
+        hidden;
+
+    box-shadow:
+        0 2px 10px
+        rgba(0, 0, 0, 0.08);
+
+}
+
+
+/* =========================
+   CHANNEL BANNER
+========================= */
+
+.channel-banner {
+
+    height:
+        190px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #d7d7d7,
+            #eeeeee,
+            #cfcfcf
+        );
+
+    position:
+        relative;
+
+}
+
+
+.banner-text {
+
+    position:
+        absolute;
+
+    right:
+        45px;
+
+    bottom:
+        25px;
+
+    font-size:
+        28px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        4px;
+
+    opacity:
+        0.3;
+
+}
+
+
+/* =========================
+   CHANNEL INFORMATION
+========================= */
+
+.channel-info {
+
+    display:
+        flex;
+
+    gap:
+        28px;
+
+    padding:
+        28px 35px 30px;
+
+}
+
+
+/* Avatar */
+
+.channel-avatar {
+
+    width:
+        150px;
+
+    height:
+        150px;
+
+    flex-shrink:
+        0;
+
+    margin-top:
+        -80px;
+
+    border-radius:
+        50%;
+
+    background:
+        #111111;
+
+    color:
+        #ffffff;
+
+    border:
+        6px solid #ffffff;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    font-size:
+        42px;
+
+    font-weight:
+        700;
+
+    box-shadow:
+        0 2px 8px
+        rgba(0, 0, 0, 0.2);
+
+}
+
+
+/* Details */
+
+.channel-details {
+
+    flex:
+        1;
+
+}
+
+
+.channel-details h2 {
+
+    font-size:
+        30px;
+
+    margin-bottom:
+        5px;
+
+}
+
+
+.handle {
+
+    color:
+        var(--secondary);
+
+    margin-bottom:
+        10px;
+
+}
+
+
+.channel-meta {
+
+    color:
+        var(--secondary);
+
+    margin-bottom:
+        15px;
+
+}
+
+
+.channel-description {
+
+    max-width:
+        700px;
+
+    line-height:
+        1.5;
+
+    margin-bottom:
+        20px;
+
+}
+
+
+/* =========================
+   CHANNEL BUTTONS
+========================= */
+
+.channel-actions {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+}
+
+
+.channel-actions button {
+
+    border:
+        none;
+
+    cursor:
+        pointer;
+
+    font-size:
+        15px;
+
+    font-weight:
+        600;
+
+    padding:
+        10px 18px;
+
+    border-radius:
+        22px;
+
+    transition:
+        0.2s;
+
+}
+
+
+/* Subscribe */
+
+.subscribe-btn {
+
+    background:
+        var(--subscribe);
+
+    color:
+        #ffffff;
+
+}
+
+
+.subscribe-btn:hover {
+
+    opacity:
+        0.85;
+
+}
+
+
+.subscribe-btn.subscribed {
+
+    background:
+        #e5e5e5;
+
+    color:
+        #111111;
+
+}
+
+
+/* Other buttons */
+
+.action-btn {
+
+    background:
+        #eeeeee;
+
+    color:
+        #111111;
+
+}
+
+
+.action-btn:hover {
+
+    background:
+        #dddddd;
+
+}
+
+
+/* =========================
+   CHANNEL TABS
+========================= */
+
+.channel-tabs {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    margin-top:
+        18px;
+
+    background:
+        var(--card);
+
+    border-bottom:
+        1px solid var(--border);
+
+    border-radius:
+        12px 12px 0 0;
+
+    overflow-x:
+        auto;
+
+}
+
+
+.tab {
+
+    border:
+        none;
+
+    background:
+        transparent;
+
+    padding:
+        17px 28px;
+
+    font-size:
+        16px;
+
+    font-weight:
+        600;
+
+    color:
+        var(--secondary);
+
+    cursor:
+        pointer;
+
+    position:
+        relative;
+
+    white-space:
+        nowrap;
+
+}
+
+
+.tab:hover {
+
+    background:
+        var(--hover);
+
+}
+
+
+.tab.active {
+
+    color:
+        var(--text);
+
+}
+
+
+.tab.active::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    bottom:
+        0;
+
+    left:
+        20px;
+
+    right:
+        20px;
+
+    height:
+        3px;
+
+    background:
+        var(--text);
+
+    border-radius:
+        3px 3px 0 0;
+
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.channel-content {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        minmax(0, 2fr)
+        minmax(280px, 1fr);
+
+    gap:
+        24px;
+
+    margin-top:
+        24px;
+
+}
+
+
+.videos-column,
+.about-card {
+
+    background:
+        var(--card);
+
+    border-radius:
+        14px;
+
+    padding:
+        24px;
+
+    box-shadow:
+        0 2px 8px
+        rgba(0, 0, 0, 0.07);
+
+}
+
+
+/* =========================
+   SECTION HEADING
+========================= */
+
+.section-heading {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    margin-bottom:
+        20px;
+
+}
+
+
+.section-heading h2,
+.about-card h2 {
+
+    font-size:
+        22px;
+
+}
+
+
+.see-all {
+
+    border:
+        none;
+
+    background:
+        transparent;
+
+    font-weight:
+        600;
+
+    cursor:
+        pointer;
+
+}
+
+
+.see-all:hover {
+
+    text-decoration:
+        underline;
+
+}
+
+
+/* =========================
+   VIDEO GRID
+========================= */
+
+.video-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap:
+        22px;
+
+}
+
+
+/* Video */
+
+.channel-video {
+
+    cursor:
+        pointer;
+
+    border-radius:
+        10px;
+
+    overflow:
+        hidden;
+
+    transition:
+        transform 0.2s ease;
+
+}
+
+
+.channel-video:hover {
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+/* Thumbnail */
+
+.thumbnail {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+}
+
+
+.channel-video img {
+
+    width:
+        100%;
+
+    aspect-ratio:
+        16 / 9;
+
+    object-fit:
+        cover;
+
+    display:
+        block;
+
+}
+
+
+/* Duration */
+
+.duration {
+
+    position:
+        absolute;
+
+    right:
+        8px;
+
+    bottom:
+        8px;
+
+    background:
+        rgba(0, 0, 0, 0.85);
+
+    color:
+        #ffffff;
+
+    padding:
+        3px 6px;
+
+    border-radius:
+        4px;
+
+    font-size:
+        12px;
+
+}
+
+
+/* =========================
+   VIDEO INFORMATION
+========================= */
+
+.video-info {
+
+    padding:
+        12px 4px;
+
+}
+
+
+.video-info h3 {
+
+    font-size:
+        16px;
+
+    line-height:
+        1.35;
+
+    margin-bottom:
+        7px;
+
+}
+
+
+.video-info p {
+
+    color:
+        var(--secondary);
+
+    font-size:
+        14px;
+
+    margin-bottom:
+        5px;
+
+}
+
+
+.video-info span {
+
+    color:
+        var(--secondary);
+
+    font-size:
+        13px;
+
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-description {
+
+    color:
+        var(--secondary);
+
+    line-height:
+        1.5;
+
+    margin:
+        14px 0 22px;
+
+}
+
+
+.about-row {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        12px;
+
+    padding:
+        14px 0;
+
+    border-top:
+        1px solid var(--border);
+
+}
+
+
+.about-row > span {
+
+    font-size:
+        20px;
+
+}
+
+
+.about-row strong {
+
+    font-size:
+        14px;
+
+}
+
+
+.about-row p {
+
+    color:
+        var(--secondary);
+
+    font-size:
+        14px;
+
+    margin-top:
+        4px;
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+
+    text-align:
+        center;
+
+    color:
+        var(--secondary);
+
+    padding:
+        30px 20px 40px;
+
+    font-size:
+        13px;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE DESIGN
+===================================================== */
+
+
+/* Tablet */
+
+@media (max-width: 900px) {
+
+    .channel-content {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .about-card {
+
+        order:
+            -1;
+
+    }
+
+
+    .video-grid {
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 650px) {
+
+    .channel-topbar {
+
+        min-height:
+            auto;
+
+        padding:
+            18px;
+
+        flex-wrap:
+            wrap;
+
+    }
+
+
+    .channel-topbar h1 {
+
+        font-size:
+            26px;
+
+    }
+
+
+    .channel-page {
+
+        width:
+            calc(100% - 20px);
+
+        margin-top:
+            12px;
+
+    }
+
+
+    .channel-banner {
+
+        height:
+            130px;
+
+    }
+
+
+    .banner-text {
+
+        right:
+            20px;
+
+        bottom:
+            18px;
+
+        font-size:
+            18px;
+
+    }
+
+
+    .channel-info {
+
+        flex-direction:
+            column;
+
+        gap:
+            12px;
+
+        padding:
+            20px;
+
+    }
+
+
+    .channel-avatar {
+
+        width:
+            105px;
+
+        height:
+            105px;
+
+        margin-top:
+            -65px;
+
+        font-size:
+            30px;
+
+    }
+
+
+    .channel-details h2 {
+
+        font-size:
+            25px;
+
+    }
+
+
+    .channel-tabs {
+
+        overflow-x:
+            auto;
+
+    }
+
+
+    .tab {
+
+        padding:
+            15px 20px;
+
+    }
+
+
+    .channel-content {
+
+        margin-top:
+            12px;
+
+        gap:
+            12px;
+
+    }
+
+
+    .videos-column,
+    .about-card {
+
+        padding:
+            16px;
+
+    }
+
+
+    .video-grid {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            18px;
+
+    }
+
+}
+
+
+/* Small Mobile */
+
+@media (max-width: 420px) {
+
+    .back-home {
+
+        font-size:
+            14px;
+
+        padding:
+            9px 13px;
+
+    }
+
+
+    .channel-actions {
+
+        flex-wrap:
+            wrap;
+
+    }
+
+
+    .channel-actions button {
+
+        padding:
+            9px 14px;
+
+    }
+
+}
