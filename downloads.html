@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Downloads - RTube</title>
+
+    <link rel="stylesheet" href="downloads.css">
+    <link rel="icon" type="image/png"
+        href="https://www.freepnglogos.com/uploads/youtube-logo-png/youtube-transparent-youtube-icon-download-clipart-with-transparent-25.png">
+
+
+</head>
+
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="downloads-header">
+
+        <div class="header-left">
+
+            <a href="index.html" class="logo">
+                ▶ RTube
+            </a>
+
+        </div>
+
+
+        <div class="search-container">
+
+            <input type="text" id="searchInput" placeholder="Search">
+
+            <button id="searchBtn">
+                🔍
+            </button>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <button class="create-btn">
+                ＋ Create
+            </button>
+
+            <button class="notification-btn">
+                🔔
+                <span class="notification-count">
+                    1
+                </span>
+            </button>
+
+            <button class="profile-btn">
+                👤
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="downloads-container">
+
+
+        <!-- Page Header -->
+
+        <div class="downloads-title">
+
+            <h1>
+                Downloads
+            </h1>
+
+            <button class="settings-btn">
+                ⚙ Settings
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             PREMIUM / EMPTY STATE
+        ========================== -->
+
+        <section class="download-empty-state">
+
+
+            <!-- Download Illustration -->
+
+            <div class="download-illustration">
+
+                <div class="download-lines">
+
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+
+                <div class="download-box">
+
+                    <span class="download-arrow">
+                        ↓
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Text -->
+
+            <div class="download-message">
+
+                <h2>
+                    Keep watching when your connection drops
+                </h2>
+
+                <p>
+                    With Premium, enjoy your favourite videos,
+                    even without Internet. Plus, get ad-free
+                    YouTube, YouTube Music, background play and more.
+                </p>
+
+                <small>
+                    One month for ₹0 for eligible users.
+                    Price varies by country.
+                    Cancel at any time.
+                </small>
+
+                <br>
+
+                <button class="premium-btn">
+                    Get YouTube Premium
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             DOWNLOADED VIDEOS
+        ========================== -->
+
+        <section class="downloaded-section">
+
+            <h2>
+                Your downloads
+            </h2>
+
+
+            <div id="downloadList">
+
+                <!-- Downloaded videos will appear here -->
+
+                <div class="no-downloads">
+
+                    <div class="no-download-icon">
+                        ⬇️
+                    </div>
+
+                    <h3>
+                        No downloaded videos
+                    </h3>
+
+                    <p>
+                        Videos that you download will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+        const searchBtn =
+            document.getElementById("searchBtn");
+
+
+        searchBtn.addEventListener("click", function () {
+
+            const searchValue =
+                searchInput.value.trim();
+
+            if (searchValue !== "") {
+
+                alert(
+                    "Searching for: " +
+                    searchValue
+                );
+
+            }
+
+        });
+
+
+        searchInput.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Enter") {
+
+                    searchBtn.click();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
