@@ -591,6 +591,87 @@ footer {
 }
 
 /* ==========================
+   CHANNEL PAGE
+========================= */
+
+.channel-header {
+  padding: 20px;
+  background: var(--header);
+  box-shadow: var(--shadow);
+}
+
+.channel-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.back-link {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--button);
+  color: var(--text);
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.back-link:hover {
+  background: var(--button-hover);
+}
+
+.channel-page {
+  padding: 20px;
+}
+
+.channel-profile {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+}
+
+.channel-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.channel-subtitle {
+  color: var(--secondary-text);
+  margin: 10px 0;
+}
+
+.channel-info,
+.channel-videos {
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+}
+
+.channel-videos .video-card {
+  margin-bottom: 15px;
+}
+
+.channel-videos article {
+  cursor: default;
+}
+
+.channel-videos article img {
+  width: 220px;
+  min-width: 220px;
+  height: 130px;
+}
+
+/* ==========================
    RESPONSIVE DESIGN
 ========================= */
 
