@@ -276,7 +276,7 @@ const headerButtons = document.querySelectorAll("header button");
 headerButtons.forEach(function (btn) {
   btn.addEventListener("click", function () {
     if (this.innerHTML.includes("📹"))
-      alert("Create Video feature coming soon!");
+      // alert("Create Video feature coming soon!");
 
     if (this.innerHTML.includes("🔔")) alert("No new notifications.");
 
@@ -446,5 +446,66 @@ if (logoutBtn) {
 
       window.open("about:blank", "_blank");
     }
+  });
+}
+// ===============================
+// Create Menu
+// ===============================
+
+const createBtn = document.getElementById("createBtn");
+const createMenu = document.getElementById("createMenu");
+
+if (createBtn && createMenu) {
+  // Open / close Create menu
+  createBtn.addEventListener("click", function (event) {
+    event.stopPropagation();
+
+    createMenu.classList.toggle("show");
+  });
+
+  // Prevent clicks inside menu from closing it immediately
+  createMenu.addEventListener("click", function (event) {
+    event.stopPropagation();
+  });
+
+  // Close menu when clicking anywhere outside
+  document.addEventListener("click", function () {
+    createMenu.classList.remove("show");
+  });
+}
+
+// ===============================
+// Upload Video
+// ===============================
+
+const uploadVideoBtn = document.getElementById("uploadVideoBtn");
+
+if (uploadVideoBtn) {
+  uploadVideoBtn.addEventListener("click", function () {
+    window.location.href = "upload.html";
+  });
+}
+
+// ===============================
+// Go Live
+// ===============================
+
+const goLiveBtn = document.getElementById("goLiveBtn");
+
+if (goLiveBtn) {
+  goLiveBtn.addEventListener("click", function () {
+    window.location.href = "live.html";
+  });
+}
+
+// ===============================
+// Create Post
+// ===============================
+
+const createPostBtn = document.getElementById("createPostBtn");
+
+if (createPostBtn) {
+  createPostBtn.addEventListener("click", function () {
+    window.location.href = "create-post.html";
   });
 }
