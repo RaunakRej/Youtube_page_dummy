@@ -428,3 +428,23 @@ if (SpeechRecognition) {
 
   console.log("Speech Recognition not supported.");
 }
+// ===============================
+// Logout Functionality
+// ===============================
+const logoutBtn = document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    const confirmLogout = confirm("Are you sure you want to logout?");
+
+    if (confirmLogout) {
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("username");
+      localStorage.removeItem("userEmail");
+
+      window.open("about:blank", "_blank");
+    }
+  });
+}
