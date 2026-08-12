@@ -270,7 +270,49 @@ articles.forEach(function (article) {
 // ===============================
 // Header Buttons
 // ===============================
+// =====================================================
+// NOTIFICATION POPUP
+// =====================================================
 
+const notificationBtn =
+    document.getElementById("notificationBtn");
+
+const notificationPopup =
+    document.getElementById("notificationPopup");
+
+
+// Open / close notification popup
+notificationBtn.addEventListener("click", function (event) {
+
+    event.stopPropagation();
+
+    if (notificationPopup.style.display === "block") {
+
+        notificationPopup.style.display = "none";
+
+    } else {
+
+        notificationPopup.style.display = "block";
+
+    }
+
+});
+
+
+// Prevent clicks inside popup from closing it
+notificationPopup.addEventListener("click", function (event) {
+
+    event.stopPropagation();
+
+});
+
+
+// Close popup when clicking outside
+document.addEventListener("click", function () {
+
+    notificationPopup.style.display = "none";
+
+});
 const headerButtons = document.querySelectorAll("header button");
 
 headerButtons.forEach(function (btn) {
@@ -509,3 +551,63 @@ if (createPostBtn) {
     window.location.href = "create-post.html";
   });
 }
+
+// Filter chips: All / Videos / Shorts / Podcasts / Music
+        const chips = document.querySelectorAll('.chip');
+        const items = document.querySelectorAll('.hist-item');
+        const emptyState = document.getElementById('emptyState');
+
+        function applyFilter(filter) {
+            let visibleCount = 0;
+            items.forEach(item => {
+                const match = filter === 'all' || item.dataset.category === filter;
+                item.style.display = match ? 'flex' : 'none';
+                if (match) visibleCount++;
+            });
+            emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                applyFilter(chip.dataset.filter);
+            });
+        });
+
+        // Search within watch history
+        document.getElementById('historySearch').addEventListener('input', (e) => {
+            const q = e.target.value.trim().toLowerCase();
+            let visibleCount = 0;
+            items.forEach(item => {
+                const match = item.dataset.title.toLowerCase().includes(q);
+                item.style.display = match ? 'flex' : 'none';
+                if (match) visibleCount++;
+            });
+            emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+        });
+
+        // Clear all watch history
+        document.getElementById('clearAllBtn').addEventListener('click', () => {
+            if (confirm('Clear all watch history? This cannot be undone.')) {
+                items.forEach(item => item.remove());
+                emptyState.style.display = 'block';
+            }
+        });
+
+        // Pause / resume watch history (just a UI toggle for this dummy app)
+        let paused = false;
+        document.getElementById('pauseBtn').addEventListener('click', () => {
+            paused = !paused;
+            document.getElementById('pauseLabel').textContent = paused
+                ? 'Resume watch history'
+                : 'Pause watch history';
+        });
+
+        document.getElementById('manageBtn').addEventListener('click', () => {
+            alert('Manage all history settings would open here.');
+        });
+
+        document.getElementById('menuBtn').addEventListener('click', () => {
+            document.getElementById('sidebar').classList.toggle('hide-item');
+        });
