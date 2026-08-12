@@ -130,48 +130,108 @@
 
         }
 
-        .video-item {
+      /* =========================
+   VIDEO ITEM
+========================= */
 
-            display: flex;
-            margin-bottom: 22px;
-            cursor: pointer;
+.video-item {
+    display: flex;
+    margin-bottom: 22px;
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+    min-height: 140px;
+    padding: 0;
+}
 
-        }
+.video-item:hover {
+    background: #f2f2f2;
+}
 
-        .video-item:hover {
 
-            background: #f2f2f2;
+/* =========================
+   VIDEO THUMBNAIL
+========================= */
 
-        }
+.video-item > img {
+    width: 250px !important;
+    height: 140px !important;
+    min-width: 250px;
+    max-width: 250px;
+    border-radius: 12px;
+    object-fit: cover;
+    display: block;
+}
 
-        .video-item img {
 
-            width: 250px;
-            height: 140px;
-            border-radius: 12px;
-            object-fit: cover;
+/* =========================
+   VIDEO DURATION
+========================= */
+.video-item > .dur {
+    position: absolute;
 
-        }
+    /* Position at bottom-right of the 250px thumbnail */
+    left: 194px;
+    bottom: 6px;
 
-        .video-info {
+    /* IMPORTANT: prevent the black background from stretching */
+    width: auto !important;
+    max-width: max-content !important;
+    min-width: 0 !important;
 
-            margin-left: 15px;
+    display: inline-block;
 
-        }
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
 
-        .video-info h3 {
+    padding: 3px 6px;
+    border-radius: 4px;
 
-            margin: 0;
-            font-size: 22px;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.2;
 
-        }
+    white-space: nowrap;
 
-        .video-info p {
+    box-sizing: border-box;
+    z-index: 10;
+}
 
-            margin: 8px 0;
-            color: gray;
 
-        }
+/* =========================
+   VIDEO INFORMATION
+========================= */
+
+.video-info {
+    margin-left: 15px;
+    padding-top: 0;
+}
+
+.video-info h3 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.video-info p {
+    margin: 8px 0;
+    color: gray;
+}
+/* Thumbnail wrapper */
+
+
+/* Video duration */
+.dur {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 3px 5px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.2;
+}
     </style>
 
 </head>
@@ -220,7 +280,7 @@
 
                 <img
                     src="https://alchetron.com/cdn/footpath-2003-film-e6fce519-6290-411a-9f13-a3123a85251-resize-750.jpg">
-
+                <span class="dur">2:42:19</span>
                 <div class="video-info">
 
                     <h3> Footpath - 2003</h3>
@@ -237,7 +297,7 @@
 
                 <img
                     src="https://th.bing.com/th/id/OIP.bSmn7xv6XPtoRqSlNHi0DwHaEK?w=243&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3">
-
+                <span class="dur">03:17</span>
                 <div class="video-info">
 
                     <h3>HAQ Trailer</h3>
@@ -253,7 +313,7 @@
             <div class="video-item" onclick="window.open('video.html?id=3','_blank')">
 
                 <img src="https://tse1.mm.bing.net/th?&id=OVP.r51zVCgfW27I-ZnT6_2jWgHgFo&w=356&h=200&c=7&pid=1.7&rs=1">
-
+                <span class="dur">08:20</span>
                 <div class="video-info">
 
                     <h3>Awarapan 2 teaser reaction</h3>
@@ -270,7 +330,7 @@
 
                 <img
                     src="https://www.bing.com/th/id/OIP.ekRbvsNYAP69tyFNwkC_YgHaKt?w=193&h=280&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=ImgAns&rm=2">
-
+                <span class="dur">15:36</span>
                 <div class="video-info">
 
                     <h3>Mr X</h3>
