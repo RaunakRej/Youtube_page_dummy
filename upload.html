@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Upload Videos - Raunak Dummy YouTube</title>
+    <link rel="icon" type="image/png"
+        href="https://www.freepnglogos.com/uploads/youtube-logo-png/youtube-transparent-youtube-icon-download-clipart-with-transparent-25.png">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            color: #0f0f0f;
+        }
+
+        /* ================================
+           HEADER
+        ================================= */
+
+        .upload-header {
+            height: 70px;
+            border-bottom: 1px solid #ddd;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 30px;
+
+            gap: 15px;
+        }
+
+        .back-btn {
+            border: none;
+            background: transparent;
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+            padding: 8px 12px;
+
+            border-radius: 50%;
+        }
+
+        .back-btn:hover {
+            background: #f2f2f2;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: red;
+        }
+
+        /* ================================
+           MAIN
+        ================================= */
+
+        .upload-container {
+            max-width: 950px;
+
+            margin: 45px auto;
+
+            padding: 0 25px;
+        }
+
+        .upload-title {
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+        .upload-subtitle {
+            color: #606060;
+
+            margin-bottom: 30px;
+        }
+
+        /* ================================
+           UPLOAD BOX
+        ================================= */
+
+        .upload-box {
+            border: 2px dashed #aaa;
+
+            border-radius: 15px;
+
+            min-height: 420px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+            padding: 40px;
+
+            transition: 0.2s;
+        }
+
+        .upload-box.dragover {
+            border-color: #065fd4;
+
+            background: #f5f9ff;
+        }
+
+        .upload-icon {
+            width: 120px;
+            height: 120px;
+
+            border-radius: 50%;
+
+            background: #f2f2f2;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 55px;
+
+            margin-bottom: 25px;
+        }
+
+        .upload-text {
+            font-size: 22px;
+
+            margin-bottom: 10px;
+        }
+
+        .upload-info {
+            color: #606060;
+
+            font-size: 14px;
+
+            margin-bottom: 25px;
+        }
+
+        /* ================================
+           SELECT BUTTON
+        ================================= */
+
+        .select-btn {
+            border: none;
+
+            background: #000;
+
+            color: white;
+
+            padding: 13px 25px;
+
+            border-radius: 25px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .select-btn:hover {
+            background: #333;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        /* ================================
+           SELECTED FILE
+        ================================= */
+
+        .file-section {
+            display: none;
+
+            margin-top: 30px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 12px;
+
+            padding: 20px;
+        }
+
+        .file-section.show {
+            display: block;
+        }
+
+        .file-title {
+            font-size: 20px;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+        .file-card {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            background: #f8f8f8;
+
+            padding: 15px;
+
+            border-radius: 10px;
+        }
+
+        .file-video-icon {
+            font-size: 35px;
+        }
+
+        .file-details {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: bold;
+
+            margin-bottom: 5px;
+
+            word-break: break-word;
+        }
+
+        .file-size {
+            color: #606060;
+
+            font-size: 13px;
+        }
+
+        .remove-btn {
+            border: none;
+
+            background: transparent;
+
+            color: #cc0000;
+
+            font-size: 20px;
+
+            cursor: pointer;
+        }
+
+        /* ================================
+           VIDEO PREVIEW
+        ================================= */
+
+        .video-preview {
+            display: none;
+
+            width: 100%;
+
+            max-width: 650px;
+
+            margin: 25px auto 0;
+
+            border-radius: 10px;
+
+            background: #000;
+        }
+
+        .video-preview.show {
+            display: block;
+        }
+
+        /* ================================
+           UPLOAD BUTTON
+        ================================= */
+
+        .action-buttons {
+            display: none;
+
+            justify-content: flex-end;
+
+            gap: 12px;
+
+            margin-top: 25px;
+        }
+
+        .action-buttons.show {
+            display: flex;
+        }
+
+        .cancel-btn {
+            border: 1px solid #ccc;
+
+            background: white;
+
+            padding: 12px 25px;
+
+            border-radius: 25px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .upload-btn {
+            border: none;
+
+            background: #065fd4;
+
+            color: white;
+
+            padding: 12px 28px;
+
+            border-radius: 25px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .upload-btn:hover {
+            background: #0047ab;
+        }
+
+        /* ================================
+           PROGRESS
+        ================================= */
+
+        .progress-section {
+            display: none;
+
+            margin-top: 25px;
+        }
+
+        .progress-section.show {
+            display: block;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+
+            height: 10px;
+
+            background: #e5e5e5;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            margin-top: 10px;
+        }
+
+        .progress-bar {
+            width: 0%;
+
+            height: 100%;
+
+            background: #065fd4;
+
+            transition: width 0.2s;
+        }
+
+        .progress-text {
+            font-size: 14px;
+
+            color: #606060;
+
+            margin-top: 8px;
+        }
+
+        /* ================================
+           SUCCESS
+        ================================= */
+
+        .success-message {
+            display: none;
+
+            text-align: center;
+
+            padding: 30px;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 60px;
+
+            margin-bottom: 15px;
+        }
+
+        .success-message h2 {
+            margin-bottom: 10px;
+        }
+
+        .success-message p {
+            color: #606060;
+        }
+
+        .home-btn {
+            border: none;
+
+            background: #065fd4;
+
+            color: white;
+
+            padding: 12px 25px;
+
+            border-radius: 25px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 15px;
+        }
+
+        /* ================================
+           FOOTER
+        ================================= */
+
+        .terms {
+            text-align: center;
+
+            color: #606060;
+
+            font-size: 13px;
+
+            margin-top: 35px;
+
+            line-height: 1.6;
+        }
+
+        /* ================================
+           RESPONSIVE
+        ================================= */
+
+        @media (max-width: 700px) {
+
+            .upload-header {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .upload-container {
+                margin-top: 25px;
+
+                padding: 0 15px;
+            }
+
+            .upload-title {
+                font-size: 25px;
+            }
+
+            .upload-box {
+                min-height: 350px;
+
+                padding: 25px;
+            }
+
+            .upload-text {
+                font-size: 18px;
+            }
+
+            .file-card {
+                align-items: flex-start;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .cancel-btn,
+            .upload-btn {
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- ================================
+         HEADER
+    ================================= -->
+
+    <header class="upload-header">
+
+        <button class="back-btn" onclick="goBack()" title="Back">
+
+            ←
+
+        </button>
+
+        <div class="logo">
+
+            ▶ Raunak Dummy YouTube
+
+        </div>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN
+    ================================= -->
+
+    <main class="upload-container">
+
+        <h1 class="upload-title">
+            Upload videos
+        </h1>
+
+        <p class="upload-subtitle">
+            Upload a video from your computer to your channel.
+        </p>
+
+
+        <!-- ================================
+             UPLOAD BOX
+        ================================= -->
+
+        <div class="upload-box" id="uploadBox">
+
+            <div class="upload-icon">
+
+                ⬆
+
+            </div>
+
+            <div class="upload-text">
+
+                Drag and drop video files to upload
+
+            </div>
+
+            <div class="upload-info">
+
+                Or select a video file from your computer
+
+                <br>
+
+                MP4, WebM, MOV, AVI — Maximum 2 GB
+
+            </div>
+
+
+            <button class="select-btn" id="selectBtn">
+
+                Select files
+
+            </button>
+
+
+            <input type="file" id="fileInput" accept="video/*">
+
+        </div>
+
+
+        <!-- ================================
+             FILE INFORMATION
+        ================================= -->
+
+        <div class="file-section" id="fileSection">
+
+            <div class="file-title">
+
+                Selected video
+
+            </div>
+
+
+            <div class="file-card">
+
+                <div class="file-video-icon">
+
+                    🎬
+
+                </div>
+
+
+                <div class="file-details">
+
+                    <div class="file-name" id="fileName">
+
+                    </div>
+
+                    <div class="file-size" id="fileSize">
+
+                    </div>
+
+                </div>
+
+
+                <button class="remove-btn" id="removeBtn" title="Remove file">
+
+                    ✕
+
+                </button>
+
+            </div>
+
+
+            <!-- VIDEO PREVIEW -->
+
+            <video class="video-preview" id="videoPreview" controls>
+            </video>
+
+
+            <!-- ACTION BUTTONS -->
+
+            <div class="action-buttons" id="actionButtons">
+
+                <button class="cancel-btn" id="cancelBtn">
+
+                    Cancel
+
+                </button>
+
+
+                <button class="upload-btn" id="uploadBtn">
+
+                    Upload video
+
+                </button>
+
+            </div>
+
+
+            <!-- PROGRESS -->
+
+            <div class="progress-section" id="progressSection">
+
+                <div>
+
+                    Uploading video...
+
+                </div>
+
+
+                <div class="progress-bar-container">
+
+                    <div class="progress-bar" id="progressBar">
+
+                    </div>
+
+                </div>
+
+
+                <div class="progress-text" id="progressText">
+
+                    0%
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================
+             SUCCESS MESSAGE
+        ================================= -->
+
+        <div class="success-message" id="successMessage">
+
+            <div class="success-icon">
+
+                ✅
+
+            </div>
+
+            <h2>
+
+                Video uploaded successfully!
+
+            </h2>
+
+            <p>
+
+                Your video has been added to your channel.
+
+            </p>
+
+
+            <button class="home-btn" onclick="location.href='index.html'">
+
+                Back to home
+
+            </button>
+
+        </div>
+
+
+        <div class="terms">
+
+            By uploading your video, you acknowledge that you agree
+            to the Terms of Service and Community Guidelines.
+
+            <br>
+
+            Please ensure that your video does not violate anyone else's
+            privacy or copyright.
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================
+         JAVASCRIPT
+    ================================= -->
+
+    <script>
+
+        const uploadBox =
+            document.getElementById("uploadBox");
+
+        const selectBtn =
+            document.getElementById("selectBtn");
+
+        const fileInput =
+            document.getElementById("fileInput");
+
+        const fileSection =
+            document.getElementById("fileSection");
+
+        const fileName =
+            document.getElementById("fileName");
+
+        const fileSize =
+            document.getElementById("fileSize");
+
+        const removeBtn =
+            document.getElementById("removeBtn");
+
+        const videoPreview =
+            document.getElementById("videoPreview");
+
+        const actionButtons =
+            document.getElementById("actionButtons");
+
+        const cancelBtn =
+            document.getElementById("cancelBtn");
+
+        const uploadBtn =
+            document.getElementById("uploadBtn");
+
+        const progressSection =
+            document.getElementById("progressSection");
+
+        const progressBar =
+            document.getElementById("progressBar");
+
+        const progressText =
+            document.getElementById("progressText");
+
+        const successMessage =
+            document.getElementById("successMessage");
+
+
+        let selectedFile = null;
+
+        let videoURL = null;
+
+
+        /* =================================
+           SELECT FILE
+        ================================= */
+
+        selectBtn.addEventListener("click", function () {
+
+            fileInput.click();
+
+        });
+
+
+        fileInput.addEventListener("change", function () {
+
+            if (this.files.length > 0) {
+
+                handleFile(this.files[0]);
+
+            }
+
+        });
+
+
+        /* =================================
+           HANDLE FILE
+        ================================= */
+
+        function handleFile(file) {
+
+            if (!file.type.startsWith("video/")) {
+
+                alert("Please select a valid video file.");
+
+                return;
+
+            }
+
+
+            // 2 GB limit
+
+            const maxSize =
+                2 * 1024 * 1024 * 1024;
+
+
+            if (file.size > maxSize) {
+
+                alert("Video size must be less than 2 GB.");
+
+                return;
+
+            }
+
+
+            selectedFile = file;
+
+
+            fileName.textContent =
+                file.name;
+
+
+            fileSize.textContent =
+                formatFileSize(file.size);
+
+
+            fileSection.classList.add("show");
+
+
+            actionButtons.classList.add("show");
+
+
+            // Create preview
+
+            if (videoURL) {
+
+                URL.revokeObjectURL(videoURL);
+
+            }
+
+
+            videoURL =
+                URL.createObjectURL(file);
+
+
+            videoPreview.src =
+                videoURL;
+
+
+            videoPreview.classList.add("show");
+
+        }
+
+
+        /* =================================
+           FILE SIZE
+        ================================= */
+
+        function formatFileSize(bytes) {
+
+            if (bytes < 1024) {
+
+                return bytes + " Bytes";
+
+            }
+
+            if (bytes < 1024 * 1024) {
+
+                return (
+                    (bytes / 1024).toFixed(2)
+                    + " KB"
+                );
+
+            }
+
+            if (bytes < 1024 * 1024 * 1024) {
+
+                return (
+                    (bytes / (1024 * 1024)).toFixed(2)
+                    + " MB"
+                );
+
+            }
+
+            return (
+                (bytes / (1024 * 1024 * 1024)).toFixed(2)
+                + " GB"
+            );
+
+        }
+
+
+        /* =================================
+           DRAG OVER
+        ================================= */
+
+        uploadBox.addEventListener(
+            "dragover",
+            function (event) {
+
+                event.preventDefault();
+
+                uploadBox.classList.add("dragover");
+
+            }
+        );
+
+
+        /* =================================
+           DRAG LEAVE
+        ================================= */
+
+        uploadBox.addEventListener(
+            "dragleave",
+            function () {
+
+                uploadBox.classList.remove("dragover");
+
+            }
+        );
+
+
+        /* =================================
+           DROP
+        ================================= */
+
+        uploadBox.addEventListener(
+            "drop",
+            function (event) {
+
+                event.preventDefault();
+
+                uploadBox.classList.remove("dragover");
+
+
+                if (event.dataTransfer.files.length > 0) {
+
+                    handleFile(
+                        event.dataTransfer.files[0]
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =================================
+           REMOVE FILE
+        ================================= */
+
+        removeBtn.addEventListener(
+            "click",
+            function () {
+
+                resetUpload();
+
+            }
+        );
+
+
+        cancelBtn.addEventListener(
+            "click",
+            function () {
+
+                resetUpload();
+
+            }
+        );
+
+
+        function resetUpload() {
+
+            selectedFile = null;
+
+            fileInput.value = "";
+
+            fileSection.classList.remove("show");
+
+            actionButtons.classList.remove("show");
+
+            progressSection.classList.remove("show");
+
+            videoPreview.classList.remove("show");
+
+            progressBar.style.width = "0%";
+
+            progressText.textContent = "0%";
+
+
+            if (videoURL) {
+
+                URL.revokeObjectURL(videoURL);
+
+                videoURL = null;
+
+            }
+
+            videoPreview.removeAttribute("src");
+
+        }
+
+
+        /* =================================
+           UPLOAD
+        ================================= */
+
+        uploadBtn.addEventListener(
+            "click",
+            function () {
+
+                if (!selectedFile) {
+
+                    alert("Please select a video first.");
+
+                    return;
+
+                }
+
+
+                startUpload();
+
+            }
+        );
+
+
+        function startUpload() {
+
+            progressSection.classList.add("show");
+
+            actionButtons.style.display = "none";
+
+
+            let progress = 0;
+
+
+            const uploadTimer =
+                setInterval(function () {
+
+                    progress += 5;
+
+
+                    progressBar.style.width =
+                        progress + "%";
+
+
+                    progressText.textContent =
+                        progress + "%";
+
+
+                    if (progress >= 100) {
+
+                        clearInterval(uploadTimer);
+
+                        setTimeout(function () {
+
+                            showSuccess();
+
+                        }, 500);
+
+                    }
+
+                }, 150);
+
+        }
+
+
+        /* =================================
+           SUCCESS
+        ================================= */
+
+        function showSuccess() {
+
+            fileSection.style.display = "none";
+
+            successMessage.classList.add("show");
+
+        }
+
+
+        /* =================================
+           BACK BUTTON
+        ================================= */
+
+        function goBack() {
+
+            window.location.href =
+                "index.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
