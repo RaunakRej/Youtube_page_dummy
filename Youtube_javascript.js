@@ -174,6 +174,18 @@ document.addEventListener("click", function () {
     });
   }
 })();
+
+// ==========================================
+// WATCH LATER
+// ==========================================
+
+const watchLaterBtn = document.getElementById("watchLaterBtn");
+
+if (watchLaterBtn) {
+  watchLaterBtn.addEventListener("click", function () {
+    window.location.href = "watchlater.html";
+  });
+}
 // ===============================
 // Sidebar
 // ===============================
@@ -273,54 +285,83 @@ articles.forEach(function (article) {
 // =====================================================
 // NOTIFICATION POPUP
 // =====================================================
+// =====================================================
+// NOTIFICATION POPUP
+// =====================================================
 
-const notificationBtn =
-    document.getElementById("notificationBtn");
+const notificationBtn = document.getElementById("notificationBtn");
 
-const notificationPopup =
-    document.getElementById("notificationPopup");
+const notificationPopup = document.getElementById("notificationPopup");
 
+const notificationContainer = document.querySelector(".notification-container");
 
-// Open / close notification popup
+// -----------------------------------------------------
+// OPEN / CLOSE NOTIFICATION POPUP
+// -----------------------------------------------------
+
 notificationBtn.addEventListener("click", function (event) {
+  event.stopPropagation();
 
-    event.stopPropagation();
+  const isOpen = notificationPopup.classList.contains("show");
 
-    if (notificationPopup.style.display === "block") {
-
-        notificationPopup.style.display = "none";
-
-    } else {
-
-        notificationPopup.style.display = "block";
-
-    }
-
+  if (isOpen) {
+    notificationPopup.classList.remove("show");
+  } else {
+    notificationPopup.classList.add("show");
+  }
 });
 
+// -----------------------------------------------------
+// DON'T CLOSE WHEN CLICKING INSIDE NOTIFICATION POPUP
+// -----------------------------------------------------
 
-// Prevent clicks inside popup from closing it
 notificationPopup.addEventListener("click", function (event) {
-
-    event.stopPropagation();
-
+  event.stopPropagation();
 });
 
+// -----------------------------------------------------
+// CLOSE WHEN CLICKING ANYWHERE OUTSIDE
+// -----------------------------------------------------
 
-// Close popup when clicking outside
-document.addEventListener("click", function () {
+document.addEventListener("click", function (event) {
+  if (!notificationContainer.contains(event.target)) {
+    notificationPopup.classList.remove("show");
+  }
+});
 
-    notificationPopup.style.display = "none";
+// =====================================================
+// CLOSE NOTIFICATION WHEN CLICKING OTHER HEADER BUTTONS
+// =====================================================
 
+const otherHeaderButtons = document.querySelectorAll(
+  "header button:not(#notificationBtn)",
+);
+
+otherHeaderButtons.forEach(function (button) {
+  button.addEventListener("click", function () {
+    notificationPopup.classList.remove("show");
+  });
+});
+
+// =====================================================
+// CLOSE NOTIFICATION WHEN CLICKING OTHER IMPORTANT
+// ELEMENTS OUTSIDE THE NOTIFICATION
+// =====================================================
+
+document.addEventListener("click", function (event) {
+  if (!event.target.closest(".notification-container")) {
+    notificationPopup.classList.remove("show");
+  }
 });
 const headerButtons = document.querySelectorAll("header button");
 
 headerButtons.forEach(function (btn) {
   btn.addEventListener("click", function () {
     if (this.innerHTML.includes("📹"))
-      // alert("Create Video feature coming soon!");
+      if (this.innerHTML.includes("🔔"))
+        // alert("Create Video feature coming soon!");
 
-    if (this.innerHTML.includes("🔔")) alert("No new notifications.");
+        alert("No new notifications.");
 
     if (this.innerHTML.includes("👤")) alert("User Profile");
   });
@@ -553,61 +594,61 @@ if (createPostBtn) {
 }
 
 // Filter chips: All / Videos / Shorts / Podcasts / Music
-        const chips = document.querySelectorAll('.chip');
-        const items = document.querySelectorAll('.hist-item');
-        const emptyState = document.getElementById('emptyState');
+const chips = document.querySelectorAll(".chip");
+const items = document.querySelectorAll(".hist-item");
+const emptyState = document.getElementById("emptyState");
 
-        function applyFilter(filter) {
-            let visibleCount = 0;
-            items.forEach(item => {
-                const match = filter === 'all' || item.dataset.category === filter;
-                item.style.display = match ? 'flex' : 'none';
-                if (match) visibleCount++;
-            });
-            emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
-        }
+function applyFilter(filter) {
+  let visibleCount = 0;
+  items.forEach((item) => {
+    const match = filter === "all" || item.dataset.category === filter;
+    item.style.display = match ? "flex" : "none";
+    if (match) visibleCount++;
+  });
+  emptyState.style.display = visibleCount === 0 ? "block" : "none";
+}
 
-        chips.forEach(chip => {
-            chip.addEventListener('click', () => {
-                chips.forEach(c => c.classList.remove('active'));
-                chip.classList.add('active');
-                applyFilter(chip.dataset.filter);
-            });
-        });
+chips.forEach((chip) => {
+  chip.addEventListener("click", () => {
+    chips.forEach((c) => c.classList.remove("active"));
+    chip.classList.add("active");
+    applyFilter(chip.dataset.filter);
+  });
+});
 
-        // Search within watch history
-        document.getElementById('historySearch').addEventListener('input', (e) => {
-            const q = e.target.value.trim().toLowerCase();
-            let visibleCount = 0;
-            items.forEach(item => {
-                const match = item.dataset.title.toLowerCase().includes(q);
-                item.style.display = match ? 'flex' : 'none';
-                if (match) visibleCount++;
-            });
-            emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
-        });
+// Search within watch history
+document.getElementById("historySearch").addEventListener("input", (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  let visibleCount = 0;
+  items.forEach((item) => {
+    const match = item.dataset.title.toLowerCase().includes(q);
+    item.style.display = match ? "flex" : "none";
+    if (match) visibleCount++;
+  });
+  emptyState.style.display = visibleCount === 0 ? "block" : "none";
+});
 
-        // Clear all watch history
-        document.getElementById('clearAllBtn').addEventListener('click', () => {
-            if (confirm('Clear all watch history? This cannot be undone.')) {
-                items.forEach(item => item.remove());
-                emptyState.style.display = 'block';
-            }
-        });
+// Clear all watch history
+document.getElementById("clearAllBtn").addEventListener("click", () => {
+  if (confirm("Clear all watch history? This cannot be undone.")) {
+    items.forEach((item) => item.remove());
+    emptyState.style.display = "block";
+  }
+});
 
-        // Pause / resume watch history (just a UI toggle for this dummy app)
-        let paused = false;
-        document.getElementById('pauseBtn').addEventListener('click', () => {
-            paused = !paused;
-            document.getElementById('pauseLabel').textContent = paused
-                ? 'Resume watch history'
-                : 'Pause watch history';
-        });
+// Pause / resume watch history (just a UI toggle for this dummy app)
+let paused = false;
+document.getElementById("pauseBtn").addEventListener("click", () => {
+  paused = !paused;
+  document.getElementById("pauseLabel").textContent = paused
+    ? "Resume watch history"
+    : "Pause watch history";
+});
 
-        document.getElementById('manageBtn').addEventListener('click', () => {
-            alert('Manage all history settings would open here.');
-        });
+document.getElementById("manageBtn").addEventListener("click", () => {
+  alert("Manage all history settings would open here.");
+});
 
-        document.getElementById('menuBtn').addEventListener('click', () => {
-            document.getElementById('sidebar').classList.toggle('hide-item');
-        });
+document.getElementById("menuBtn").addEventListener("click", () => {
+  document.getElementById("sidebar").classList.toggle("hide-item");
+});
