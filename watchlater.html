@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Watch Later - Raunak Dummy YouTube</title>
+
+    <link rel="stylesheet" href="youtube_style.css">
+    <link rel="icon" type="image/png"
+        href="https://www.freepnglogos.com/uploads/youtube-logo-png/youtube-transparent-youtube-icon-download-clipart-with-transparent-25.png">
+
+
+
+    <style>
+        /* ==========================================
+           RESET CONFLICTING MAIN STYLES
+        ========================================== */
+
+        main.watch-container {
+            display: flex !important;
+            gap: 35px !important;
+
+            margin: 0 0 0 272px !important;
+
+            padding: 30px 40px !important;
+
+            padding-top: 30px !important;
+
+            position: relative !important;
+
+            top: 0 !important;
+
+            left: 0 !important;
+
+            transform: none !important;
+
+            width: calc(100% - 272px) !important;
+
+            min-height: 100vh !important;
+
+            box-sizing: border-box !important;
+        }
+
+
+        /* ==========================================
+           SIDEBAR
+        ========================================== */
+
+        #sidebar {
+            position: fixed !important;
+
+            top: 0 !important;
+
+            left: 0 !important;
+
+            width: 250px !important;
+
+            height: 100vh !important;
+
+            overflow-y: auto !important;
+
+            box-sizing: border-box !important;
+
+            margin: 0 !important;
+
+            padding: 25px 15px !important;
+
+            background: #ffffff;
+
+            border-right: 1px solid #dddddd;
+
+            z-index: 1000;
+        }
+
+
+        #sidebar h2 {
+            margin: 20px 10px;
+        }
+
+
+        #sidebar ul {
+            list-style: none;
+
+            padding: 0;
+
+            margin: 0;
+        }
+
+
+        #sidebar li {
+            padding: 14px 15px;
+
+            cursor: pointer;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+        }
+
+
+        #sidebar li:hover {
+            background: #f2f2f2;
+        }
+
+
+        #sidebar hr {
+            border: none;
+
+            border-top: 1px solid #dddddd;
+
+            margin: 20px 0;
+        }
+
+
+        /* ==========================================
+           LEFT PLAYLIST CARD
+        ========================================== */
+
+        .playlist-card {
+
+            width: 370px;
+
+            min-width: 370px;
+
+            height: 680px;
+
+            background: linear-gradient(to bottom,
+                    #9b5b1b,
+                    #7a4212);
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            color: white;
+
+            position: sticky;
+
+            top: 20px;
+
+            align-self: flex-start;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+
+        }
+
+
+        .playlist-card img {
+
+            width: 100%;
+
+            height: 330px;
+
+            object-fit: cover;
+
+            display: block;
+
+        }
+
+
+        .playlist-content {
+
+            padding: 25px 30px;
+
+        }
+
+
+        .playlist-content h1 {
+
+            font-size: 38px;
+
+            margin: 0 0 20px;
+
+        }
+
+
+        .playlist-content h3 {
+
+            font-size: 17px;
+
+            margin: 0 0 15px;
+
+        }
+
+
+        .playlist-content p {
+
+            margin: 8px 0;
+
+        }
+
+
+        /* ==========================================
+           PLAY BUTTONS
+        ========================================== */
+
+        .play-buttons {
+
+            display: flex;
+
+            gap: 15px;
+
+            margin-top: 30px;
+
+        }
+
+
+        .play-buttons button {
+
+            border: none;
+
+            border-radius: 30px;
+
+            padding: 14px 28px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .play {
+
+            background: white;
+
+            color: black;
+
+        }
+
+
+        .shuffle {
+
+            background: rgba(255, 255, 255, 0.2);
+
+            color: white;
+
+        }
+
+
+        .play:hover {
+
+            background: #eeeeee;
+
+        }
+
+
+        .shuffle:hover {
+
+            background: rgba(255, 255, 255, 0.3);
+
+        }
+
+
+        /* ==========================================
+           RIGHT AREA
+        ========================================== */
+
+        .right-area {
+
+            flex: 1;
+
+            min-width: 0;
+
+            margin: 0 !important;
+
+            padding: 0 !important;
+
+        }
+
+
+        /* ==========================================
+           WATCH HEADER
+        ========================================== */
+
+        .watch-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin: 10px 0 25px;
+
+        }
+
+
+        .video-count {
+
+            font-size: 17px;
+
+            color: #555;
+
+        }
+
+
+        .clear-all {
+
+            border: none;
+
+            background: transparent;
+
+            color: #cc0000;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .clear-all:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* ==========================================
+           FILTER BUTTONS
+        ========================================== */
+
+        .filter {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .filter button {
+
+            border: none;
+
+            background: #eeeeee;
+
+            padding: 10px 18px;
+
+            border-radius: 10px;
+
+            font-weight: 500;
+
+            cursor: pointer;
+
+        }
+
+
+        .filter button.active {
+
+            background: #0f0f0f;
+
+            color: white;
+
+        }
+
+
+        /* ==========================================
+           VIDEO ITEM
+        ========================================== */
+
+        .video-item {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            position: relative;
+
+            width: 100%;
+
+            min-height: 140px;
+
+            margin-bottom: 20px;
+
+            padding: 10px;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            box-sizing: border-box;
+
+            transition: background 0.2s;
+
+        }
+
+
+        .video-item:hover {
+
+            background: #f2f2f2;
+
+        }
+
+
+        /* ==========================================
+           VIDEO THUMBNAIL
+        ========================================== */
+
+        .video-item>img {
+
+            width: 250px !important;
+
+            min-width: 250px !important;
+
+            max-width: 250px !important;
+
+            height: 140px !important;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+
+            display: block;
+
+        }
+
+
+        /* ==========================================
+           VIDEO DURATION
+        ========================================== */
+
+        .dur {
+
+            position: absolute;
+
+            left: 205px;
+
+            top: 118px;
+
+            background: rgba(0, 0, 0, 0.9);
+
+            color: white;
+
+            padding: 4px 6px;
+
+            border-radius: 4px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* ==========================================
+           VIDEO INFORMATION
+        ========================================== */
+
+        .video-info {
+
+            margin-left: 18px;
+
+            padding-top: 3px;
+
+        }
+
+
+        .video-info h3 {
+
+            margin: 0 0 10px;
+
+            font-size: 19px;
+
+            line-height: 1.4;
+
+        }
+
+
+        .video-info p {
+
+            margin: 7px 0;
+
+            color: #606060;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ==========================================
+           EMPTY MESSAGE
+        ========================================== */
+
+        .empty-message {
+
+            display: none;
+
+            text-align: center;
+
+            padding: 100px 20px;
+
+        }
+
+
+        .clock {
+
+            font-size: 65px;
+
+        }
+
+
+        .empty-message h2 {
+
+            font-size: 28px;
+
+        }
+
+
+        .empty-message p {
+
+            color: #606060;
+
+            font-size: 17px;
+
+        }
+
+
+        .browse-btn {
+
+            border: none;
+
+            background: #065fd4;
+
+            color: white;
+
+            padding: 14px 28px;
+
+            border-radius: 25px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        /* ==========================================
+           RESPONSIVE DESIGN
+        ========================================== */
+
+        @media (max-width: 1000px) {
+
+            main.watch-container {
+
+                margin-left: 0 !important;
+
+                width: 100% !important;
+
+                padding: 20px !important;
+
+            }
+
+
+            #sidebar {
+
+                display: none;
+
+            }
+
+
+            .playlist-card {
+
+                width: 300px;
+
+                min-width: 300px;
+
+            }
+
+
+            .video-item>img {
+
+                width: 200px !important;
+
+                min-width: 200px !important;
+
+                max-width: 200px !important;
+
+                height: 115px !important;
+
+            }
+
+
+            .dur {
+
+                left: 160px;
+
+                top: 95px;
+
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            main.watch-container {
+
+                flex-direction: column;
+
+            }
+
+
+            .playlist-card {
+
+                width: 100%;
+
+                min-width: 0;
+
+                height: auto;
+
+                position: relative;
+
+                top: 0;
+
+            }
+
+
+            .playlist-card img {
+
+                height: 250px;
+
+            }
+
+
+            .video-item>img {
+
+                width: 160px !important;
+
+                min-width: 160px !important;
+
+                max-width: 160px !important;
+
+                height: 100px !important;
+
+            }
+
+
+            .dur {
+
+                left: 120px;
+
+                top: 80px;
+
+            }
+
+
+            .video-info h3 {
+
+                font-size: 15px;
+
+            }
+
+
+            .video-info {
+
+                margin-left: 12px;
+
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- SIDEBAR -->
+
+    <aside id="sidebar">
+
+        <h2>Menu</h2>
+
+        <ul>
+
+            <li onclick="location.href='index.html'">
+                🏠 Home
+            </li>
+
+            <li>🔥 Trending</li>
+
+            <li>🎵 Music</li>
+
+            <li>🎮 Gaming</li>
+
+            <li>🎬 Movies</li>
+
+            <li>📚 Education</li>
+
+            <li>⚽ Sports</li>
+
+            <li>📰 News</li>
+
+        </ul>
+
+
+        <hr>
+
+
+        <h2>You</h2>
+
+        <ul>
+
+            <li>👤 Your channel</li>
+
+            <li>📜 History</li>
+
+            <li onclick="location.href='watchlater.html'">
+                🕒 Watch Later
+            </li>
+
+            <li onclick="location.href='likedvideo.html'">
+                👍 Liked Videos
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+
+    <!-- WATCH LATER CONTENT -->
+
+    <main class="watch-container">
+
+
+        <!-- LEFT PLAYLIST CARD -->
+
+        <div class="playlist-card">
+
+            <img src="images/liked-banner.jpg" alt="Watch Later">
+
+
+            <div class="playlist-content">
+
+                <h1>Watch Later</h1>
+
+                <h3>RAUNAK REJ</h3>
+
+                <p>
+
+                    <span id="playlistCount">
+                        4
+                    </span>
+
+                    videos • No views
+
+                </p>
+
+
+                <p>
+                    Last updated today
+                </p>
+
+
+                <div class="play-buttons">
+
+                    <button class="play" onclick="playAll()">
+
+                        ▶ Play all
+
+                    </button>
+
+
+                    <button class="shuffle" onclick="shuffleVideos()">
+
+                        🔀 Shuffle
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RIGHT AREA -->
+
+        <div class="right-area">
+
+
+            <!-- VIDEO COUNT -->
+
+            <div class="watch-header">
+
+                <span class="video-count" id="videoCount">
+
+                    4 videos
+
+                </span>
+
+
+                <button class="clear-all" onclick="clearAllVideos()">
+
+                    Clear all
+
+                </button>
+
+            </div>
+
+
+
+            <!-- FILTER -->
+
+            <div class="filter">
+
+                <button class="active">
+                    All
+                </button>
+
+                <button>
+                    Videos
+                </button>
+
+                <button>
+                    Shorts
+                </button>
+
+            </div>
+
+
+
+            <!-- VIDEO 1 -->
+
+            <div class="video-item" onclick="openVideo(1)">
+
+                <img src="https://alchetron.com/cdn/footpath-2003-film-e6fce519-6290-411a-9f13-a3123a85251-resize-750.jpg"
+                    alt="Footpath 2003">
+
+
+                <span class="dur">
+                    2:42:19
+                </span>
+
+
+                <div class="video-info">
+
+                    <h3>
+                        Footpath - 2003
+                    </h3>
+
+                    <p>
+                        Emraan Hashmi
+                    </p>
+
+                    <p>
+                        102M views • 1 year ago
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- VIDEO 2 -->
+
+            <div class="video-item" onclick="openVideo(2)">
+
+                <img src="https://th.bing.com/th/id/OIP.bSmn7xv6XPtoRqSlNHi0DwHaEK?w=243&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+                    alt="HAQ Trailer">
+
+
+                <span class="dur">
+                    03:17
+                </span>
+
+
+                <div class="video-info">
+
+                    <h3>
+                        HAQ Trailer
+                    </h3>
+
+                    <p>
+                        Pen Movies
+                    </p>
+
+                    <p>
+                        10M views • 7 months ago
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- VIDEO 3 -->
+
+            <div class="video-item" onclick="openVideo(3)">
+
+                <img src="https://tse1.mm.bing.net/th?&id=OVP.r51zVCgfW27I-ZnT6_2jWgHgFo&w=356&h=200&c=7&pid=1.7&rs=1"
+                    alt="Awarapan 2">
+
+
+                <span class="dur">
+                    08:20
+                </span>
+
+
+                <div class="video-info">
+
+                    <h3>
+                        Awarapan 2 teaser reaction
+                    </h3>
+
+                    <p>
+                        ParbhmSingh
+                    </p>
+
+                    <p>
+                        314K views • 3 weeks ago
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- VIDEO 4 -->
+
+            <div class="video-item" onclick="openVideo(4)">
+
+                <img src="https://www.bing.com/th/id/OIP.ekRbvsNYAP69tyFNwkC_YgHaKt?w=193&h=280&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=ImgAns&rm=2"
+                    alt="Mr X">
+
+
+                <span class="dur">
+                    15:36
+                </span>
+
+
+                <div class="video-info">
+
+                    <h3>
+                        Mr X
+                    </h3>
+
+                    <p>
+                        Tollywood Box Office
+                    </p>
+
+                    <p>
+                        1M views • 11 months ago
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- EMPTY MESSAGE -->
+
+            <div class="empty-message" id="emptyMessage">
+
+                <div class="clock">
+                    🕐
+                </div>
+
+                <h2>
+                    Your Watch Later list is empty
+                </h2>
+
+                <p>
+                    Save videos to watch them later.
+                </p>
+
+
+                <button class="browse-btn" onclick="location.href='index.html'">
+
+                    Browse videos
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <script>
+
+        /* ==========================================
+           OPEN VIDEO
+        ========================================== */
+
+        function openVideo(id) {
+
+            window.open(
+                "video.html?id=" + id,
+                "_blank"
+            );
+
+        }
+
+
+        /* ==========================================
+           PLAY ALL
+        ========================================== */
+
+        function playAll() {
+
+            openVideo(1);
+
+        }
+
+
+        /* ==========================================
+           SHUFFLE
+        ========================================== */
+
+        function shuffleVideos() {
+
+            const videos = [1, 2, 3, 4];
+
+            const randomVideo =
+                videos[
+                Math.floor(
+                    Math.random() * videos.length
+                )
+                ];
+
+            openVideo(randomVideo);
+
+        }
+
+
+        /* ==========================================
+           CLEAR ALL
+        ========================================== */
+
+        function clearAllVideos() {
+
+            const confirmClear = confirm(
+                "Are you sure you want to clear all Watch Later videos?"
+            );
+
+
+            if (!confirmClear) {
+
+                return;
+
+            }
+
+
+            document
+                .querySelectorAll(".video-item")
+                .forEach(function (video) {
+
+                    video.remove();
+
+                });
+
+
+            document.getElementById(
+                "playlistCount"
+            ).textContent = "0";
+
+
+            document.getElementById(
+                "videoCount"
+            ).textContent = "0 videos";
+
+
+            document.getElementById(
+                "emptyMessage"
+            ).style.display = "block";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
