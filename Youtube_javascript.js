@@ -1,183 +1,611 @@
-// ===============================
-// Search Videos with Spinner
-// ===============================
+// =====================================================
+// VIDEO DATA
+// =====================================================
 
-const searchInput = document.getElementById("searchInput");
-const searchBtn = document.getElementById("searchBtn");
-const videoCards = document.querySelectorAll(".video-card");
-const spinner = document.getElementById("spinner");
-
-const videos = {
-  1: {
+const videos = [
+  {
+    id: 1,
     title: "Jannat Full Movie | Emraan Hashmi",
+    channel: "T-Series Movies",
+    views: "25M views",
+    uploaded: "2 years ago",
+    duration: "2:08:19",
+    thumbnail:
+      "https://cdn.cinematerial.com/p/297x/iajmjaap/jannat-indian-movie-poster-md.jpg?v=1456298328",
+    category: "recommended",
     url: "https://youtu.be/rdDSok6g1LI?si=g5i3DvlkaO555qY0",
   },
 
-  2: {
+  {
+    id: 2,
     title: "Aashiq Banaya Aapne | HD Video Song",
+    channel: "Bollywood Hits",
+    views: "120M views",
+    uploaded: "4 years ago",
+    duration: "2:05:33",
+    thumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS42lvnHL2Hnqnjocbv1Q9vMdhVQEsehl34HcLcrfSHyg&s=10",
+    category: "recommended",
     url: "https://www.youtube.com/embed/VIDEO_ID_2",
   },
 
-  3: {
+  {
+    id: 3,
     title: "Murder (2004) Best Scenes",
+    channel: "Movie Clips",
+    views: "15M views",
+    uploaded: "1 year ago",
+    duration: "2:04:12",
+    thumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvSOC3si4jKR47IV6FprMm03f3dcYL5GoGmZEZQvebmg&s=10",
+    category: "recommended",
     url: "https://www.youtube.com/embed/VIDEO_ID_3",
   },
 
-  4: {
+  {
+    id: 4,
     title: "Hamari Adhuri Kahani | Official Trailer",
+    channel: "Movie Trailers",
+    views: "45M views",
+    uploaded: "5 years ago",
+    duration: "2:09:33",
+    thumbnail: "https://picsum.photos/300/180",
+    category: "recommended",
     url: "https://www.youtube.com/embed/VIDEO_ID_4",
   },
 
-  5: {
+  {
+    id: 5,
     title: "Emraan Hashmi Exclusive Interview",
+    channel: "Film Companion",
+    views: "3.5M views",
+    uploaded: "6 months ago",
+    duration: "45:19",
+    thumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXip1tYlrJ4pef4ugmcjnHD7na_C_I8Eia4FzfLFLU6Q&s=10",
+    category: "recommended",
     url: "https://www.youtube.com/embed/VIDEO_ID_5",
   },
-};
 
-function searchVideos() {
-  const value = searchInput.value.trim().toLowerCase();
+  {
+    id: 6,
+    title: "To phir Aao Song",
+    channel: "Vishesh Films",
+    views: "101M views",
+    uploaded: "2 months ago",
+    duration: "05:17",
+    thumbnail:
+      "https://th.bing.com/th/id/OIP.k1V3mVsjP0pYUZnOzcvTlQHaEK?w=271&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+    category: "trending",
+    url: "https://www.youtube.com/embed/VIDEO_ID_6",
+  },
 
-  // Show spinner
-  spinner.style.display = "flex";
+  {
+    id: 7,
+    title: "Hale Dil",
+    channel: "Murder 2",
+    views: "284M views",
+    uploaded: "10 years ago",
+    duration: "04:49",
+    thumbnail:
+      "https://th.bing.com/th/id/OIP.tdBI_FTDeRU-NCZe9yZO_gHaEK?w=320&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+    category: "music",
+    url: "https://www.youtube.com/embed/VIDEO_ID_7",
+  },
 
-  // Simulate search delay
-  setTimeout(() => {
-    // Find the section that is currently visible
-    let activeSection = document.getElementById("recommended-section");
+  {
+    id: 8,
+    title: "Lutt Gaye",
+    channel: "Music Album",
+    views: "680M views",
+    uploaded: "3 years ago",
+    duration: "04:00",
+    thumbnail:
+      "https://tellyflight.com/wp-content/uploads/2021/02/LUT-GAYE-SONG-CAST-AND-LYRICS-copy.jpg",
+    category: "music",
+    url: "https://www.youtube.com/embed/VIDEO_ID_8",
+  },
 
-    if (document.getElementById("trending-section").style.display === "block") {
-      activeSection = document.getElementById("trending-section");
-    }
+  {
+    id: 9,
+    title: "Raaz The Mystery Continues",
+    channel: "Raaz 2",
+    views: "145M views",
+    uploaded: "8 months ago",
+    duration: "2:17:13",
+    thumbnail:
+      "https://www.bing.com/th/id/OIP._8PqTx9T1g9OUQ_4Rf5oFgHaJ4?w=193&h=257&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=ImgAns&rm=2",
+    category: "movies",
+    url: "https://www.youtube.com/embed/VIDEO_ID_9",
+  },
 
-    if (document.getElementById("music-section").style.display === "block") {
-      activeSection = document.getElementById("music-section");
-    }
+  {
+    id: 10,
+    title: "Raaz 3",
+    channel: "Raaz 3D",
+    views: "152M views",
+    uploaded: "1 year ago",
+    duration: "2:12:06",
+    thumbnail:
+      "https://m.media-amazon.com/images/S/pv-target-images/78127490fdc2d9ba76361584d915587983a5664a9d6a0fc987e892b15df1d602.jpg",
+    category: "movies",
+    url: "https://www.youtube.com/embed/VIDEO_ID_10",
+  },
 
-    if (document.getElementById("movies").style.display === "block") {
-      activeSection = document.getElementById("movies");
-    }
+  {
+    id: 11,
+    title: "Raaz Reboot",
+    channel: "Raaz Reboot",
+    views: "50M views",
+    uploaded: "6 months ago",
+    duration: "2:06:18",
+    thumbnail:
+      "https://a10.gaanacdn.com/gn_img/albums/10q3ZR1352/0q3ZA9A6K5/size_l.jpg",
+    category: "movies",
+    url: "https://www.youtube.com/embed/VIDEO_ID_11",
+  },
 
-    const cards = activeSection.querySelectorAll(".video-card");
+  {
+    id: 12,
+    title: "Ek thi Daayan",
+    channel: "Ek thi Daayan",
+    views: "118M views",
+    uploaded: "12 years ago",
+    duration: "2:11:06",
+    thumbnail:
+      "https://th.bing.com/th/id/OIP.6jYyGT7PLez-jDAN4IFkQgHaHa?w=161&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+    category: "movies",
+    url: "https://www.youtube.com/embed/VIDEO_ID_12",
+  },
+];
 
-    cards.forEach(function (card) {
-      const title = card.querySelector("h3").textContent.toLowerCase();
+// =====================================================
+// COMMON DOM ELEMENTS
+// =====================================================
 
-      if (title.includes(value)) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
-    });
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+const spinner = document.getElementById("spinner");
+const clearBtn = document.getElementById("clearBtn");
 
-    // Hide spinner after search
-    spinner.style.display = "none";
-  }, 800); // 0.8 second delay for spinner effect
+// =====================================================
+// CREATE VIDEO CARD
+// =====================================================
+
+function createVideoCard(video) {
+  return `
+    <div class="video-card">
+
+      <article data-id="${video.id}">
+
+        <div class="thumbnail-container">
+
+          <img
+            src="${video.thumbnail}"
+            alt="${video.title}"
+            loading="lazy"
+          >
+
+          <span class="dur">
+            ${video.duration}
+          </span>
+
+        </div>
+
+        <div class="video-info">
+
+          <h3>${video.title}</h3>
+
+          <p>${video.channel}</p>
+
+          <p>
+            ${video.views} • ${video.uploaded}
+          </p>
+
+        </div>
+
+      </article>
+
+    </div>
+  `;
 }
 
-searchBtn.addEventListener("click", searchVideos);
+// =====================================================
+// RENDER VIDEOS
+// =====================================================
 
-searchInput.addEventListener("keyup", function (e) {
-  if (e.key === "Enter") {
-    searchVideos();
+function renderVideos() {
+  const recommendedContainer = document.getElementById("recommendedVideos");
+
+  const trendingContainer = document.getElementById("trendingVideos");
+
+  const musicContainer = document.getElementById("musicVideos");
+
+  const moviesContainer = document.getElementById("movieVideos");
+
+  if (
+    !recommendedContainer ||
+    !trendingContainer ||
+    !musicContainer ||
+    !moviesContainer
+  ) {
+    console.error("Video containers are missing from HTML.");
+
+    return;
   }
-});
 
-searchInput.addEventListener("input", searchVideos);
+  recommendedContainer.innerHTML = "";
+  trendingContainer.innerHTML = "";
+  musicContainer.innerHTML = "";
+  moviesContainer.innerHTML = "";
 
-// ===============================
-// Profile Menu
-// ===============================
-const profileBtn = document.getElementById("profileBtn");
-const profileMenu = document.getElementById("profileMenu");
+  videos.forEach(function (video) {
+    const card = createVideoCard(video);
 
-profileBtn.addEventListener("click", function (e) {
-  e.stopPropagation();
-
-  if (profileMenu.style.display === "block") {
-    profileMenu.style.display = "none";
-  } else {
-    profileMenu.style.display = "block";
-  }
-});
-
-// Prevent clicks inside the menu from closing it
-profileMenu.addEventListener("click", function (e) {
-  e.stopPropagation();
-});
-
-// Close only when clicking outside
-document.addEventListener("click", function () {
-  profileMenu.style.display = "none";
-});
-
-// ===== Namespaced Help panel JS (non-invasive) =====
-(function () {
-  const profileContainer = document.querySelector(".profile-container");
-  if (!profileContainer) return;
-
-  const helpBtn = profileContainer.querySelector("#helpBtn");
-  const helpMenu = profileContainer.querySelector("#helpMenu");
-  const closeHelp = profileContainer.querySelector("#closeHelp");
-  const helpSearch = profileContainer.querySelector("#helpSearch");
-
-  if (!helpBtn || !helpMenu) return;
-
-  // Toggle help open/close
-  helpBtn.addEventListener("click", function (e) {
-    e.stopPropagation();
-    const open = helpMenu.classList.contains("is-open");
-    if (open) {
-      helpMenu.classList.remove("is-open");
-      helpMenu.setAttribute("aria-hidden", "true");
-    } else {
-      // show help panel without forcing profile menu to close
-      helpMenu.classList.add("is-open");
-      helpMenu.setAttribute("aria-hidden", "false");
-
-      // move focus to search input for accessibility
-      const input = helpMenu.querySelector("#helpSearch");
-      if (input) input.focus();
+    if (video.category === "recommended") {
+      recommendedContainer.innerHTML += card;
+    } else if (video.category === "trending") {
+      trendingContainer.innerHTML += card;
+    } else if (video.category === "music") {
+      musicContainer.innerHTML += card;
+    } else if (video.category === "movies") {
+      moviesContainer.innerHTML += card;
     }
   });
 
-  // Prevent clicks inside the help panel from closing it
-  helpMenu.addEventListener("click", function (e) {
-    e.stopPropagation();
+  attachVideoEvents();
+}
+
+// =====================================================
+// VIDEO CLICK EVENTS
+// =====================================================
+
+function attachVideoEvents() {
+  const articles = document.querySelectorAll(
+    "#recommendedVideos article, " +
+      "#trendingVideos article, " +
+      "#musicVideos article, " +
+      "#movieVideos article",
+  );
+
+  articles.forEach(function (article) {
+    article.style.cursor = "pointer";
+
+    article.addEventListener("click", function () {
+      const id = article.dataset.id;
+
+      console.log("Opening video:", id);
+
+      window.open("video.html?id=" + id, "_blank");
+    });
+
+    article.addEventListener("mouseenter", function () {
+      article.style.transform = "scale(1.02)";
+    });
+
+    article.addEventListener("mouseleave", function () {
+      article.style.transform = "scale(1)";
+    });
+  });
+}
+
+// =====================================================
+// GET ACTIVE CATEGORY
+// =====================================================
+
+function getActiveCategory() {
+  const trendingSection = document.getElementById("trending-section");
+
+  const musicSection = document.getElementById("music-section");
+
+  const moviesSection = document.getElementById("movies");
+
+  if (trendingSection && trendingSection.style.display !== "none") {
+    return "trending";
+  }
+
+  if (musicSection && musicSection.style.display !== "none") {
+    return "music";
+  }
+
+  if (moviesSection && moviesSection.style.display !== "none") {
+    return "movies";
+  }
+
+  return "recommended";
+}
+// =====================================================
+// SEARCH VIDEOS WITH SPINNER
+// =====================================================
+
+function searchVideos() {
+  if (!searchInput) {
+    return;
+  }
+
+  const value = searchInput.value.trim().toLowerCase();
+
+  const activeCategory = getActiveCategory();
+
+  // Show spinner
+  if (spinner) {
+    spinner.style.display = "flex";
+  }
+
+  // Give the browser time to display the spinner
+  setTimeout(function () {
+    try {
+      let filteredVideos;
+
+      if (value === "") {
+        filteredVideos = videos.filter(function (video) {
+          return video.category === activeCategory;
+        });
+      } else {
+        filteredVideos = videos.filter(function (video) {
+          const matchesText =
+            video.title.toLowerCase().includes(value) ||
+            video.channel.toLowerCase().includes(value);
+
+          const matchesCategory = video.category === activeCategory;
+
+          return matchesText && matchesCategory;
+        });
+      }
+
+      renderSearchResults(filteredVideos, activeCategory);
+    } catch (error) {
+      console.error("Search error:", error);
+    } finally {
+      // Hide spinner after search is completed
+      if (spinner) {
+        spinner.style.display = "none";
+      }
+    }
+  }, 300);
+}
+// =====================================================
+// RENDER SEARCH RESULTS
+// =====================================================
+
+function renderSearchResults(videoList, category) {
+  const containers = {
+    recommended: document.getElementById("recommendedVideos"),
+
+    trending: document.getElementById("trendingVideos"),
+
+    music: document.getElementById("musicVideos"),
+
+    movies: document.getElementById("movieVideos"),
+  };
+
+  const container = containers[category];
+
+  if (!container) {
+    console.error("Container not found:", category);
+
+    return;
+  }
+
+  container.innerHTML = "";
+
+  if (videoList.length === 0) {
+    container.innerHTML = `
+      <div class="no-results">
+        <h3>No videos found</h3>
+        <p>Try another search term.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+  videoList.forEach(function (video) {
+    container.innerHTML += createVideoCard(video);
   });
 
-  // Close help using the close button
-  if (closeHelp) {
-    closeHelp.addEventListener("click", function (e) {
-      e.stopPropagation();
+  attachVideoEvents();
+}
+
+// =====================================================
+// SEARCH BUTTON
+// =====================================================
+
+if (searchBtn) {
+  searchBtn.addEventListener("click", function () {
+    searchVideos();
+  });
+}
+
+// =====================================================
+// ENTER KEY SEARCH
+// =====================================================
+
+if (searchInput) {
+  searchInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      searchVideos();
+    }
+  });
+
+  searchInput.addEventListener("input", function () {
+    toggleClearButton();
+  });
+}
+
+// =====================================================
+// CLEAR SEARCH BUTTON
+// =====================================================
+
+function toggleClearButton() {
+  if (!searchInput || !clearBtn) {
+    return;
+  }
+
+  if (searchInput.value.trim() !== "") {
+    clearBtn.style.display = "flex";
+  } else {
+    clearBtn.style.display = "none";
+  }
+}
+
+function clearSearch() {
+  if (!searchInput) {
+    return;
+  }
+
+  searchInput.value = "";
+
+  toggleClearButton();
+
+  if (spinner) {
+    spinner.style.display = "none";
+  }
+
+  const category = getActiveCategory();
+
+  const filteredVideos = videos.filter(function (video) {
+    return video.category === category;
+  });
+
+  renderSearchResults(filteredVideos, category);
+
+  searchInput.focus();
+}
+
+if (clearBtn) {
+  clearBtn.addEventListener("click", clearSearch);
+}
+
+// =====================================================
+// RESET SEARCH
+// =====================================================
+
+function resetSearch() {
+  if (searchInput) {
+    searchInput.value = "";
+  }
+
+  toggleClearButton();
+
+  if (spinner) {
+    spinner.style.display = "none";
+  }
+
+  renderVideos();
+}
+
+// =====================================================
+// PROFILE MENU
+// =====================================================
+
+const profileBtn = document.getElementById("profileBtn");
+
+const profileMenu = document.getElementById("profileMenu");
+
+if (profileBtn && profileMenu) {
+  profileBtn.addEventListener("click", function (event) {
+    event.stopPropagation();
+
+    if (profileMenu.style.display === "block") {
+      profileMenu.style.display = "none";
+    } else {
+      profileMenu.style.display = "block";
+    }
+  });
+
+  profileMenu.addEventListener("click", function (event) {
+    event.stopPropagation();
+  });
+
+  document.addEventListener("click", function () {
+    profileMenu.style.display = "none";
+  });
+}
+
+// =====================================================
+// HELP PANEL
+// =====================================================
+
+(function () {
+  const profileContainer = document.querySelector(".profile-container");
+
+  if (!profileContainer) {
+    return;
+  }
+
+  const helpBtn = profileContainer.querySelector("#helpBtn");
+
+  const helpMenu = profileContainer.querySelector("#helpMenu");
+
+  const closeHelp = profileContainer.querySelector("#closeHelp");
+
+  const helpSearch = profileContainer.querySelector("#helpSearch");
+
+  if (!helpBtn || !helpMenu) {
+    return;
+  }
+
+  helpBtn.addEventListener("click", function (event) {
+    event.stopPropagation();
+
+    const open = helpMenu.classList.contains("is-open");
+
+    if (open) {
       helpMenu.classList.remove("is-open");
+
+      helpMenu.setAttribute("aria-hidden", "true");
+    } else {
+      helpMenu.classList.add("is-open");
+
+      helpMenu.setAttribute("aria-hidden", "false");
+
+      if (helpSearch) {
+        helpSearch.focus();
+      }
+    }
+  });
+
+  helpMenu.addEventListener("click", function (event) {
+    event.stopPropagation();
+  });
+
+  if (closeHelp) {
+    closeHelp.addEventListener("click", function (event) {
+      event.stopPropagation();
+
+      helpMenu.classList.remove("is-open");
+
       helpMenu.setAttribute("aria-hidden", "true");
     });
   }
 
-  // Clicking outside closes help (does not affect other handlers)
   document.addEventListener("click", function () {
     if (helpMenu.classList.contains("is-open")) {
       helpMenu.classList.remove("is-open");
+
       helpMenu.setAttribute("aria-hidden", "true");
     }
   });
 
-  // Optional: simple search/filter within help items
   if (helpSearch) {
     helpSearch.addEventListener("input", function () {
       const q = helpSearch.value.trim().toLowerCase();
+
       const items = helpMenu.querySelectorAll(".help-item");
+
       items.forEach(function (item) {
-        const txt = item.textContent.trim().toLowerCase();
-        item.style.display = txt.includes(q) ? "flex" : "none";
+        const text = item.textContent.trim().toLowerCase();
+
+        item.style.display = text.includes(q) ? "flex" : "none";
       });
     });
   }
 })();
 
-// ==========================================
+// =====================================================
 // WATCH LATER
-// ==========================================
+// =====================================================
 
 const watchLaterBtn = document.getElementById("watchLaterBtn");
 
@@ -186,9 +614,10 @@ if (watchLaterBtn) {
     window.location.href = "watchlater.html";
   });
 }
-// ===============================
-// Sidebar
-// ===============================
+
+// =====================================================
+// SIDEBAR
+// =====================================================
 
 const menuItems = document.querySelectorAll("aside li");
 
@@ -202,20 +631,30 @@ menuItems.forEach(function (item) {
   });
 });
 
+// =====================================================
+// THEME / APPEARANCE
+// =====================================================
+
 document.addEventListener("DOMContentLoaded", function () {
   const appearanceBtn = document.getElementById("appearanceBtn");
+
   const appearanceMenu = document.getElementById("appearanceMenu");
+
   const backAppearance = document.getElementById("backAppearance");
 
-  appearanceBtn.addEventListener("click", () => {
-    appearanceMenu.style.display = "block";
-  });
+  if (appearanceBtn && appearanceMenu) {
+    appearanceBtn.addEventListener("click", function () {
+      appearanceMenu.style.display = "block";
+    });
+  }
 
-  backAppearance.addEventListener("click", () => {
-    appearanceMenu.style.display = "none";
-  });
+  if (backAppearance && appearanceMenu) {
+    backAppearance.addEventListener("click", function () {
+      appearanceMenu.style.display = "none";
+    });
+  }
 
-  document.querySelectorAll('input[name="theme"]').forEach((item) => {
+  document.querySelectorAll('input[name="theme"]').forEach(function (item) {
     item.addEventListener("change", function () {
       if (this.value === "dark") {
         document.body.classList.add("dark-mode");
@@ -232,59 +671,30 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// ===============================
-// Sidebar Toggle
-// ===============================
+// =====================================================
+// SIDEBAR TOGGLE
+// =====================================================
+
 const menuBtn = document.getElementById("menuBtn");
+
 const sidebar = document.getElementById("sidebar");
+
 const hideItems = document.querySelectorAll(".hide-item");
 
-menuBtn.addEventListener("click", function () {
-  sidebar.classList.toggle("small");
+if (menuBtn && sidebar) {
+  menuBtn.addEventListener("click", function () {
+    sidebar.classList.toggle("small");
 
-  hideItems.forEach(function (item) {
-    if (item.style.display === "none") {
-      item.style.display = "block";
-    } else {
-      item.style.display = "none";
-    }
+    hideItems.forEach(function (item) {
+      if (item.style.display === "none") {
+        item.style.display = "block";
+      } else {
+        item.style.display = "none";
+      }
+    });
   });
-});
-// ===============================
-// Video Click
-// ===============================
-const articles = document.querySelectorAll("article");
+}
 
-articles.forEach((article) => {
-  article.style.cursor = "pointer";
-
-  article.addEventListener("click", () => {
-    const id = article.dataset.id;
-
-    window.open("video.html?id=" + id, "_blank");
-  });
-});
-
-// ===============================
-// Hover
-// ===============================
-
-articles.forEach(function (article) {
-  article.addEventListener("mouseenter", function () {
-    this.style.transform = "scale(1.02)";
-  });
-
-  article.addEventListener("mouseleave", function () {
-    this.style.transform = "scale(1)";
-  });
-});
-
-// ===============================
-// Header Buttons
-// ===============================
-// =====================================================
-// NOTIFICATION POPUP
-// =====================================================
 // =====================================================
 // NOTIFICATION POPUP
 // =====================================================
@@ -295,199 +705,173 @@ const notificationPopup = document.getElementById("notificationPopup");
 
 const notificationContainer = document.querySelector(".notification-container");
 
-// -----------------------------------------------------
-// OPEN / CLOSE NOTIFICATION POPUP
-// -----------------------------------------------------
+if (notificationBtn && notificationPopup) {
+  notificationBtn.addEventListener("click", function (event) {
+    event.stopPropagation();
 
-notificationBtn.addEventListener("click", function (event) {
-  event.stopPropagation();
-
-  const isOpen = notificationPopup.classList.contains("show");
-
-  if (isOpen) {
-    notificationPopup.classList.remove("show");
-  } else {
-    notificationPopup.classList.add("show");
-  }
-});
-
-// -----------------------------------------------------
-// DON'T CLOSE WHEN CLICKING INSIDE NOTIFICATION POPUP
-// -----------------------------------------------------
-
-notificationPopup.addEventListener("click", function (event) {
-  event.stopPropagation();
-});
-
-// -----------------------------------------------------
-// CLOSE WHEN CLICKING ANYWHERE OUTSIDE
-// -----------------------------------------------------
-
-document.addEventListener("click", function (event) {
-  if (!notificationContainer.contains(event.target)) {
-    notificationPopup.classList.remove("show");
-  }
-});
-
-// =====================================================
-// CLOSE NOTIFICATION WHEN CLICKING OTHER HEADER BUTTONS
-// =====================================================
-
-const otherHeaderButtons = document.querySelectorAll(
-  "header button:not(#notificationBtn)",
-);
-
-otherHeaderButtons.forEach(function (button) {
-  button.addEventListener("click", function () {
-    notificationPopup.classList.remove("show");
+    notificationPopup.classList.toggle("show");
   });
-});
+
+  notificationPopup.addEventListener("click", function (event) {
+    event.stopPropagation();
+  });
+
+  document.addEventListener("click", function (event) {
+    if (
+      notificationContainer &&
+      !notificationContainer.contains(event.target)
+    ) {
+      notificationPopup.classList.remove("show");
+    }
+  });
+
+  const otherHeaderButtons = document.querySelectorAll(
+    "header button:not(#notificationBtn)",
+  );
+
+  otherHeaderButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      notificationPopup.classList.remove("show");
+    });
+  });
+}
 
 // =====================================================
-// CLOSE NOTIFICATION WHEN CLICKING OTHER IMPORTANT
-// ELEMENTS OUTSIDE THE NOTIFICATION
+// HEADER BUTTONS
 // =====================================================
 
-document.addEventListener("click", function (event) {
-  if (!event.target.closest(".notification-container")) {
-    notificationPopup.classList.remove("show");
-  }
-});
 const headerButtons = document.querySelectorAll("header button");
 
 headerButtons.forEach(function (btn) {
   btn.addEventListener("click", function () {
-    if (this.innerHTML.includes("📹"))
-      if (this.innerHTML.includes("🔔"))
-        // alert("Create Video feature coming soon!");
+    if (this.innerHTML.includes("🔔")) {
+      // Notification popup handles
+      // notification button.
+    }
 
-        alert("No new notifications.");
-
-    if (this.innerHTML.includes("👤")) alert("User Profile");
+    if (this.innerHTML.includes("👤")) {
+      console.log("User Profile");
+    }
   });
 });
 
-function toggleClearButton() {
-  const input = document.getElementById("searchInput");
-  const clearBtn = document.getElementById("clearBtn");
+// =====================================================
+// HOME / TRENDING / MUSIC / MOVIES
+// =====================================================
 
-  if (input.value.trim() !== "") {
-    clearBtn.style.display = "flex";
-  } else {
-    clearBtn.style.display = "none";
+function showSection(sectionName) {
+  const recommendedSection = document.getElementById("recommended-section");
+
+  const trendingSection = document.getElementById("trending-section");
+
+  const musicSection = document.getElementById("music-section");
+
+  const moviesSection = document.getElementById("movies");
+
+  if (recommendedSection) {
+    recommendedSection.style.display =
+      sectionName === "recommended" ? "block" : "none";
   }
+
+  if (trendingSection) {
+    trendingSection.style.display =
+      sectionName === "trending" ? "block" : "none";
+  }
+
+  if (musicSection) {
+    musicSection.style.display = sectionName === "music" ? "block" : "none";
+  }
+
+  if (moviesSection) {
+    moviesSection.style.display = sectionName === "movies" ? "block" : "none";
+  }
+
+  resetSearch();
 }
-function clearSearch() {
-  searchInput.value = "";
 
-  document.getElementById("clearBtn").style.display = "none";
+// =====================================================
+// HOME
+// =====================================================
 
-  document.querySelectorAll(".video-card").forEach(function (card) {
-    card.style.display = "block";
-  });
+const homeBtn = document.getElementById("home");
 
-  // Hide spinner when clearing search
-  spinner.style.display = "none";
-
-  searchInput.focus();
-}
-
-// ===============================
-// Footer
-// ===============================
-
-// trending //// Handle Trending click
-// ===============================
-// Trending
-// ===============================
-
-document.getElementById("trending").addEventListener("click", function () {
-  resetSearch();
-
-  document.getElementById("recommended-section").style.display = "none";
-  document.getElementById("music-section").style.display = "none";
-  document.getElementById("movies").style.display = "none";
-  document.getElementById("trending-section").style.display = "block";
-});
-
-/// Music ///// ===============================
-// Music
-// ===============================
-document.getElementById("music").addEventListener("click", function () {
-  resetSearch();
-
-  document.getElementById("recommended-section").style.display = "none";
-  document.getElementById("trending-section").style.display = "none";
-  document.getElementById("movies").style.display = "none";
-  document.getElementById("music-section").style.display = "block";
-});
-
-/// Movies ///// ===============================
-// Movies
-// ===============================
-document.getElementById("moviesBtn").addEventListener("click", function () {
-  resetSearch();
-
-  document.getElementById("recommended-section").style.display = "none";
-  document.getElementById("trending-section").style.display = "none";
-  document.getElementById("music-section").style.display = "none";
-  document.getElementById("movies").style.display = "block";
-});
-
-// main //// ===============================
-// Home
-// ===============================
-
-document.getElementById("home").addEventListener("click", function () {
-  resetSearch();
-
-  document.getElementById("recommended-section").style.display = "block";
-  document.getElementById("trending-section").style.display = "none";
-  document.getElementById("music-section").style.display = "none";
-  document.getElementById("movies").style.display = "none";
-});
-
-document.querySelector("footer p").innerHTML =
-  `&copy; ${new Date().getFullYear()} RTube. This is a dummy webpage created for learning purposes.`;
-
-/// footer ///
-
-function resetSearch() {
-  searchInput.value = "";
-
-  document.getElementById("clearBtn").style.display = "none";
-
-  // Hide spinner when resetting
-  spinner.style.display = "none";
-
-  document.querySelectorAll(".video-card").forEach(function (card) {
-    card.style.display = "block";
+if (homeBtn) {
+  homeBtn.addEventListener("click", function () {
+    showSection("recommended");
   });
 }
 
-// ===============================
-// Voice Search
-// ===============================
+// =====================================================
+// TRENDING
+// =====================================================
+
+const trendingBtn = document.getElementById("trending");
+
+if (trendingBtn) {
+  trendingBtn.addEventListener("click", function () {
+    showSection("trending");
+  });
+}
+
+// =====================================================
+// MUSIC
+// =====================================================
+
+const musicBtn = document.getElementById("music");
+
+if (musicBtn) {
+  musicBtn.addEventListener("click", function () {
+    showSection("music");
+  });
+}
+
+// =====================================================
+// MOVIES
+// =====================================================
+
+const moviesBtn = document.getElementById("moviesBtn");
+
+if (moviesBtn) {
+  moviesBtn.addEventListener("click", function () {
+    showSection("movies");
+  });
+}
+
+// =====================================================
+// FOOTER
+// =====================================================
+
+const footerText = document.querySelector("footer p");
+
+if (footerText) {
+  footerText.innerHTML = `&copy; ${new Date().getFullYear()} RTube. This is a dummy webpage created for learning purposes.`;
+}
+
+// =====================================================
+// VOICE SEARCH
+// =====================================================
 
 const voiceBtn = document.getElementById("voiceBtn");
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
-if (SpeechRecognition) {
+if (voiceBtn && SpeechRecognition) {
   const recognition = new SpeechRecognition();
 
   recognition.lang = "en-US";
+
   recognition.interimResults = false;
+
   recognition.maxAlternatives = 1;
 
-  voiceBtn.addEventListener("click", () => {
+  voiceBtn.addEventListener("click", function () {
     recognition.start();
 
     voiceBtn.innerHTML = "🎙️";
   });
 
-  recognition.addEventListener("result", (event) => {
+  recognition.addEventListener("result", function (event) {
     const transcript = event.results[0][0].transcript;
 
     searchInput.value = transcript;
@@ -497,23 +881,23 @@ if (SpeechRecognition) {
     searchVideos();
   });
 
-  recognition.addEventListener("end", () => {
+  recognition.addEventListener("end", function () {
     voiceBtn.innerHTML = "🎤";
   });
 
-  recognition.addEventListener("error", () => {
+  recognition.addEventListener("error", function () {
     voiceBtn.innerHTML = "🎤";
 
     alert("Voice recognition failed.");
   });
-} else {
+} else if (voiceBtn) {
   voiceBtn.style.display = "none";
-
-  console.log("Speech Recognition not supported.");
 }
-// ===============================
-// Logout Functionality
-// ===============================
+
+// =====================================================
+// LOGOUT
+// =====================================================
+
 const logoutBtn = document.getElementById("logoutBtn");
 
 if (logoutBtn) {
@@ -524,42 +908,43 @@ if (logoutBtn) {
 
     if (confirmLogout) {
       localStorage.removeItem("isLoggedIn");
+
       localStorage.removeItem("username");
+
       localStorage.removeItem("userEmail");
 
       window.open("about:blank", "_blank");
     }
   });
 }
-// ===============================
-// Create Menu
-// ===============================
+
+// =====================================================
+// CREATE MENU
+// =====================================================
 
 const createBtn = document.getElementById("createBtn");
+
 const createMenu = document.getElementById("createMenu");
 
 if (createBtn && createMenu) {
-  // Open / close Create menu
   createBtn.addEventListener("click", function (event) {
     event.stopPropagation();
 
     createMenu.classList.toggle("show");
   });
 
-  // Prevent clicks inside menu from closing it immediately
   createMenu.addEventListener("click", function (event) {
     event.stopPropagation();
   });
 
-  // Close menu when clicking anywhere outside
   document.addEventListener("click", function () {
     createMenu.classList.remove("show");
   });
 }
 
-// ===============================
-// Upload Video
-// ===============================
+// =====================================================
+// UPLOAD VIDEO
+// =====================================================
 
 const uploadVideoBtn = document.getElementById("uploadVideoBtn");
 
@@ -569,9 +954,9 @@ if (uploadVideoBtn) {
   });
 }
 
-// ===============================
-// Go Live
-// ===============================
+// =====================================================
+// GO LIVE
+// =====================================================
 
 const goLiveBtn = document.getElementById("goLiveBtn");
 
@@ -581,9 +966,9 @@ if (goLiveBtn) {
   });
 }
 
-// ===============================
-// Create Post
-// ===============================
+// =====================================================
+// CREATE POST
+// =====================================================
 
 const createPostBtn = document.getElementById("createPostBtn");
 
@@ -593,62 +978,138 @@ if (createPostBtn) {
   });
 }
 
-// Filter chips: All / Videos / Shorts / Podcasts / Music
+// =====================================================
+// WATCH HISTORY
+// =====================================================
+// These elements may exist only on the
+// Watch History page.
+// Therefore null checks are required.
+// =====================================================
+
 const chips = document.querySelectorAll(".chip");
+
 const items = document.querySelectorAll(".hist-item");
+
 const emptyState = document.getElementById("emptyState");
 
 function applyFilter(filter) {
   let visibleCount = 0;
-  items.forEach((item) => {
+
+  items.forEach(function (item) {
     const match = filter === "all" || item.dataset.category === filter;
+
     item.style.display = match ? "flex" : "none";
-    if (match) visibleCount++;
+
+    if (match) {
+      visibleCount++;
+    }
   });
-  emptyState.style.display = visibleCount === 0 ? "block" : "none";
+
+  if (emptyState) {
+    emptyState.style.display = visibleCount === 0 ? "block" : "none";
+  }
 }
 
-chips.forEach((chip) => {
-  chip.addEventListener("click", () => {
-    chips.forEach((c) => c.classList.remove("active"));
+chips.forEach(function (chip) {
+  chip.addEventListener("click", function () {
+    chips.forEach(function (c) {
+      c.classList.remove("active");
+    });
+
     chip.classList.add("active");
+
     applyFilter(chip.dataset.filter);
   });
 });
 
-// Search within watch history
-document.getElementById("historySearch").addEventListener("input", (e) => {
-  const q = e.target.value.trim().toLowerCase();
-  let visibleCount = 0;
-  items.forEach((item) => {
-    const match = item.dataset.title.toLowerCase().includes(q);
-    item.style.display = match ? "flex" : "none";
-    if (match) visibleCount++;
+// =====================================================
+// HISTORY SEARCH
+// =====================================================
+
+const historySearch = document.getElementById("historySearch");
+
+if (historySearch) {
+  historySearch.addEventListener("input", function (e) {
+    const q = e.target.value.trim().toLowerCase();
+
+    let visibleCount = 0;
+
+    items.forEach(function (item) {
+      const title = item.dataset.title || "";
+
+      const match = title.toLowerCase().includes(q);
+
+      item.style.display = match ? "flex" : "none";
+
+      if (match) {
+        visibleCount++;
+      }
+    });
+
+    if (emptyState) {
+      emptyState.style.display = visibleCount === 0 ? "block" : "none";
+    }
   });
-  emptyState.style.display = visibleCount === 0 ? "block" : "none";
-});
+}
 
-// Clear all watch history
-document.getElementById("clearAllBtn").addEventListener("click", () => {
-  if (confirm("Clear all watch history? This cannot be undone.")) {
-    items.forEach((item) => item.remove());
-    emptyState.style.display = "block";
-  }
-});
+// =====================================================
+// CLEAR ALL HISTORY
+// =====================================================
 
-// Pause / resume watch history (just a UI toggle for this dummy app)
+const clearAllBtn = document.getElementById("clearAllBtn");
+
+if (clearAllBtn) {
+  clearAllBtn.addEventListener("click", function () {
+    if (confirm("Clear all watch history? This cannot be undone.")) {
+      items.forEach(function (item) {
+        item.remove();
+      });
+
+      if (emptyState) {
+        emptyState.style.display = "block";
+      }
+    }
+  });
+}
+
+// =====================================================
+// PAUSE / RESUME HISTORY
+// =====================================================
+
+const pauseBtn = document.getElementById("pauseBtn");
+
+const pauseLabel = document.getElementById("pauseLabel");
+
 let paused = false;
-document.getElementById("pauseBtn").addEventListener("click", () => {
-  paused = !paused;
-  document.getElementById("pauseLabel").textContent = paused
-    ? "Resume watch history"
-    : "Pause watch history";
-});
 
-document.getElementById("manageBtn").addEventListener("click", () => {
-  alert("Manage all history settings would open here.");
-});
+if (pauseBtn) {
+  pauseBtn.addEventListener("click", function () {
+    paused = !paused;
 
-document.getElementById("menuBtn").addEventListener("click", () => {
-  document.getElementById("sidebar").classList.toggle("hide-item");
+    if (pauseLabel) {
+      pauseLabel.textContent = paused
+        ? "Resume watch history"
+        : "Pause watch history";
+    }
+  });
+}
+
+// =====================================================
+// MANAGE HISTORY
+// =====================================================
+
+const manageBtn = document.getElementById("manageBtn");
+
+if (manageBtn) {
+  manageBtn.addEventListener("click", function () {
+    alert("Manage all history settings would open here.");
+  });
+}
+
+// =====================================================
+// INITIALIZE APPLICATION
+// =====================================================
+
+document.addEventListener("DOMContentLoaded", function () {
+  renderVideos();
 });
