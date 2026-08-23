@@ -108,6 +108,19 @@ const videos = [
 
   {
     id: 9,
+    title: "Tumhare liye",
+    channel: "Music Album",
+    views: "4.5M views",
+    uploaded: "11 Hours ago",
+    duration: "03:28",
+    thumbnail:
+      "https://i.ytimg.com/vi/8Mj-MjMFDxc/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLAA3Ty-5NFd2HmJo-tjmKFLrXrGfQ",
+    category: "music",
+    url: "https://www.youtube.com/embed/VIDEO_ID_9",
+  },
+
+  {
+    id: 10,
     title: "Raaz The Mystery Continues",
     channel: "Raaz 2",
     views: "145M views",
@@ -116,11 +129,11 @@ const videos = [
     thumbnail:
       "https://www.bing.com/th/id/OIP._8PqTx9T1g9OUQ_4Rf5oFgHaJ4?w=193&h=257&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=ImgAns&rm=2",
     category: "movies",
-    url: "https://www.youtube.com/embed/VIDEO_ID_9",
+    url: "https://www.youtube.com/embed/VIDEO_ID_10",
   },
 
   {
-    id: 10,
+    id: 11,
     title: "Raaz 3",
     channel: "Raaz 3D",
     views: "152M views",
@@ -129,11 +142,11 @@ const videos = [
     thumbnail:
       "https://m.media-amazon.com/images/S/pv-target-images/78127490fdc2d9ba76361584d915587983a5664a9d6a0fc987e892b15df1d602.jpg",
     category: "movies",
-    url: "https://www.youtube.com/embed/VIDEO_ID_10",
+    url: "https://www.youtube.com/embed/VIDEO_ID_11",
   },
 
   {
-    id: 11,
+    id: 12,
     title: "Raaz Reboot",
     channel: "Raaz Reboot",
     views: "50M views",
@@ -142,11 +155,11 @@ const videos = [
     thumbnail:
       "https://a10.gaanacdn.com/gn_img/albums/10q3ZR1352/0q3ZA9A6K5/size_l.jpg",
     category: "movies",
-    url: "https://www.youtube.com/embed/VIDEO_ID_11",
+    url: "https://www.youtube.com/embed/VIDEO_ID_12",
   },
 
   {
-    id: 12,
+    id: 13,
     title: "Ek thi Daayan",
     channel: "Ek thi Daayan",
     views: "118M views",
@@ -155,7 +168,20 @@ const videos = [
     thumbnail:
       "https://th.bing.com/th/id/OIP.6jYyGT7PLez-jDAN4IFkQgHaHa?w=161&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
     category: "movies",
-    url: "https://www.youtube.com/embed/VIDEO_ID_12",
+    url: "https://www.youtube.com/embed/VIDEO_ID_13",
+  },
+
+  {
+    id: 14,
+    title: "Crook",
+    channel: "Crook",
+    views: "10M views",
+    uploaded: "11 Months ago",
+    duration: "1:59:45",
+    thumbnail:
+      "https://th.bing.com/th/id/OIP.T4B8ybFe3zhahGm_lz9s_QHaKn?w=208&h=299&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+    category: "movies",
+    url: "https://www.youtube.com/embed/VIDEO_ID_14",
   },
 ];
 
