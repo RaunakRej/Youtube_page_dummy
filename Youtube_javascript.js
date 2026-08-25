@@ -1,189 +1,13 @@
 // =====================================================
-// VIDEO DATA
+// VIDEO DATA FROM SPRING BOOT API
 // =====================================================
 
-const videos = [
-  {
-    id: 1,
-    title: "Jannat Full Movie | Emraan Hashmi",
-    channel: "T-Series Movies",
-    views: "25M views",
-    uploaded: "2 years ago",
-    duration: "2:08:19",
-    thumbnail:
-      "https://cdn.cinematerial.com/p/297x/iajmjaap/jannat-indian-movie-poster-md.jpg?v=1456298328",
-    category: "recommended",
-    url: "https://youtu.be/rdDSok6g1LI?si=g5i3DvlkaO555qY0",
-  },
+let videos = [];
 
-  {
-    id: 2,
-    title: "Aashiq Banaya Aapne | HD Video Song",
-    channel: "Bollywood Hits",
-    views: "120M views",
-    uploaded: "4 years ago",
-    duration: "2:05:33",
-    thumbnail:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS42lvnHL2Hnqnjocbv1Q9vMdhVQEsehl34HcLcrfSHyg&s=10",
-    category: "recommended",
-    url: "https://www.youtube.com/embed/VIDEO_ID_2",
-  },
+const API_URL = "http://localhost:8080/api/videos";
 
-  {
-    id: 3,
-    title: "Murder (2004) Best Scenes",
-    channel: "Movie Clips",
-    views: "15M views",
-    uploaded: "1 year ago",
-    duration: "2:04:12",
-    thumbnail:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvSOC3si4jKR47IV6FprMm03f3dcYL5GoGmZEZQvebmg&s=10",
-    category: "recommended",
-    url: "https://www.youtube.com/embed/VIDEO_ID_3",
-  },
-
-  {
-    id: 4,
-    title: "Hamari Adhuri Kahani | Official Trailer",
-    channel: "Movie Trailers",
-    views: "45M views",
-    uploaded: "5 years ago",
-    duration: "2:09:33",
-    thumbnail: "https://picsum.photos/300/180",
-    category: "recommended",
-    url: "https://www.youtube.com/embed/VIDEO_ID_4",
-  },
-
-  {
-    id: 5,
-    title: "Emraan Hashmi Exclusive Interview",
-    channel: "Film Companion",
-    views: "3.5M views",
-    uploaded: "6 months ago",
-    duration: "45:19",
-    thumbnail:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXip1tYlrJ4pef4ugmcjnHD7na_C_I8Eia4FzfLFLU6Q&s=10",
-    category: "recommended",
-    url: "https://www.youtube.com/embed/VIDEO_ID_5",
-  },
-
-  {
-    id: 6,
-    title: "To phir Aao Song",
-    channel: "Vishesh Films",
-    views: "101M views",
-    uploaded: "2 months ago",
-    duration: "05:17",
-    thumbnail:
-      "https://th.bing.com/th/id/OIP.k1V3mVsjP0pYUZnOzcvTlQHaEK?w=271&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
-    category: "trending",
-    url: "https://www.youtube.com/embed/VIDEO_ID_6",
-  },
-
-  {
-    id: 7,
-    title: "Hale Dil",
-    channel: "Murder 2",
-    views: "284M views",
-    uploaded: "10 years ago",
-    duration: "04:49",
-    thumbnail:
-      "https://th.bing.com/th/id/OIP.tdBI_FTDeRU-NCZe9yZO_gHaEK?w=320&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
-    category: "music",
-    url: "https://www.youtube.com/embed/VIDEO_ID_7",
-  },
-
-  {
-    id: 8,
-    title: "Lutt Gaye",
-    channel: "Music Album",
-    views: "680M views",
-    uploaded: "3 years ago",
-    duration: "04:00",
-    thumbnail:
-      "https://tellyflight.com/wp-content/uploads/2021/02/LUT-GAYE-SONG-CAST-AND-LYRICS-copy.jpg",
-    category: "music",
-    url: "https://www.youtube.com/embed/VIDEO_ID_8",
-  },
-
-  {
-    id: 9,
-    title: "Tumhare liye",
-    channel: "Music Album",
-    views: "4.5M views",
-    uploaded: "11 Hours ago",
-    duration: "03:28",
-    thumbnail:
-      "https://i.ytimg.com/vi/8Mj-MjMFDxc/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLAA3Ty-5NFd2HmJo-tjmKFLrXrGfQ",
-    category: "music",
-    url: "https://www.youtube.com/embed/VIDEO_ID_9",
-  },
-
-  {
-    id: 10,
-    title: "Raaz The Mystery Continues",
-    channel: "Raaz 2",
-    views: "145M views",
-    uploaded: "8 months ago",
-    duration: "2:17:13",
-    thumbnail:
-      "https://www.bing.com/th/id/OIP._8PqTx9T1g9OUQ_4Rf5oFgHaJ4?w=193&h=257&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=ImgAns&rm=2",
-    category: "movies",
-    url: "https://www.youtube.com/embed/VIDEO_ID_10",
-  },
-
-  {
-    id: 11,
-    title: "Raaz 3",
-    channel: "Raaz 3D",
-    views: "152M views",
-    uploaded: "1 year ago",
-    duration: "2:12:06",
-    thumbnail:
-      "https://m.media-amazon.com/images/S/pv-target-images/78127490fdc2d9ba76361584d915587983a5664a9d6a0fc987e892b15df1d602.jpg",
-    category: "movies",
-    url: "https://www.youtube.com/embed/VIDEO_ID_11",
-  },
-
-  {
-    id: 12,
-    title: "Raaz Reboot",
-    channel: "Raaz Reboot",
-    views: "50M views",
-    uploaded: "6 months ago",
-    duration: "2:06:18",
-    thumbnail:
-      "https://a10.gaanacdn.com/gn_img/albums/10q3ZR1352/0q3ZA9A6K5/size_l.jpg",
-    category: "movies",
-    url: "https://www.youtube.com/embed/VIDEO_ID_12",
-  },
-
-  {
-    id: 13,
-    title: "Ek thi Daayan",
-    channel: "Ek thi Daayan",
-    views: "118M views",
-    uploaded: "12 years ago",
-    duration: "2:11:06",
-    thumbnail:
-      "https://th.bing.com/th/id/OIP.6jYyGT7PLez-jDAN4IFkQgHaHa?w=161&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
-    category: "movies",
-    url: "https://www.youtube.com/embed/VIDEO_ID_13",
-  },
-
-  {
-    id: 14,
-    title: "Crook",
-    channel: "Crook",
-    views: "10M views",
-    uploaded: "11 Months ago",
-    duration: "1:59:45",
-    thumbnail:
-      "https://th.bing.com/th/id/OIP.T4B8ybFe3zhahGm_lz9s_QHaKn?w=208&h=299&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
-    category: "movies",
-    url: "https://www.youtube.com/embed/VIDEO_ID_14",
-  },
-];
+// Search API
+const SEARCH_API_URL = "http://localhost:8080/api/videos/search";
 
 // =====================================================
 // COMMON DOM ELEMENTS
@@ -193,6 +17,70 @@ const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
 const spinner = document.getElementById("spinner");
 const clearBtn = document.getElementById("clearBtn");
+
+// =====================================================
+// LOAD VIDEOS FROM SPRING BOOT API
+// =====================================================
+
+async function loadVideosFromAPI() {
+  try {
+    console.log("Fetching videos from Spring Boot API...");
+
+    if (spinner) {
+      spinner.style.display = "flex";
+    }
+
+    const response = await fetch(API_URL);
+
+    if (!response.ok) {
+      throw new Error("API request failed. Status: " + response.status);
+    }
+
+    const data = await response.json();
+
+    console.log("Videos received from API:", data);
+
+    videos = data;
+
+    renderVideos();
+  } catch (error) {
+    console.error("Error loading videos from API:", error);
+
+    showAPIError();
+  } finally {
+    if (spinner) {
+      spinner.style.display = "none";
+    }
+  }
+}
+
+// =====================================================
+// API ERROR MESSAGE
+// =====================================================
+
+function showAPIError() {
+  const containers = [
+    document.getElementById("recommendedVideos"),
+    document.getElementById("trendingVideos"),
+    document.getElementById("musicVideos"),
+    document.getElementById("movieVideos"),
+  ];
+
+  containers.forEach(function (container) {
+    if (container) {
+      container.innerHTML = `
+        <div class="no-results">
+          <h3>Unable to load videos</h3>
+
+          <p>
+            Please make sure the Spring Boot API
+            is running on port 8080.
+          </p>
+        </div>
+      `;
+    }
+  });
+}
 
 // =====================================================
 // CREATE VIDEO CARD
@@ -207,25 +95,26 @@ function createVideoCard(video) {
         <div class="thumbnail-container">
 
           <img
-            src="${video.thumbnail}"
-            alt="${video.title}"
+            src="${video.thumbnail || ""}"
+            alt="${video.title || "Video"}"
             loading="lazy"
           >
 
           <span class="dur">
-            ${video.duration}
+            ${video.duration || ""}
           </span>
 
         </div>
 
         <div class="video-info">
 
-          <h3>${video.title}</h3>
+          <h3>${video.title || "Untitled Video"}</h3>
 
-          <p>${video.channel}</p>
+          <p>${video.channel || "Unknown Channel"}</p>
 
           <p>
-            ${video.views} • ${video.uploaded}
+            ${video.views || "0 views"} •
+            ${video.uploaded || ""}
           </p>
 
         </div>
@@ -302,7 +191,7 @@ function attachVideoEvents() {
 
       console.log("Opening video:", id);
 
-      window.open("video.html?id=" + id, "_blank");
+      window.open("video.html?id=" + encodeURIComponent(id), "_blank");
     });
 
     article.addEventListener("mouseenter", function () {
@@ -340,56 +229,102 @@ function getActiveCategory() {
 
   return "recommended";
 }
+
 // =====================================================
-// SEARCH VIDEOS WITH SPINNER
+// SEARCH VIDEOS USING SPRING BOOT SEARCH API
 // =====================================================
 
-function searchVideos() {
+async function searchVideos() {
   if (!searchInput) {
     return;
   }
 
-  const value = searchInput.value.trim().toLowerCase();
+  const value = searchInput.value.trim();
+
+  // If search box is empty
+  if (value === "") {
+    resetSearch();
+
+    return;
+  }
 
   const activeCategory = getActiveCategory();
+
+  console.log("Searching for:", value);
+
+  console.log(
+    "Search API:",
+    SEARCH_API_URL + "?query=" + encodeURIComponent(value),
+  );
 
   // Show spinner
   if (spinner) {
     spinner.style.display = "flex";
   }
 
-  // Give the browser time to display the spinner
-  setTimeout(function () {
-    try {
-      let filteredVideos;
+  try {
+    // =================================================
+    // CALL SPRING BOOT SEARCH API
+    // =================================================
 
-      if (value === "") {
-        filteredVideos = videos.filter(function (video) {
-          return video.category === activeCategory;
-        });
-      } else {
-        filteredVideos = videos.filter(function (video) {
-          const matchesText =
-            video.title.toLowerCase().includes(value) ||
-            video.channel.toLowerCase().includes(value);
+    const response = await fetch(
+      SEARCH_API_URL + "?query=" + encodeURIComponent(value),
+    );
 
-          const matchesCategory = video.category === activeCategory;
-
-          return matchesText && matchesCategory;
-        });
-      }
-
-      renderSearchResults(filteredVideos, activeCategory);
-    } catch (error) {
-      console.error("Search error:", error);
-    } finally {
-      // Hide spinner after search is completed
-      if (spinner) {
-        spinner.style.display = "none";
-      }
+    if (!response.ok) {
+      throw new Error("Search API request failed. Status: " + response.status);
     }
-  }, 300);
+
+    // Convert API response to JSON
+    const searchResults = await response.json();
+
+    console.log("Search results received from API:", searchResults);
+
+    // =================================================
+    // FILTER BY CURRENT SECTION
+    // =================================================
+
+    let filteredResults = searchResults;
+
+    /*
+     * The backend search API returns matching videos.
+     *
+     * If category is present in the API response,
+     * only videos belonging to the currently selected
+     * section will be displayed.
+     *
+     * If category is not present, all API results
+     * will be displayed.
+     */
+
+    if (
+      Array.isArray(searchResults) &&
+      searchResults.some(function (video) {
+        return video.category;
+      })
+    ) {
+      filteredResults = searchResults.filter(function (video) {
+        return (
+          video.category &&
+          video.category.toLowerCase() === activeCategory.toLowerCase()
+        );
+      });
+    }
+
+    // Display results
+    renderSearchResults(filteredResults, activeCategory);
+  } catch (error) {
+    console.error("Search API error:", error);
+
+    renderSearchAPIError();
+  } finally {
+    // Hide spinner
+    if (spinner) {
+      spinner.style.display = "none";
+    }
+  }
 }
+
 // =====================================================
 // RENDER SEARCH RESULTS
 // =====================================================
@@ -413,24 +348,75 @@ function renderSearchResults(videoList, category) {
     return;
   }
 
+  // Clear existing videos
   container.innerHTML = "";
 
-  if (videoList.length === 0) {
+  // No results
+  if (!videoList || videoList.length === 0) {
     container.innerHTML = `
       <div class="no-results">
+
         <h3>No videos found</h3>
-        <p>Try another search term.</p>
+
+        <p>
+          Try another search term.
+        </p>
+
       </div>
     `;
 
     return;
   }
 
+  // Display API results
   videoList.forEach(function (video) {
     container.innerHTML += createVideoCard(video);
   });
 
+  // Attach click events
   attachVideoEvents();
+}
+
+// =====================================================
+// SEARCH API ERROR
+// =====================================================
+
+function renderSearchAPIError() {
+  const category = getActiveCategory();
+
+  const containers = {
+    recommended: document.getElementById("recommendedVideos"),
+
+    trending: document.getElementById("trendingVideos"),
+
+    music: document.getElementById("musicVideos"),
+
+    movies: document.getElementById("movieVideos"),
+  };
+
+  const container = containers[category];
+
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="no-results">
+
+      <h3>Unable to search videos</h3>
+
+      <p>
+        Please make sure the Spring Boot backend
+        is running on port 8080.
+      </p>
+
+      <p>
+        Search API:
+        <strong>/api/videos/search</strong>
+      </p>
+
+    </div>
+  `;
 }
 
 // =====================================================
@@ -474,6 +460,10 @@ function toggleClearButton() {
     clearBtn.style.display = "none";
   }
 }
+
+// =====================================================
+// CLEAR SEARCH
+// =====================================================
 
 function clearSearch() {
   if (!searchInput) {
@@ -771,8 +761,7 @@ const headerButtons = document.querySelectorAll("header button");
 headerButtons.forEach(function (btn) {
   btn.addEventListener("click", function () {
     if (this.innerHTML.includes("🔔")) {
-      // Notification popup handles
-      // notification button.
+      // Notification popup handles it
     }
 
     if (this.innerHTML.includes("👤")) {
@@ -900,11 +889,14 @@ if (voiceBtn && SpeechRecognition) {
   recognition.addEventListener("result", function (event) {
     const transcript = event.results[0][0].transcript;
 
-    searchInput.value = transcript;
+    if (searchInput) {
+      searchInput.value = transcript;
 
-    toggleClearButton();
+      toggleClearButton();
 
-    searchVideos();
+      // Voice search also uses API
+      searchVideos();
+    }
   });
 
   recognition.addEventListener("end", function () {
@@ -1006,10 +998,6 @@ if (createPostBtn) {
 
 // =====================================================
 // WATCH HISTORY
-// =====================================================
-// These elements may exist only on the
-// Watch History page.
-// Therefore null checks are required.
 // =====================================================
 
 const chips = document.querySelectorAll(".chip");
@@ -1137,5 +1125,7 @@ if (manageBtn) {
 // =====================================================
 
 document.addEventListener("DOMContentLoaded", function () {
-  renderVideos();
+  console.log("RTube frontend loaded.");
+
+  loadVideosFromAPI();
 });
