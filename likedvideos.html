@@ -4,15 +4,20 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Liked Videos</title>
 
     <link rel="stylesheet" href="youtube_style.css">
+
     <link rel="icon" type="image/png"
         href="https://www.freepnglogos.com/uploads/youtube-logo-png/youtube-transparent-youtube-icon-download-clipart-with-transparent-25.png">
 
     <style>
+        /* =====================================================
+           BODY
+        ===================================================== */
+
         body {
 
             font-family: Arial, Helvetica, sans-serif;
@@ -20,6 +25,11 @@
             background: #fff;
 
         }
+
+
+        /* =====================================================
+           MAIN CONTAINER
+        ===================================================== */
 
         .liked-container {
 
@@ -29,325 +39,1243 @@
 
         }
 
-        /* LEFT CARD */
+
+        /* =====================================================
+           LEFT PLAYLIST CARD
+        ===================================================== */
 
         .playlist-card {
 
             width: 350px;
-            background: linear-gradient(#8b5d3d, #5b3822);
+
+            background:
+                linear-gradient(#8b5d3d,
+                    #5b3822);
 
             border-radius: 18px;
+
             padding: 25px;
+
             color: white;
+
             position: sticky;
+
             top: 90px;
+
             height: 730px;
 
+            box-sizing: border-box;
+
         }
+
 
         .playlist-card img {
 
             width: 100%;
+
             border-radius: 15px;
 
+            display: block;
+
         }
+
 
         .playlist-card h1 {
 
             margin-top: 20px;
+
             font-size: 42px;
 
         }
 
+
         .playlist-card h3 {
 
             font-size: 22px;
+
             margin-bottom: 10px;
 
         }
 
+
+        .playlist-card p {
+
+            font-size: 17px;
+
+        }
+
+
+        /* =====================================================
+           PLAY BUTTONS
+        ===================================================== */
+
         .play-buttons {
 
             display: flex;
+
             gap: 15px;
+
             margin-top: 25px;
 
         }
 
+
         .play-buttons button {
 
             padding: 15px 30px;
+
             border: none;
+
             border-radius: 35px;
+
             cursor: pointer;
+
             font-size: 18px;
+
             font-weight: bold;
 
         }
+
 
         .play {
 
             background: white;
 
+            color: black;
+
         }
+
 
         .shuffle {
 
             background: #6c4b34;
+
             color: white;
 
         }
 
-        /* RIGHT */
+
+        .play-buttons button:hover {
+
+            transform: scale(1.03);
+
+        }
+
+
+        /* =====================================================
+           RIGHT AREA
+        ===================================================== */
 
         .right-area {
 
             flex: 1;
 
+            min-width: 0;
+
         }
+
+
+        /* =====================================================
+           FILTER BUTTONS
+        ===================================================== */
 
         .filter {
 
             display: flex;
+
             gap: 10px;
+
             margin-bottom: 25px;
 
         }
 
+
         .filter button {
 
             padding: 10px 18px;
+
             border: none;
+
             border-radius: 12px;
+
             cursor: pointer;
 
+            background: #f2f2f2;
+
+            font-size: 15px;
+
         }
+
+
+        .filter button:hover {
+
+            background: #ddd;
+
+        }
+
 
         .filter .active {
 
             background: black;
+
             color: white;
 
         }
 
-      /* =========================
-   VIDEO ITEM
-========================= */
 
-.video-item {
-    display: flex;
-    margin-bottom: 22px;
-    cursor: pointer;
-    position: relative;
-    width: 100%;
-    min-height: 140px;
-    padding: 0;
-}
+        /* =====================================================
+           VIDEO ITEM
+        ===================================================== */
 
-.video-item:hover {
-    background: #f2f2f2;
-}
+        .video-item {
 
+            display: flex;
 
-/* =========================
-   VIDEO THUMBNAIL
-========================= */
+            margin-bottom: 22px;
 
-.video-item > img {
-    width: 250px !important;
-    height: 140px !important;
-    min-width: 250px;
-    max-width: 250px;
-    border-radius: 12px;
-    object-fit: cover;
-    display: block;
-}
+            cursor: pointer;
+
+            position: relative;
+
+            width: 100%;
+
+            min-height: 140px;
+
+            padding: 8px;
+
+            border-radius: 10px;
+
+            box-sizing: border-box;
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+
+        }
 
 
-/* =========================
-   VIDEO DURATION
-========================= */
-.video-item > .dur {
-    position: absolute;
+        .video-item:hover {
 
-    /* Position at bottom-right of the 250px thumbnail */
-    left: 194px;
-    bottom: 6px;
+            background: #f2f2f2;
 
-    /* IMPORTANT: prevent the black background from stretching */
-    width: auto !important;
-    max-width: max-content !important;
-    min-width: 0 !important;
+            transform: scale(1.01);
 
-    display: inline-block;
-
-    background: rgba(0, 0, 0, 0.85);
-    color: #fff;
-
-    padding: 3px 6px;
-    border-radius: 4px;
-
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 1.2;
-
-    white-space: nowrap;
-
-    box-sizing: border-box;
-    z-index: 10;
-}
+        }
 
 
-/* =========================
-   VIDEO INFORMATION
-========================= */
+        /* =====================================================
+           VIDEO THUMBNAIL
+        ===================================================== */
 
-.video-info {
-    margin-left: 15px;
-    padding-top: 0;
-}
+        .video-item>img {
 
-.video-info h3 {
-    margin: 0;
-    font-size: 22px;
-}
+            width: 250px !important;
 
-.video-info p {
-    margin: 8px 0;
-    color: gray;
-}
-/* Thumbnail wrapper */
+            height: 140px !important;
+
+            min-width: 250px;
+
+            max-width: 250px;
+
+            border-radius: 12px;
+
+            object-fit: cover;
+
+            display: block;
+
+        }
 
 
-/* Video duration */
-.dur {
-    position: absolute;
-    bottom: 6px;
-    right: 6px;
-    background: rgba(0, 0, 0, 0.85);
-    color: white;
-    padding: 3px 5px;
-    border-radius: 4px;
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 1.2;
-}
+        /* =====================================================
+           VIDEO DURATION
+        ===================================================== */
+
+        .video-item>.dur {
+
+            position: absolute;
+
+            left: 198px;
+
+            bottom: 12px;
+
+            width: auto !important;
+
+            max-width: max-content !important;
+
+            min-width: 0 !important;
+
+            display: inline-block;
+
+            background: rgba(0, 0, 0, 0.85);
+
+            color: #fff;
+
+            padding: 3px 6px;
+
+            border-radius: 4px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            line-height: 1.2;
+
+            white-space: nowrap;
+
+            box-sizing: border-box;
+
+            z-index: 10;
+
+        }
+
+
+        /* =====================================================
+           VIDEO INFORMATION
+        ===================================================== */
+
+        .video-info {
+
+            margin-left: 15px;
+
+            padding-top: 0;
+
+        }
+
+
+        .video-info h3 {
+
+            margin: 0;
+
+            font-size: 22px;
+
+            line-height: 1.3;
+
+        }
+
+
+        .video-info p {
+
+            margin: 8px 0;
+
+            color: gray;
+
+            font-size: 15px;
+
+        }
+
+
+        /* =====================================================
+           LOADING
+        ===================================================== */
+
+        .loading {
+
+            padding: 50px;
+
+            text-align: center;
+
+            color: #666;
+
+            font-size: 18px;
+
+        }
+
+
+        /* =====================================================
+           NO RESULTS / ERROR
+        ===================================================== */
+
+        .no-results {
+
+            padding: 60px 20px;
+
+            text-align: center;
+
+            color: #666;
+
+        }
+
+
+        .no-results h2 {
+
+            margin-bottom: 10px;
+
+            color: #222;
+
+        }
+
+
+        .no-results p {
+
+            color: #777;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .liked-container {
+
+                flex-direction: column;
+
+            }
+
+
+            .playlist-card {
+
+                width: 100%;
+
+                position: relative;
+
+                top: 0;
+
+                height: auto;
+
+            }
+
+
+            .playlist-card img {
+
+                max-width: 400px;
+
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .liked-container {
+
+                padding: 15px;
+
+            }
+
+
+            .video-item {
+
+                flex-direction: column;
+
+            }
+
+
+            .video-item>img {
+
+                width: 100% !important;
+
+                max-width: 100%;
+
+                min-width: 0;
+
+                height: auto !important;
+
+                aspect-ratio: 16 / 9;
+
+            }
+
+
+            .video-item>.dur {
+
+                left: auto;
+
+                right: 8px;
+
+                bottom: auto;
+
+                top: 115px;
+
+            }
+
+
+            .video-info {
+
+                margin-left: 0;
+
+                padding-top: 10px;
+
+            }
+
+
+            .video-info h3 {
+
+                font-size: 18px;
+
+            }
+
+
+            .play-buttons {
+
+                flex-wrap: wrap;
+
+            }
+
+        }
     </style>
 
 </head>
 
+
 <body>
+
+
+    <!-- =====================================================
+         MAIN LIKED VIDEOS CONTAINER
+    ===================================================== -->
 
     <div class="liked-container">
 
+
+        <!-- =================================================
+             LEFT PLAYLIST CARD
+        ================================================== -->
+
         <div class="playlist-card">
 
-            <img src="images/liked-banner.jpg">
 
-            <h1>Liked Videos</h1>
+            <img src="images/liked-banner.jpg" alt="Liked Videos">
 
-            <h3>Raunak Rej</h3>
 
-            <p>145 Videos</p>
+            <h1>
+                Liked Videos
+            </h1>
+
+
+            <h3>
+                Raunak Rej
+            </h3>
+
+
+            <!-- This number will be updated by API -->
+
+            <p id="likedVideoCount">
+                0 Videos
+            </p>
+
 
             <div class="play-buttons">
 
-                <button class="play">
+
+                <button class="play" id="playAllBtn" type="button">
+
                     ▶ Play All
+
                 </button>
 
-                <button class="shuffle">
+
+                <button class="shuffle" id="shuffleBtn" type="button">
+
                     🔀 Shuffle
+
                 </button>
+
 
             </div>
 
+
         </div>
+
+
+        <!-- =================================================
+             RIGHT AREA
+        ================================================== -->
 
         <div class="right-area">
 
+
+            <!-- =================================================
+                 FILTER BUTTONS
+            ================================================== -->
+
             <div class="filter">
 
-                <button class="active">All</button>
 
-                <button>Videos</button>
+                <button class="active" id="allBtn" type="button">
 
-                <button>Shorts</button>
+                    All
+
+                </button>
+
+
+                <button id="videosBtn" type="button">
+
+                    Videos
+
+                </button>
+
+
+                <button id="shortsBtn" type="button">
+
+                    Shorts
+
+                </button>
+
 
             </div>
 
-            <div class="video-item" onclick="window.open('video.html?id=1','_blank')">
 
-                <img
-                    src="https://alchetron.com/cdn/footpath-2003-film-e6fce519-6290-411a-9f13-a3123a85251-resize-750.jpg">
-                <span class="dur">2:42:19</span>
-                <div class="video-info">
+            <!-- =================================================
+                 LIKED VIDEOS CONTAINER
 
-                    <h3> Footpath - 2003</h3>
+                 Videos will be inserted here from:
+                 GET /api/videos/liked
+            ================================================== -->
 
-                    <p>Emraan Hashmi</p>
+            <div id="likedVideosContainer">
 
-                    <p>102M views • 1 year ago</p>
+
+                <div class="loading">
+
+                    Loading liked videos...
 
                 </div>
 
-            </div>
-
-            <div class="video-item" onclick="window.open('video.html?id=2','_blank')">
-
-                <img
-                    src="https://th.bing.com/th/id/OIP.bSmn7xv6XPtoRqSlNHi0DwHaEK?w=243&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3">
-                <span class="dur">03:17</span>
-                <div class="video-info">
-
-                    <h3>HAQ Trailer</h3>
-
-                    <p>Pen Movies</p>
-
-                    <p>10M views • 7 months ago</p>
-
-                </div>
 
             </div>
-
-            <div class="video-item" onclick="window.open('video.html?id=3','_blank')">
-
-                <img src="https://tse1.mm.bing.net/th?&id=OVP.r51zVCgfW27I-ZnT6_2jWgHgFo&w=356&h=200&c=7&pid=1.7&rs=1">
-                <span class="dur">08:20</span>
-                <div class="video-info">
-
-                    <h3>Awarapan 2 teaser reaction</h3>
-
-                    <p>ParbhmSingh</p>
-
-                    <p>314K views 3 weeks ago</p>
-
-                </div>
-
-            </div>
-
-            <div class="video-item" onclick="window.open('video.html?id=4','_blank')">
-
-                <img
-                    src="https://www.bing.com/th/id/OIP.ekRbvsNYAP69tyFNwkC_YgHaKt?w=193&h=280&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=ImgAns&rm=2">
-                <span class="dur">15:36</span>
-                <div class="video-info">
-
-                    <h3>Mr X</h3>
-
-                    <p>Tollywood Box Office</p>
-
-                    <p>1M views • 11 months ago</p>
-
-                </div>
-
-            </div>
-
 
 
         </div>
 
+
     </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+
+        // =====================================================
+        // API URL
+        // =====================================================
+
+        const LIKED_VIDEOS_API =
+            "http://localhost:8080/api/videos/liked";
+
+
+        // =====================================================
+        // GLOBAL LIKED VIDEOS ARRAY
+        // =====================================================
+
+        let likedVideos = [];
+
+
+        // =====================================================
+        // DOM ELEMENTS
+        // =====================================================
+
+        const likedVideosContainer =
+            document.getElementById(
+                "likedVideosContainer"
+            );
+
+
+        const likedVideoCount =
+            document.getElementById(
+                "likedVideoCount"
+            );
+
+
+        const allBtn =
+            document.getElementById(
+                "allBtn"
+            );
+
+
+        const videosBtn =
+            document.getElementById(
+                "videosBtn"
+            );
+
+
+        const shortsBtn =
+            document.getElementById(
+                "shortsBtn"
+            );
+
+
+        const playAllBtn =
+            document.getElementById(
+                "playAllBtn"
+            );
+
+
+        const shuffleBtn =
+            document.getElementById(
+                "shuffleBtn"
+            );
+
+
+        // =====================================================
+        // LOAD LIKED VIDEOS FROM SPRING BOOT
+        // =====================================================
+
+        async function loadLikedVideos() {
+
+
+            try {
+
+
+                console.log(
+                    "Fetching liked videos..."
+                );
+
+
+                // Show loading
+
+                likedVideosContainer.innerHTML = `
+
+                    <div class="loading">
+
+                        Loading liked videos...
+
+                    </div>
+
+                `;
+
+
+                // =================================================
+                // CALL API
+                // =================================================
+
+                const response =
+                    await fetch(
+                        LIKED_VIDEOS_API
+                    );
+
+
+                // =================================================
+                // CHECK RESPONSE
+                // =================================================
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Liked videos API failed. Status: "
+                        + response.status
+                    );
+
+                }
+
+
+                // =================================================
+                // CONVERT RESPONSE TO JSON
+                // =================================================
+
+                likedVideos =
+                    await response.json();
+
+
+                console.log(
+                    "Liked videos received:",
+                    likedVideos
+                );
+
+
+                // =================================================
+                // UPDATE COUNT
+                // =================================================
+
+                likedVideoCount.textContent =
+                    likedVideos.length
+                    + " Videos";
+
+
+                // =================================================
+                // DISPLAY ALL LIKED VIDEOS
+                // =================================================
+
+                renderLikedVideos(
+                    likedVideos
+                );
+
+
+            }
+            catch (error) {
+
+
+                console.error(
+                    "Error loading liked videos:",
+                    error
+                );
+
+
+                // =================================================
+                // ERROR MESSAGE
+                // =================================================
+
+                likedVideosContainer.innerHTML = `
+
+                    <div class="no-results">
+
+                        <h2>
+                            Unable to load liked videos
+                        </h2>
+
+                        <p>
+                            Please make sure your Spring Boot
+                            backend is running on port 8080.
+                        </p>
+
+                        <p>
+                            API:
+                            /api/videos/liked
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        // =====================================================
+        // RENDER LIKED VIDEOS
+        // =====================================================
+
+        function renderLikedVideos(videoList) {
+
+
+            likedVideosContainer.innerHTML = "";
+
+
+            // =================================================
+            // NO VIDEOS
+            // =================================================
+
+            if (
+                !Array.isArray(videoList) ||
+                videoList.length === 0
+            ) {
+
+
+                likedVideosContainer.innerHTML = `
+
+                    <div class="no-results">
+
+                        <h2>
+                            No liked videos
+                        </h2>
+
+                        <p>
+                            Videos that you like will appear here.
+                        </p>
+
+                    </div>
+
+                `;
+
+
+                return;
+
+            }
+
+
+            // =================================================
+            // CREATE VIDEO ITEMS
+            // =================================================
+
+            videoList.forEach(
+                function (video) {
+
+
+                    const videoItem =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    videoItem.className =
+                        "video-item";
+
+
+                    // Store category for filtering
+
+                    videoItem.dataset.category =
+                        video.category || "videos";
+
+
+                    // =================================================
+                    // VIDEO HTML
+                    // =================================================
+
+                    videoItem.innerHTML = `
+
+                        <img
+                            src="${video.thumbnail || ""}"
+                            alt="${video.title || "Video"}"
+                            loading="lazy"
+                        >
+
+                        <span class="dur">
+                            ${video.duration || ""}
+                        </span>
+
+                        <div class="video-info">
+
+                            <h3>
+                                ${video.title || "Untitled Video"}
+                            </h3>
+
+                            <p>
+                                ${video.channel || "Unknown Channel"}
+                            </p>
+
+                            <p>
+                                ${video.views || "0 views"}
+                                •
+                                ${video.uploaded || ""}
+                            </p>
+
+                        </div>
+
+                    `;
+
+
+                    // =================================================
+                    // OPEN VIDEO
+                    // =================================================
+
+                    videoItem.addEventListener(
+                        "click",
+                        function () {
+
+
+                            console.log(
+                                "Opening video:",
+                                video.id
+                            );
+
+
+                            window.open(
+                                "video.html?id="
+                                + encodeURIComponent(
+                                    video.id
+                                ),
+                                "_blank"
+                            );
+
+
+                        }
+                    );
+
+
+                    // Add to container
+
+                    likedVideosContainer.appendChild(
+                        videoItem
+                    );
+
+
+                }
+            );
+
+        }
+
+
+        // =====================================================
+        // SET ACTIVE FILTER BUTTON
+        // =====================================================
+
+        function setActiveButton(activeButton) {
+
+
+            allBtn.classList.remove(
+                "active"
+            );
+
+
+            videosBtn.classList.remove(
+                "active"
+            );
+
+
+            shortsBtn.classList.remove(
+                "active"
+            );
+
+
+            activeButton.classList.add(
+                "active"
+            );
+
+        }
+
+
+        // =====================================================
+        // FILTER LIKED VIDEOS
+        // =====================================================
+
+        function filterLikedVideos(filter) {
+
+
+            let filteredVideos;
+
+
+            // =================================================
+            // ALL
+            // =================================================
+
+            if (filter === "all") {
+
+                filteredVideos =
+                    likedVideos;
+
+            }
+
+
+            // =================================================
+            // VIDEOS
+            // =================================================
+
+            else if (filter === "videos") {
+
+                filteredVideos =
+                    likedVideos.filter(
+                        function (video) {
+
+                            return (
+                                video.category !== "shorts"
+                            );
+
+                        }
+                    );
+
+            }
+
+
+            // =================================================
+            // SHORTS
+            // =================================================
+
+            else if (filter === "shorts") {
+
+                filteredVideos =
+                    likedVideos.filter(
+                        function (video) {
+
+                            return (
+                                video.category === "shorts"
+                            );
+
+                        }
+                    );
+
+            }
+
+
+            renderLikedVideos(
+                filteredVideos
+            );
+
+        }
+
+
+        // =====================================================
+        // ALL BUTTON
+        // =====================================================
+
+        if (allBtn) {
+
+            allBtn.addEventListener(
+                "click",
+                function () {
+
+                    setActiveButton(
+                        allBtn
+                    );
+
+                    filterLikedVideos(
+                        "all"
+                    );
+
+                }
+            );
+
+        }
+
+
+        // =====================================================
+        // VIDEOS BUTTON
+        // =====================================================
+
+        if (videosBtn) {
+
+            videosBtn.addEventListener(
+                "click",
+                function () {
+
+                    setActiveButton(
+                        videosBtn
+                    );
+
+                    filterLikedVideos(
+                        "videos"
+                    );
+
+                }
+            );
+
+        }
+
+
+        // =====================================================
+        // SHORTS BUTTON
+        // =====================================================
+
+        if (shortsBtn) {
+
+            shortsBtn.addEventListener(
+                "click",
+                function () {
+
+                    setActiveButton(
+                        shortsBtn
+                    );
+
+                    filterLikedVideos(
+                        "shorts"
+                    );
+
+                }
+            );
+
+        }
+
+
+        // =====================================================
+        // PLAY ALL
+        // =====================================================
+
+        if (playAllBtn) {
+
+            playAllBtn.addEventListener(
+                "click",
+                function () {
+
+
+                    if (
+                        likedVideos.length === 0
+                    ) {
+
+                        alert(
+                            "There are no liked videos to play."
+                        );
+
+                        return;
+
+                    }
+
+
+                    // Open first liked video
+
+                    const firstVideo =
+                        likedVideos[0];
+
+
+                    window.open(
+                        "video.html?id="
+                        + encodeURIComponent(
+                            firstVideo.id
+                        ),
+                        "_blank"
+                    );
+
+
+                }
+            );
+
+        }
+
+
+        // =====================================================
+        // SHUFFLE
+        // =====================================================
+
+        if (shuffleBtn) {
+
+            shuffleBtn.addEventListener(
+                "click",
+                function () {
+
+
+                    if (
+                        likedVideos.length === 0
+                    ) {
+
+                        alert(
+                            "There are no liked videos to shuffle."
+                        );
+
+                        return;
+
+                    }
+
+
+                    // Generate random index
+
+                    const randomIndex =
+                        Math.floor(
+                            Math.random()
+                            * likedVideos.length
+                        );
+
+
+                    const randomVideo =
+                        likedVideos[randomIndex];
+
+
+                    console.log(
+                        "Opening random liked video:",
+                        randomVideo.id
+                    );
+
+
+                    window.open(
+                        "video.html?id="
+                        + encodeURIComponent(
+                            randomVideo.id
+                        ),
+                        "_blank"
+                    );
+
+
+                }
+            );
+
+        }
+
+
+        // =====================================================
+        // INITIALIZE
+        // =====================================================
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+
+                console.log(
+                    "Liked Videos page loaded."
+                );
+
+
+                loadLikedVideos();
+
+
+            }
+        );
+
+
+    </script>
+
 
 </body>
 
