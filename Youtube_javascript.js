@@ -10,6 +10,25 @@ const API_URL = "http://localhost:8080/api/videos";
 const SEARCH_API_URL = "http://localhost:8080/api/videos/search";
 
 // =====================================================
+// LIKED VIDEOS STORAGE
+// =====================================================
+
+const LIKED_VIDEOS_KEY = "likedVideoIds";
+
+function getLikedVideoIds() {
+  try {
+    return JSON.parse(localStorage.getItem(LIKED_VIDEOS_KEY) || "[]");
+  } catch (error) {
+    console.error("Error reading liked videos:", error);
+    return [];
+  }
+}
+
+function saveLikedVideoIds(likedIds) {
+  localStorage.setItem(LIKED_VIDEOS_KEY, JSON.stringify(likedIds));
+}
+
+// =====================================================
 // COMMON DOM ELEMENTS
 // =====================================================
 
@@ -42,6 +61,16 @@ async function loadVideosFromAPI() {
 
     videos = data;
 
+    // =================================================
+    // RESTORE LIKED STATUS FROM LOCAL STORAGE
+    // =================================================
+
+    const likedVideoIds = getLikedVideoIds();
+
+    videos.forEach(function (video) {
+      video.liked = likedVideoIds.includes(String(video.id));
+    });
+
     renderVideos();
   } catch (error) {
     console.error("Error loading videos from API:", error);
@@ -70,12 +99,14 @@ function showAPIError() {
     if (container) {
       container.innerHTML = `
         <div class="no-results">
+
           <h3>Unable to load videos</h3>
 
           <p>
             Please make sure the Spring Boot API
             is running on port 8080.
           </p>
+
         </div>
       `;
     }
@@ -85,6 +116,7 @@ function showAPIError() {
 // =====================================================
 // CREATE VIDEO CARD
 // =====================================================
+
 function createVideoCard(video) {
   const isLiked = video.liked === true;
 
@@ -109,9 +141,13 @@ function createVideoCard(video) {
 
         <div class="video-info">
 
-          <h3>${video.title || "Untitled Video"}</h3>
+          <h3>
+            ${video.title || "Untitled Video"}
+          </h3>
 
-          <p>${video.channel || "Unknown Channel"}</p>
+          <p>
+            ${video.channel || "Unknown Channel"}
+          </p>
 
           <p>
             ${video.views || "0 views"} •
@@ -133,6 +169,7 @@ function createVideoCard(video) {
     </div>
   `;
 }
+
 // =====================================================
 // LIKE / UNLIKE VIDEO API
 // =====================================================
@@ -144,6 +181,10 @@ async function toggleLikeVideo(videoId, likeButton) {
     likeButton.disabled = true;
 
     let response;
+
+    // =================================================
+    // LIKE / UNLIKE API
+    // =================================================
 
     if (isCurrentlyLiked) {
       // UNLIKE
@@ -157,21 +198,84 @@ async function toggleLikeVideo(videoId, likeButton) {
       });
     }
 
+    // =================================================
+    // CHECK API RESPONSE
+    // =================================================
+
     if (!response.ok) {
       throw new Error("Like API failed. Status: " + response.status);
     }
 
-    const updatedVideo = await response.json();
+    // =================================================
+    // READ JSON RESPONSE IF AVAILABLE
+    // =================================================
+
+    let updatedVideo = null;
+
+    const contentType = response.headers.get("content-type");
+
+    if (contentType && contentType.includes("application/json")) {
+      updatedVideo = await response.json();
+    }
 
     console.log("Like API response:", updatedVideo);
 
-    // Update button
-    if (isCurrentlyLiked) {
-      likeButton.classList.remove("liked");
-      likeButton.innerHTML = "♡ Like";
+    // =================================================
+    // NEW LIKE STATUS
+    // =================================================
+
+    const newLikeStatus = !isCurrentlyLiked;
+
+    // =================================================
+    // UPDATE LOCAL VIDEO ARRAY
+    // =================================================
+
+    const videoIndex = videos.findIndex(function (video) {
+      return String(video.id) === String(videoId);
+    });
+
+    if (videoIndex !== -1) {
+      videos[videoIndex].liked = newLikeStatus;
+    }
+
+    // =================================================
+    // UPDATE LOCAL STORAGE
+    // =================================================
+
+    let likedVideoIds = getLikedVideoIds();
+
+    if (newLikeStatus) {
+      // =========================
+      // LIKE
+      // =========================
+
+      if (!likedVideoIds.includes(String(videoId))) {
+        likedVideoIds.push(String(videoId));
+      }
     } else {
+      // =========================
+      // UNLIKE
+      // =========================
+
+      likedVideoIds = likedVideoIds.filter(function (id) {
+        return String(id) !== String(videoId);
+      });
+    }
+
+    saveLikedVideoIds(likedVideoIds);
+
+    // =================================================
+    // UPDATE BUTTON UI
+    // =================================================
+
+    if (newLikeStatus) {
       likeButton.classList.add("liked");
+
       likeButton.innerHTML = "♥ Liked";
+    } else {
+      likeButton.classList.remove("liked");
+
+      likeButton.innerHTML = "♡ Like";
     }
   } catch (error) {
     console.error("Like/Unlike error:", error);
@@ -229,9 +333,6 @@ function renderVideos() {
 }
 
 // =====================================================
-// VIDEO CLICK EVENTS
-// =====================================================
-// =====================================================
 // VIDEO CLICK + LIKE BUTTON EVENTS
 // =====================================================
 
@@ -272,6 +373,7 @@ function attachVideoEvents() {
     if (likeButton) {
       likeButton.addEventListener("click", function (event) {
         event.preventDefault();
+
         event.stopPropagation();
 
         const videoId = this.dataset.id;
@@ -325,9 +427,6 @@ function getActiveCategory() {
 // =====================================================
 // SEARCH VIDEOS USING SPRING BOOT SEARCH API
 // =====================================================
-// =====================================================
-// SEARCH VIDEOS USING SPRING BOOT SEARCH API
-// =====================================================
 
 async function searchVideos() {
   if (!searchInput) {
@@ -336,18 +435,26 @@ async function searchVideos() {
 
   const value = searchInput.value.trim();
 
-  // If search box is empty
+  // =================================================
+  // EMPTY SEARCH
+  // =================================================
+
   if (value === "") {
     resetSearch();
+
     return;
   }
 
   const activeCategory = getActiveCategory();
 
   console.log("Searching for:", value);
+
   console.log("Active category:", activeCategory);
 
-  // Build API URL
+  // =================================================
+  // BUILD SEARCH API URL
+  // =================================================
+
   const searchURL =
     SEARCH_API_URL +
     "?query=" +
@@ -357,7 +464,10 @@ async function searchVideos() {
 
   console.log("Search API:", searchURL);
 
-  // Show spinner
+  // =================================================
+  // SHOW SPINNER
+  // =================================================
+
   if (spinner) {
     spinner.style.display = "flex";
   }
@@ -373,10 +483,23 @@ async function searchVideos() {
       throw new Error("Search API request failed. Status: " + response.status);
     }
 
-    // Convert API response to JSON
+    // =================================================
+    // CONVERT RESPONSE TO JSON
+    // =================================================
+
     const searchResults = await response.json();
 
     console.log("Search results received from API:", searchResults);
+
+    // =================================================
+    // RESTORE LIKE STATUS
+    // =================================================
+
+    const likedVideoIds = getLikedVideoIds();
+
+    searchResults.forEach(function (video) {
+      video.liked = likedVideoIds.includes(String(video.id));
+    });
 
     // =================================================
     // DISPLAY SEARCH RESULTS
@@ -388,7 +511,6 @@ async function searchVideos() {
 
     renderSearchAPIError();
   } finally {
-    // Hide spinner
     if (spinner) {
       spinner.style.display = "none";
     }
@@ -418,32 +540,48 @@ function renderSearchResults(videoList, category) {
     return;
   }
 
-  // Clear existing videos
+  // =================================================
+  // CLEAR EXISTING VIDEOS
+  // =================================================
+
   container.innerHTML = "";
 
-  // No results
+  // =================================================
+  // NO RESULTS
+  // =================================================
+
   if (!videoList || videoList.length === 0) {
     container.innerHTML = `
+
       <div class="no-results">
 
-        <h3>No videos found</h3>
+        <h3>
+          No videos found
+        </h3>
 
         <p>
           Try another search term.
         </p>
 
       </div>
+
     `;
 
     return;
   }
 
-  // Display API results
+  // =================================================
+  // DISPLAY SEARCH RESULTS
+  // =================================================
+
   videoList.forEach(function (video) {
     container.innerHTML += createVideoCard(video);
   });
 
-  // Attach click events
+  // =================================================
+  // ATTACH EVENTS
+  // =================================================
+
   attachVideoEvents();
 }
 
@@ -471,9 +609,12 @@ function renderSearchAPIError() {
   }
 
   container.innerHTML = `
+
     <div class="no-results">
 
-      <h3>Unable to search videos</h3>
+      <h3>
+        Unable to search videos
+      </h3>
 
       <p>
         Please make sure the Spring Boot backend
@@ -482,10 +623,13 @@ function renderSearchAPIError() {
 
       <p>
         Search API:
-        <strong>/api/videos/search</strong>
+        <strong>
+          /api/videos/search
+        </strong>
       </p>
 
     </div>
+
   `;
 }
 
@@ -964,7 +1108,7 @@ if (voiceBtn && SpeechRecognition) {
 
       toggleClearButton();
 
-      // Voice search also uses API
+      // Voice search also uses Search API
       searchVideos();
     }
   });
