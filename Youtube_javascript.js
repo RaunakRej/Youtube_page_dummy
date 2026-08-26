@@ -85,8 +85,9 @@ function showAPIError() {
 // =====================================================
 // CREATE VIDEO CARD
 // =====================================================
-
 function createVideoCard(video) {
+  const isLiked = video.liked === true;
+
   return `
     <div class="video-card">
 
@@ -117,12 +118,68 @@ function createVideoCard(video) {
             ${video.uploaded || ""}
           </p>
 
+          <button
+            class="like-btn ${isLiked ? "liked" : ""}"
+            data-id="${video.id}"
+            type="button"
+          >
+            ${isLiked ? "♥ Liked" : "♡ Like"}
+          </button>
+
         </div>
 
       </article>
 
     </div>
   `;
+}
+// =====================================================
+// LIKE / UNLIKE VIDEO API
+// =====================================================
+
+async function toggleLikeVideo(videoId, likeButton) {
+  const isCurrentlyLiked = likeButton.classList.contains("liked");
+
+  try {
+    likeButton.disabled = true;
+
+    let response;
+
+    if (isCurrentlyLiked) {
+      // UNLIKE
+      response = await fetch(`${API_URL}/${videoId}/like`, {
+        method: "DELETE",
+      });
+    } else {
+      // LIKE
+      response = await fetch(`${API_URL}/${videoId}/like`, {
+        method: "POST",
+      });
+    }
+
+    if (!response.ok) {
+      throw new Error("Like API failed. Status: " + response.status);
+    }
+
+    const updatedVideo = await response.json();
+
+    console.log("Like API response:", updatedVideo);
+
+    // Update button
+    if (isCurrentlyLiked) {
+      likeButton.classList.remove("liked");
+      likeButton.innerHTML = "♡ Like";
+    } else {
+      likeButton.classList.add("liked");
+      likeButton.innerHTML = "♥ Liked";
+    }
+  } catch (error) {
+    console.error("Like/Unlike error:", error);
+
+    alert("Unable to update like status.");
+  } finally {
+    likeButton.disabled = false;
+  }
 }
 
 // =====================================================
@@ -174,6 +231,9 @@ function renderVideos() {
 // =====================================================
 // VIDEO CLICK EVENTS
 // =====================================================
+// =====================================================
+// VIDEO CLICK + LIKE BUTTON EVENTS
+// =====================================================
 
 function attachVideoEvents() {
   const articles = document.querySelectorAll(
@@ -186,13 +246,45 @@ function attachVideoEvents() {
   articles.forEach(function (article) {
     article.style.cursor = "pointer";
 
-    article.addEventListener("click", function () {
+    // =================================================
+    // VIDEO CLICK
+    // =================================================
+
+    article.addEventListener("click", function (event) {
+      // Do NOT open video when Like button is clicked
+      if (event.target.closest(".like-btn")) {
+        return;
+      }
+
       const id = article.dataset.id;
 
       console.log("Opening video:", id);
 
       window.open("video.html?id=" + encodeURIComponent(id), "_blank");
     });
+
+    // =================================================
+    // LIKE BUTTON
+    // =================================================
+
+    const likeButton = article.querySelector(".like-btn");
+
+    if (likeButton) {
+      likeButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const videoId = this.dataset.id;
+
+        console.log("Like button clicked:", videoId);
+
+        toggleLikeVideo(videoId, this);
+      });
+    }
+
+    // =================================================
+    // HOVER EFFECT
+    // =================================================
 
     article.addEventListener("mouseenter", function () {
       article.style.transform = "scale(1.02)";
@@ -233,6 +325,9 @@ function getActiveCategory() {
 // =====================================================
 // SEARCH VIDEOS USING SPRING BOOT SEARCH API
 // =====================================================
+// =====================================================
+// SEARCH VIDEOS USING SPRING BOOT SEARCH API
+// =====================================================
 
 async function searchVideos() {
   if (!searchInput) {
@@ -244,18 +339,23 @@ async function searchVideos() {
   // If search box is empty
   if (value === "") {
     resetSearch();
-
     return;
   }
 
   const activeCategory = getActiveCategory();
 
   console.log("Searching for:", value);
+  console.log("Active category:", activeCategory);
 
-  console.log(
-    "Search API:",
-    SEARCH_API_URL + "?query=" + encodeURIComponent(value),
-  );
+  // Build API URL
+  const searchURL =
+    SEARCH_API_URL +
+    "?query=" +
+    encodeURIComponent(value) +
+    "&category=" +
+    encodeURIComponent(activeCategory);
+
+  console.log("Search API:", searchURL);
 
   // Show spinner
   if (spinner) {
@@ -267,9 +367,7 @@ async function searchVideos() {
     // CALL SPRING BOOT SEARCH API
     // =================================================
 
-    const response = await fetch(
-      SEARCH_API_URL + "?query=" + encodeURIComponent(value),
-    );
+    const response = await fetch(searchURL);
 
     if (!response.ok) {
       throw new Error("Search API request failed. Status: " + response.status);
@@ -281,38 +379,10 @@ async function searchVideos() {
     console.log("Search results received from API:", searchResults);
 
     // =================================================
-    // FILTER BY CURRENT SECTION
+    // DISPLAY SEARCH RESULTS
     // =================================================
 
-    let filteredResults = searchResults;
-
-    /*
-     * The backend search API returns matching videos.
-     *
-     * If category is present in the API response,
-     * only videos belonging to the currently selected
-     * section will be displayed.
-     *
-     * If category is not present, all API results
-     * will be displayed.
-     */
-
-    if (
-      Array.isArray(searchResults) &&
-      searchResults.some(function (video) {
-        return video.category;
-      })
-    ) {
-      filteredResults = searchResults.filter(function (video) {
-        return (
-          video.category &&
-          video.category.toLowerCase() === activeCategory.toLowerCase()
-        );
-      });
-    }
-
-    // Display results
-    renderSearchResults(filteredResults, activeCategory);
+    renderSearchResults(searchResults, activeCategory);
   } catch (error) {
     console.error("Search API error:", error);
 
