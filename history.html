@@ -3,146 +3,321 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="history_style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Watch history - Raunak Dummy YouTube</title>
+
+    <link rel="stylesheet" href="history_style.css">
+
     <link rel="icon" type="image/png"
         href="https://www.freepnglogos.com/uploads/youtube-logo-png/youtube-transparent-youtube-icon-download-clipart-with-transparent-25.png">
 </head>
 
 <body>
 
-    <!-- Header (same structure as index.html) -->
+    <!-- ================= HEADER ================= -->
+
     <header>
+
         <div class="left">
+
             <button id="menuBtn">☰</button>
-            <div class="logo" style="color: red;"><span class="play">▶</span>R YouTube<sup>IN</sup></div>
+
+            <div class="logo" style="color: red;">
+                <span class="play">▶</span>
+                R YouTube<sup>IN</sup>
+            </div>
+
         </div>
+
+
+        <!-- Search -->
 
         <div class="search-container">
+
             <div class="search-box">
+
                 <input type="text" id="searchInput" placeholder="Search videos...">
+
                 <button id="searchBtn">🔍</button>
+
             </div>
-            <button id="voiceBtn" title="Voice Search">🎤</button>
+
+            <button id="voiceBtn" title="Voice Search">
+                🎤
+            </button>
+
         </div>
 
+
+        <!-- Header Right -->
+
         <div class="header-right">
-            <button class="create-btn" id="createBtn">＋ Create</button>
-            <button class="icon-btn">🔔<span class="badge">1</span></button>
+
+            <button class="create-btn" id="createBtn">
+                ＋ Create
+            </button>
+
+            <button class="icon-btn">
+                🔔
+                <span class="badge">1</span>
+            </button>
+
             <img class="avatar" id="profileBtn"
                 src="https://yt3.ggpht.com/seoNK1MlktRZw8GEsZMOElBRtVl6kKZ81d6hCmcFkUjf-pJ1jsKyAmCoxCi_DvO9O91PSFSJ=s88-c-k-c0x00ffffff-no-rj"
                 alt="Profile">
+
         </div>
+
     </header>
 
+
+    <!-- ================= MAIN ================= -->
+
     <main>
-        <!-- Sidebar -->
+
+        <!-- ================= SIDEBAR ================= -->
+
         <aside id="sidebar">
+
             <ul class="channel-list">
-                <li><img src="https://i.pravatar.cc/40?img=12" alt="">Parbrahm Singh<span class="sub-dot">●</span></li>
-                <li><img src="https://i.pravatar.cc/40?img=13" alt="">Goldmines<span class="sub-dot">●</span></li>
-                <li><img src="https://i.pravatar.cc/40?img=14" alt="">PlayMovies<span class="sub-dot">●</span></li>
-                <li><img src="https://i.pravatar.cc/40?img=15" alt="">Nomad Suman</li>
-                <li><img src="https://i.pravatar.cc/40?img=16" alt="">Aaj Ke Balaji Bha...<span class="live-dot">🔴</span></li>
-                <li><img src="https://i.pravatar.cc/40?img=17" alt="">Masala Reacts<span class="sub-dot">●</span></li>
+
+                <li>
+                    <img src="https://i.pravatar.cc/40?img=12" alt="">
+                    Parbrahm Singh
+                    <span class="sub-dot">●</span>
+                </li>
+
+                <li>
+                    <img src="https://i.pravatar.cc/40?img=13" alt="">
+                    Goldmines
+                    <span class="sub-dot">●</span>
+                </li>
+
+                <li>
+                    <img src="https://i.pravatar.cc/40?img=14" alt="">
+                    PlayMovies
+                    <span class="sub-dot">●</span>
+                </li>
+
+                <li>
+                    <img src="https://i.pravatar.cc/40?img=15" alt="">
+                    Nomad Suman
+                </li>
+
+                <li>
+                    <img src="https://i.pravatar.cc/40?img=16" alt="">
+                    Aaj Ke Balaji Bha...
+                    <span class="live-dot">🔴</span>
+                </li>
+
+                <li>
+                    <img src="https://i.pravatar.cc/40?img=17" alt="">
+                    Masala Reacts
+                    <span class="sub-dot">●</span>
+                </li>
+
             </ul>
-            <div class="show-more">⌄ Show more</div>
+
+
+            <div class="show-more">
+                ⌄ Show more
+            </div>
+
 
             <hr class="sidebar-rule">
 
-            <div class="section-label">You <span>›</span></div>
+
+            <div class="section-label">
+                You <span>›</span>
+            </div>
+
+
             <ul class="you-list">
-                <li onclick="location.href='channel.html'"><span class="ico">👤</span>Your channel</li>
-                <li class="active"><span class="ico">🕘</span>History</li>
-                <li><span class="ico">▤</span>Playlists</li>
-                <li><span class="ico">🕒</span>Watch Later</li>
-                <li onclick="location.href='likedvideos.html'"><span class="ico">👍</span>Liked videos</li>
+
+                <li onclick="location.href='channel.html'">
+                    <span class="ico">👤</span>
+                    Your channel
+                </li>
+
+                <li class="active">
+                    <span class="ico">🕘</span>
+                    History
+                </li>
+
+                <li>
+                    <span class="ico">▤</span>
+                    Playlists
+                </li>
+
+                <li>
+                    <span class="ico">🕒</span>
+                    Watch Later
+                </li>
+
+                <li onclick="location.href='likedvideos.html'">
+                    <span class="ico">👍</span>
+                    Liked videos
+                </li>
+
             </ul>
+
         </aside>
 
-        <!-- Watch history content -->
+
+        <!-- ================= HISTORY CONTENT ================= -->
+
         <div id="history-content">
+
             <div class="history-main">
+
                 <h1>Watch history</h1>
 
+
+                <!-- FILTERS -->
+
                 <div class="filter-chips" id="filterChips">
-                    <button class="chip active" data-filter="all">All</button>
-                    <button class="chip" data-filter="videos">Videos</button>
-                    <button class="chip" data-filter="shorts">Shorts</button>
-                    <button class="chip" data-filter="podcasts">Podcasts</button>
-                    <button class="chip" data-filter="music">Music</button>
+
+                    <button class="chip active" data-filter="all">
+                        All
+                    </button>
+
+                    <button class="chip" data-filter="videos">
+                        Videos
+                    </button>
+
+                    <button class="chip" data-filter="shorts">
+                        Shorts
+                    </button>
+
+                    <button class="chip" data-filter="podcasts">
+                        Podcasts
+                    </button>
+
+                    <button class="chip" data-filter="music">
+                        Music
+                    </button>
+
                 </div>
+
+
+                <!-- HISTORY LIST -->
 
                 <div id="historyList">
-                    <h2 class="day-heading">Today</h2>
 
-                    <div class="hist-item" data-category="videos" data-title="Dhruva Telugu Full Movie | Ram Charan | Rakul Preet Singh | Arvind Swami | Delugu Movies">
-                        <div class="thumb">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZSxsttlYZ1PPE0wDq7TcRtEz-L6mUQLMrI8TEjJ2S2A&s=10" alt="">
-                            <span class="dur">4:19</span>
-                        </div>
-                        <div class="hist-info">
-                            <h3>MAIN RAHOON YA NA RAHOON </h3>
-                            <p class="channel-name">Emraan Hashmi</p>
-                            <p>▷ 467M</p>
-                        </div>
-                        <button class="dots-btn">⋮</button>
-                    </div>
+                    <!-- JavaScript will load history here -->
 
-                    <div class="hist-item" data-category="videos" data-title="MAIN RAHOON YA NA RAHOON">
-                        <div class="thumb">
-                            <img src="" alt="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUTExMVFhUVGB0XGBcVFhUYFxcYGBcXGBgaFxgYHSggGBolHRYVITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGhAQGi0lICUtLS01LS0tLS0tLS0tLS0tLi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAOEA4QMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAFAAMEBgcBAgj/xABAEAABAgQEAwYDBQYFBQEAAAABAhEAAwQhBRIxQQZRYRMiMnGBkaGx0RQjQsHwB1JyguHxFSRTYqIzQ5KTsmP/xAAZAQADAQEBAAAAAAAAAAAAAAABAgMABAX/xAApEQACAgICAQQBAwUAAAAAAAAAAQIRAyESMUEEEyJRYTJxgUJSscHw/9oADAMBAAIRAxEAPwDXE3meUSoi0Q1PMxKjxsfVlxQoUImKAIeL4giRLMxT8gBqonQCKFV4wUrVMZIWbAO58v7R44qxszZjhSghBISE89z1NvKKdiGIqKnJbonX1O0Lx5MZaDOJ4uF6pynX1gMa3W5PmOsCZ1Y+594Z7U+cVjjpGsKprbt7e0RlVOvVocw3C5k5QbTnF7ocElpQBlHVxeFlJRHjFsqvDmNGnXm15hyPlpG14PWidJQu9xvr8IyTiDhjIkzZQsLlI+Yg3+zTHlBQp1qdJ8D6g8h0hHX6kCSNNhQoUMTFCjjw1WVAloKjtp1OwjN0GiJi+JCWGHiPwil1tSVF9Sf077RIr6rMSpRd/jFaxbFsoIBY9P1fzjmtzZ1Rioodr6lKAxVf9bQNkTzMLCA4UZirnWLrgNIhIdvWKNKKMnbFSYRm8US/8AlNo8FBHoGJ2NRT8U4bUgZpV2/D9Ig4Hi6pEwEEi7EfURoKTFN4zwkSz2yBZRZXQ8/X5w6d6YjNTwnEEz5YWPURNjNf2d40x7JR10f9bxpIMPB+GQkqYDxLiynkTTKWJmYfupBHpeJWB47KqwoyszIYHMALl9L9Ip+N1EtFfMMzIU5FOlaUqzHJ92BmGyx8eUEP2bTMyZxJBVmTmIZipi7NbkLcood+T0sI+n9xJ3Uf23/H+/oucKFCgHmjNKlkiHo8pFo6IEVUQnYEcU1plU6ynxKGVPmfoHMF4p37R6ooRKSGZRUSTfQABh/NGfRjP8Urcspk67nq34Yq02pO8TsWrHLDyHOB9JJK1gRaCSWwPbH6KgmTTbTmYtOHcLpDZrwVwqlShIYQR7UCOeWVs6Y4kuzzS0iZYZIiYhcRkzHhxKoQrRORMBDGKdW4PMk1aOyB+8WDLbY5g49NYs6qhKA6iAOsPYfiEmcUNdUtQUk9dwD1Dj2gcmtkpouwjseZawoAjQx6i6Oc5Fb4trWZHIZj+X5+8WUxl/EmJGZNURudeQ0H5RLK9UUxrdkLEqmzvpsxt/WKlVTiokkwRxWawaAKy56DSHwwGnIJ4VTqmLASHP6uY0TDqbs03uYr/BsgiWVAAOdTc/lB+pnTADlAfqPrEskrY8Fo8VuJKRdKARzUpKX8nMNSsa/eSAOaVpUB53tFGxrGFmomXDJUUJBDMlJYWGj6+ZjzTYwQ1h6GOmPp4uNt7OCfrJqbqOjT5NQlQcEHyL/KPGJy0T5K5RIdSSA5Gu3xaAtCv7grykd17MwLP4R+rwDmYmmWsoJJUPEoklIJALJToANHIdwdI54Y3KVI68uaMI8mQ8CrDLmgmxBDjexvG14RUhaAeYcRj81MuccySlK9lJYOf9w031+cXPgLFiR2S3CknQ2I6MYbLFwkmTx5I5Y6J2NcKzp09c1E2WlKm7qkhWg3cHmYIcLYJMpRM7RaVlZBcBtAzM3JoPQooWl6rJLH7b6/ZePz2KFChRjnFCaFCjBFFJ/atTk0qJg/BMDnkFgp+eWLtEPGKAT5MyUS2dLA/unVKh5EA+kYB84Vqu91a8esLnhE0GJGPUK5ExcuYGmJ15FzZQO4gKV3MdEUpRoF07NPp54IsbRIQpzFU4YqioNyix1VemQjMbk6DnHBKLUqO2Mk42FUEJ1hldcnYj0ii4rik6YCVLyp/dFvIf0iRgKVliQQnlpFHClYqyW6HcfqlrXlJLfujT15wT4dVM7psgAl06k8n2HpB04VKmgEi7NHZVIiV3QwaA5WqNx+Vl2wOqzobcX94JxU8AqQFiLYYMHqiORUwTxNWdlTrVo4YetvrGUqqc6tDq5u4DekXb9pNUQhEsbuo35WHzjOwrKGs7aDq+vxhO22NHSIWJzsxMDk69YcrJntBXBsJNlKFjHRahEWuTLdwqnLKAg3MlgwNo5WVIAh01bRyXbOpLRR+McBWJhmyxmCvEBq/MDf0gThOBzZqg6VIQ/eJBBbkH1MaSusG8RSpUwuNEmw29RFlnajRCXpouVhGikpCcrd1mI2bRozzijD109QXLpmErQrmCbg8iD+UWuYufn7y3GmUBgPXWPNXSJnFMueA6SWbVi2+xtCY8nGQc2L3I0ikUaiqYkHwjvKPJIuX/W4g7w/i601CVqUouWLkm2wvsNGhvi+kRTzJcuVZC5ecjcqCiLncMzCINCO9bz9rn5RabUokMWPgz6ApJwWhKhuIeeKzwNW55OUm6flt+cWaJQehpKmdhR5hQ9iiSt49PEKmnholgwkJ2jUeo4vSFHiabGGlLRjMOO6YVFR2eUFSUEpO73U1tQW0jMJ9ASXR3gbi12driNTmz82JgbZmPokw7jnA3Y5p1Oe4Qc0sh+ze+aWR+FxdOzvs0HHkcFRkk+zOOGppRMymz/OLDiNEuYoEbCz6DrAqqwOanLMQLp1vYtfXaLbhc3OhJ336QMkt8kXhGlxYCpsBU7qObz09oOyqTs0xMSsDeG6iaITk32VUUuiVRzWS5LPEPF8Sp7OQFl7g8m1G+sVPiavLgImHu8jp7awDkJXMULknnrbctFY4rVslLJukX3A8XT9oCQo3LDkY1enm5kJVzDxjdLgr9ktK2Uhiw0VfW+npGlYXi6UywhQLp32Ll/ziTaT0LJSfZUOPK/NOUkG6Qw0ff21iimbb9bWiycYTUmomLBd2YWtYD1iqzFguYfGtBZArVWiXgeJTe2QFLJSNjpEGpW5Me8DS84COhpcGSTfJGsUkx0iGahEQaGpIDGJnbAiPOO1MiVEvlESVibd2YsyACxAlrUdDfMzN5PBSShzDlVJcWHweHi15A9kSkVIW2SuTmbRWXXqksR5RCnVa1zQ4DoKkKUPCchbMOmvtDpkoUFImU6SFBiUhIcedjDfF0xFPTHKAkrSJSRyzPm/4g/CHpN0hW3HbKfjOJmonFf4QMqBySNPckn1iVghzTABuCfYP+UBpekG+FC1VJ/jA9y35x0zilE5lK2aVwFMadMl9D83EXsxQODL1SiH/G/IuogfI+0X8xzQGn2KFChQ4hUaWoVZosFLV2vFTop7awWkTXjlXdmDv2oRHr6wBJMQAYH41OaWfKGtvQLKjg1QFV4Wd1KPu8avImAiMZwUEz38zGkUMxQA5dYpk1LRl0BeKOHpwzqlALl+LJcEblmdw+2zxn+FYurOo5crG45Pz/XKNTrcZd5YVq4+EYuqtNPWL7S6SohQ5pUXf0/KK4ocou0b3drZbJ1e1xd4h1dYpUpRGrQPxOStAzyz2ktVxuQDp5iAycVIP6f1jRxXtFXlrTJuGUJm95RYP6w9ild2Pclo1/FziNhmJB2KmEEcRrpOUMxI8t4o+XLaFUlx0yTwrXEgpmqy7h3tz8oPS6mYFFRyqRoFAvY2uefQ3iiYYhU5bBwndfLy6wco6woz5XYFQcE6AlvkbRPJHboMH0QscrXWpmD+pa/XpAiWtwddf1+UTsVqRmIOttE8hfeBaqoDRyesWhHQsnsbnKYNvBLhSVmnPygNmKjYF4uvBmHlLqI/Rg5XxgxYfKVh6dJt1iGuoUnWCc0XiNUU7iPPOtMYkYoAbwUk4qgjURWq2QRA9VJMCVLcpSkFRPkHh1FMHKjQqetlkh2jO+PcT7apUkHuSu6PNhmPvb0gMMdn6JVl8tYhBdvjHXjwuLtkMmVS0ibJT7QYwCbknIX+6XHnt8WgLIWzcoM0EsBQVqNSB+tI2R6Fgtmt8J0mRQJLlSX9Mob/AOifWLbFS4Ur0r7xZJOx02YDlobRawqOOEh5rZ2OxyFFOQpm9HMzaQbp7RW8DRvFllC0c7pAXRI7aAvEU/7s+UGJaQ99Ij1OHS51lFQSNW31sPh+tGhVgaoq/CWHqUszCGQnc7nlFgrq9nAMSp/ZJSlCLJTZhy8+f1gBXLQGuXzMf4e85/8Am0dMY8nbJTlSAdZXKzi+8AeOqNymencMqLFi0qSO9mVdmtvmLvY6hgOsdmimmS1JWo5LvsMrJ3NwfHttHYlVNHMm7KvwfXggyVm2qfzET8S4dQsKWHtewGwJuSQwt1PSKpUrlS1g061HKo3VyCJbFm3V2tuQHmbFR40mYkA2URcH5jmLRHJBxlziduOalHjIg1HDZQFlychI8JuAopzD/aWd4m0vCoKiAQrlmZJUMsxXdSVP/wBshixvcBobqU62L+un0i68D4QJcgT1B1zdH2liwF+evtGeTQyx7PNFwobAzAjTupS7HQh3a0NnhOUlPdnzMytcwQRci5SGLd7V4siz0+XL6vEWcAfwnT6N8j7xCytFMPDaVKClrKVpd0kMFBQJGX2/5cg8NS+CEOHUWIfYsSQMt1DYj5Xix4lToPeCLi4bm/xDWb+8OYfUoKR3bKDpJ2cFhrdnHt7v7mtMXh9gTDeHUgiyRfd9g7s0H6KhEtLAjb4xMXlIslvy0/r7xFmzBsIjJ32OlR1cltxvz2bp1EQ6qZltHszbPEKovCaG2RlLcw1j8xqaZs6co/mtEqUlrlogYnWSJgCVK8K7jvXsGIYFwCVW6bQ2NXJAm6Rn6TeHjp5H5wSmU9Ild1zMoUHZJDp+98Lh3LSdWZzrt2kkSAFFaye8wICu8gEXSADc38TNbW7elZxUMUQzEDY294m4XWZSx0dv7x7p5dMgApUpagpNw4SzpJ1ALNmGmoG2s+dR03iS4K1FX4srElgC3RiDuq2kRnXkrC/BcuG8YlqAQoDYXA0HIxeMNqy+Ulx+E7joYzjhHDZXbla+6B4EuWUevlr7ReZy8sxHU/Bo82dKWi72th/tYUDO36woHNkaZh0nGKhIcTlJ9vpHuVxVWJBBnKJ/l+kDFTMxZteUeVoS7BJaO/hF9ojbDEnimszAmerXRkt8oKzeIasm0xV9EghrcrONYqqCH3j1Nq1Agp23c/KFlC38UC2WinxioL9oSwOrkP0cbaRArZ84v99MGYukuFJRpZRZym5uwIbeBknF1KcLtoGFmubxJrEkodBLgXDkuGhE5wlsBHxKZUoISuaVpOhDNa/KIJqZikkEkp3EFJcqXMlIGZlOHBLMennDBppYnJlqmdmlSgFLWknICbq7viAF46IzfXkPFA3sU6kCNjqeEUzJmFJUkdnTyiJvIKT2BQg9VLVpuHim1XDtIqVKqKaoXMlGoTTzu1QEFBUxz7MhiNeYvYxZJPGiVVk1GZKZMqfNqM+dLLTKkCXLQl9XWnOG1OWLw1+ow/gyRMVitUv/ALpnyJXMploWVqB5EJlxzhGqmmXhiFTFMtdROVo3ZSEGWgG3hfLDWGY3SypYoj2SlSqGYpVT2oyidOSFTZaRooknV3sA2sQJ1bKlSlhE5GaThQkoZaS8+oPeCWuSO67aPBpJo1skcd1k+lkZBMUFTa2dMSbf9JCcoSLaAqB9Yk8I1WIKo6eZKWombWvOWRLZFNL7q3KtA6VXF7wE/aPisuqmU2RaVBEhKiUqBZUwupJbRQCUuOsEKLE5UtEml7dIQcOn5gVgI7WcStlF2zgIZjcZusBcfcYbdE/h2pM1OJVOY9nMM+XTJt4UoXMUpPQjJ5aQ1wlQ1M2mw9SQoyzVTJ85dmShDpSC+yiFaDeFhuM0kqWmi+6JlUMxRqe1TlTNmpCpktI0UTa7vYBtYhUmMS5BlJTOTlpcLUrKJgZVTNDlDAsVd4FtYZKOjWydgGNzv8qUL71fXTVElKVf5aUsZkB9BrfWFg2Kzkqp+xUAa2vnXKQr/KSVsUJ/dBvf6RDw6oppVNRVaaiU1HSzUpkBX3pqZmYMEciTqdGfS48YZU08mmoaxVTK/wAnTTU9jmHbKqZj2CORJ15B9LxkkC2GsOpTUUU0oU3a1+dADWkpqZcohP8AtCSofzRSeJ8SXMrqhSJpyiasFg4SEEoGg/2vFn4P4hk0yqOUZ0vJLw9a1ErS3bLmomFJL/8AUZBtreKlw/h0pVOqsq5y5ckzOzyy0hUybOUMygnNYABy566NCzimkkbkwKcTmnMnOpT2FwG9ALxxSJiFd9CrO4bp0gniWE0qZ5CJ5MnMGWZakrI7pL3YMXDts7Q1VTsxUEqJygm7qul7pJ5i/nEdLSRnJnjCaD7WvskISFBOY9opTctg+rbesdxbDvs0wImBAzAqZCsybahiARD9BLWhBmLkhZW2VUwqSk5XULJuRY30MMYxKUpElXZZCorynMohV05inObJchttYytyrwUpcL8kWSE3UEhj8PpBakDS3JZ7sICdkpFjY7kEG3pDorbslgDqf1pBlGxoT+NBmVUrUksojbZum0EMP4gnHxTFhgEpOrciX9IE098xSD4SX1YAgD5mPInZWS7Nc/r1iLgnoWHydNlr/wAXnf6yvaFFd7X/APT5fWFEvbDwf2AMjQlTFiPWZrkx5Ut46SQ2ST06wiWPOPS1gR4UsGCY5PBN8rc4JSa8d1wzW9YhS5ybJLNvzePU2WgfiDgbpL+73hHT+LCkO1ZQlRAZlB7Ea9PXbrDMueVWuX9YaSoc3fV+kelKAFmD+fwhlHVGou/AuGGrpKylG8ymWS90p7Q9ooPZwlL+ggph9FT1EjE6xMqUmV2a5VKkISwRJll5ibaklBzaiK3wtVKk0GJTQS6kSpKWBfNNUtJbrlV53i7Jk08qRNohMV9ppcOndpKSPu3nCWuYolmKwoIa+izaOiC0gFJ/Zth6Z+ISgtCVIQlcxSVAEFkkJcG3iUk+kF8RwQJky6dCEiZUYjOQlQSHEuWpcoAFvCGJgbwVVdhIr6qzy5CZYPJU+YEj17ojQsenSJdUKqaook0dOpbhLtNq5pSlSRutkK2PjECEE4bMUD9qFNJk1qESkpTL+zSyMoCQe/OS9hcslNzraDHB8zsqWjAp5U1dbVKQrtZeciSghCmOzMTdxrAT9pctCKimyKUqX9hkJSpdipIVOyqNvEQXOmsW6ir5kqn+xIVky4Uqo7tlJmrJLgi4YEn+bpGSXNh8A3hDAqZc/EJoQgyUKmyZKVAKTmOdRyguLITboqBGAYT2uHDLLCl1FZLlBWV1BCUOTmZwHLRbeFaeRJlU1Gpak1Ip5lUZQT3SZyCkZ1MwUlJKQHGh6RF4Oq50hOE0yV5UTZc6pnhheWcykAkhwGbRriDw6/7sAJxESKefiVamnkr7CbLpqeUpIEoLKUoWcoDEgJKvU83h/E6CmkV1fUmRKIpZUkiUQOy+0z2Hh3A1bmYWF4dNrKKmMtJWmoxFVROUPwIBYlfIZQTfoNxD0+mm19PWGQkzPtOJBBKD4ZMtIyr6J0L9YPgwQw3AaedibqkSh/kULmywgdn205g6Umz5c3w3eKXxNIVT0GH02V1Htpy/4lLZBPXK8XVGIZZ9bUoIKZlZS0yCAfDJUntG/esFmAP7TZgVWlCSlKZMpMsAmySQVnTfLMTAm0osKVlE7MhBzlgS+52tp5NEafMsnKS+426ecFZ8pGQkr0AVbUu1nbrAGZctq8Sg7C1Rr0nhbNJlS5hKlCWEKuCAXJLbNcJ/lEVj9otCaZckBRKCktySp7pB/hCfaLRw3iE5VNKJZyjL1JSSkuOdniLxBUnIoTkCdLI7yLX6pLOFDVwYjGTjIdLlpmZ0VT3u8Mw3DtFiRWMB2ctgCwsSCToPPpFYrpskzFdighBV3ASSQORveCWDrmPlOYJJDAuA5I0HO2sdE4p7JrQTmYhOCC4QlJOUgJSm4JfQRFTNStYJKUhhcn211jtWruAkWKjr0iDY7CJ0OnoKdpK/eHuPpCgd2nQe0KBx/JjZf8Nkf6Mv/wAEfSGaynppSFTFy5QSkOSUI+nO0ECdYxfiPHZtTNVnWcoUcqAe4ACwLCxLb311iy2c0VZKxjHBOUcsuWhGyUpS7dSzny0geQDoG9IghTDn+t4kS5pLZXhqR0QSbpnqoZhYO4Og8vp8Y8TVlWibO7ts2giy4JwwVkKmEhJL5d/1eLhT4KkJy5U2SUgs7ktcuLG3XUxGWWCOiOGL8mXSMv8Adh84l088IUCEgNcEgKD+oY+UXLG+FULSopsvY2DjkQGGsUgqCCx7qhbeGjKM+jSxRXk1XA6iRUScwloDEFaAAEhYFlZdNHYnS8esQraaVmKykKmOFl++sFnCjqoFg4NrRQcNxEyE50m6klIHMHc+sD505RLkHzg/yRWCNu5F2qMZpggolSk5SxKcoCCRoVJ0U2zi0A8RxeYuxJKSzpJcHKGTYuLA25RXjiTfhPtEykxCWuxt0MTkmivtwj0wgnF5hIK2UwCRnShYCU6JGYFki9hzi1YBxJKzvOQDmSZalAOrIU5W55RawtFNVTtcRwJ9Dtt/eCn5THeGD7Zp8o06lZpRK1EEKmkFCiGACQT39NdmYQ8KSWGOUA5cgIsQhmyJOyde6LXMZ7hFeoTAB4wNgWIHp1i509UJzMwWnV9tHsQX0FrHqIZTTdM5p4Umqev8E+XTS0pMtICUnxIQcqTscyUsDZheFJp0ISQgBCT4uzOQHbvZWf1jkymcrItnQEu1x47/APIe0eDSEg+FLlFk3HcU73Gp002GsOq+yajB/wBR7TRygAkISEguEgDK7NmCdHazxxdHJUSpSEKJLlSgFEnS6i5OwjkulYC4sFjzzEF2FhpoOceEUp7MJIDgj8XINrk+YMal9m4R/uPZw6R/oym/gR9I8jDZAv2ModciPm0PTJRKMtiWHQFm9haGvsxbRPjz5fw+FmFv5nbV7QEkKoxa2x5ElKQwSkDkAB1jyqRLOqEeoTDEyiJAYgFKVgWsCspLN+6ACG5ND06QChSWDlLOfJhGpBcYqvkNf4XT69jK/wDWj6R7FBK/0pf/AIJ+kSAPbaOmASIqsPknWVLPmhP0jz/hsj/Rlf8ArR9IlwjGNZE/w2R/oyv/AAT9I7EmFGs1srPHmJ9hSkDxTO6Obfi+DB+sY72ka5xvhRnoBv3Qo7cn36PGRJholI9B3AcK7Rlq02EXOhw+WjRIfygFgs37tLcoOUk0kxyZZNs7cUVQXlGJsqcRaB8stExE9IDksOsc5ZkgqeM+4xw4oUVgd1RuNjzi5/41TmwW56An5R2qlS58spsQRDQk4Oyckmip8OYMF/ezPCBllg7sLqPy9DFimUKDsI9SUBCUp2SAPaHUzUu2YPycPDTk2zQjSBU/CZYB7oip4vh4SXHPaNEmyXEU3iCQtDuktz2hscnZprQIoqop1NusEBXpIGgvezxX5zmGjKWNHvHS4J7JKTLpgeLqp1K7gmJmM4zMpLEl0k2OocHVhcQSqMZCp5Wl2OW5sXCQC9zFLpJKmGZRBB87flFhwVEsTUKmXSNXcgd0sSALh22iM0gpeTRKCqExAUPXz3iQ8CpM5MudkAAC05u6wBLm4A0tBQGKwdo4pqmdJjjiPK0uGiNNppYuVEereEP5aAw7FJeYc4WYRHUhHhKtXI0fvAg7f7jHDLQz5j3mD+3ToC8AxJKo52g5j3HJ/leIqTKAUnMdn1dgcraWuPiTC+zy3bcW6+EsH8gfaNZiSJqdcwZ21GvLzjuccx789IjzVI8GZiFE21BIKyxa1ib+keUyJZAYmzNci/4T53gWYkdqn94Wfcbax6B/rEQU8pRIuTcXctoDrpp5aw/LkhLkPe5cve9/j8oxh2FHmFBANzZYUCk6EN7xhOP0RkT1oylIBYA7WBIHMB7HcMd43iK/xPwrLrGUVZFj8QDuORD+XtBToeLozXhqpd0eoiwzcUlyR3j3uQuYA1eDzaGoGdil7KG6SWcjb+ke59GvMWDkm5+UTnFOVnXjk60GJHFCVFmI2vrHrFsOqJiQrvEG4D/lEClwZu8p3G519hYRoOEsqUH2iE2ou4l421speEYbO8JGUdAQfd2+EWecFSKdSkgrUkbnmQCX6AxMqZyUlikjrtDdfKTPlGXmKcwZx/SEcnJ2w8aRV62rmTZToJS+rajpAqhqsqiAglixJGYn8/aLhQ4QJUkINzqTcuf7AQ1S4VKfMC+9jaKKS2gKLY/hk9bAFLD5RLrqdK0EKD2iTLlgC0Nzy4I5xJqilGYYjTZFkDR4apxe7xY8SwtRUSIHysFmqJZNuv5R0rIqIe27Oy5aTuREgSjz/XpAufMCJhl52UmxDkB+Tgs8OoqGLKcef1hXFmRZcCqAiYCoE9dYvqVPeMskLNiD82jQcCq8yAC2YP7P/WDjlTohnhq0E4ZnzECyg7B9H9uZh6PEwgMWF7X8idfT4xdnKR88vYE3tffSwJ6jpeFMmS8hJDpSWY3u2znkY6Z3OXqOV9je3X5x77Y3ZNwzNd3YdIUwyqbLJYoJYto4/Fdt/CY89rKuWYgA2LK72zg3NwLneHPtB/ca3kAdx7HnsRHftB7rSzvyFunL1aAE4ZstT917FX8QAAccwxaPCZkp2Yh1MzlN7KdnG6gP6Q6macoOS+jDqkHlo7CPH2hTnueVjc91vn8DGMITkAhgXUAQf4uZfpEyI0hYJbJlDaM3LX3+BiTDIByFHYUGgDcIRwR2AYgY1g0qpQUzEh2ISrdJPI+gt0inUtMqWyJo76O6erWB9Q0aCIr+P4VNmKMxIT3U7E5lN0ZnbrCTVovhnxewLWTAzCBsnixUpRTl0fQ7bf2gfiNSrIptYHUdGVd9RZOp3LeUJGCrZ2Sm26RZ6PiNZBBdT7qPp5NDuG4vmKkkEFiRb5c4gYViFLLUEpTmJN1Kb4bRYq6VmTmZiN4nNJOqDf5BiMbnlTJUlha6ST87bR7lzFy7u4Ny3MxDo5EklZmqVlsyUkh1F3duTD3hVE6WWEqhXuylnIPEC7m5sYZR+hlkQepsSzCCUqYCIrFFKKLENmDsCSAej3gvJnNEplCRWoDExWZ2KTUSywCTuoa+Y5GDlTUOGgXiFM8lVtoWP5A+jPakusxIpqtQDajrt9Ii1NlGPcmYxEelVo4b2HaKoU40b9czF04dqkNlNlE2ULX6ufKKHJ6f1EFcLrihQcODqOcc00Wq1RqlNOzC+uh84egDglW4sXSbpPPn+usHQYpjlaOLJGmdhPChRQmJ4TxyFGMdhRyFGox2FHIUajChQoUajDcKFCjUA68dePMdEKEpPF3DczMZ1OnMDdaBqDuUjcHca/lUqKa5KFWbY2PtGwzpmUEmK7ilHKnp+8lpV1PiD8laiFdFo5GuygIRKlqcM777QTreIVzEiWnezj84g4xw6ZanSVFB0u7dD1j3RSEpA5/GFlx77OiLsIYZRqFge82vX6wapKRQuoueZiBRzWNtYZqcXUHHKI23o6YOkEq9SR5xCFXygUmqKy5MT6RAJhXGhrCdJLzXMTZskFBEN0iLRLyxJmMt4lozKmtsq4/XrA6V1jQOM8L7WTnSO8i/mNxGdpVHoYZ8oHLkjUgpSzmtt+tIISpvrAGXMaCVPNBD6eUacQxZZ8Hr+zVY2N2L+re0XqhxWWtmV67X0vpGYU5mBim/JvygvRVi0HMQA9uQVzB69Yhbi7Rp41JGlRyIWFVYmIF7j48omx0xkmrOGUWnTFChQoYUUKFCjGFChQoBhQoTwo1mG4UcjsMAUeVraOqUwiDPmX9fyhXoKGq6cSlR6fM/0iETY+USZ/hbmPlDEtNvSJPsddDSJYUCCHBitYtR9kttjdJPxHmItUkRyspETUZF76Eag7EdYVopCfFlWplNeBFUSXUdz8BFqmYMpCVd9JYFmCgS3RmB9TAWroFLCUp7obvKN/Yb+UTWmdfJNaA2CjMtTaZT7uL/ADg9SljeFTUqZYZI8ydT5/SHkyXgzaY0E0HKSoSzRNTpFdp0FBg5SrcRzyRUdXKcNGb8T8NLlLK5QdCrsNUnf0jT0h45MpgoMRaGx5HB2hJRUkYdnbXXlEujnxpeJ8LSZviSPPf3itVXAhBeXNbooP8AER1rPCS3oj7cl0DKaoUi6T6bH0iwUOMgjKsWOvIwNRwnVDwqln1PyKWiQjAKoC6Af4VJ/OJy4vpjq/osGFzTJVmQp0E3Sbtzbl+tIukmaFBxGY0xmSzkUlSTyUGMX3DZn3aH3Av1Z2P6/qMbaZDPFVYVhR5SqOx1I5DsJ44THHggOvCeOPHHjGPUKOZoUajHiFHYUEwxUxBnfnChQkjIbm6DyMNSo7Cib7G8HpEepmnrChRvBvJ4qvCr+EwFm6D1hQojI68HRFmQpMKFC+DpRLnRPw/wwoUTl0OEJOkSEwoUIIeZkQKiOwoIyHDDkjWFCjBYL4o8Un+b5ogrRf8AST/Cn5woUXgcmXwFZf69o9R2FHYjiOKjhhQoIohChQoxjkKFCjGP/9k=">
-                            <span class="dur">3:51</span>
-                        </div>
-                        <div class="hist-info">
-                            <h3>Dhruva Full Action Hindi Dubbed Movie In HD Quality | Ram Charan, Rakul Preet Singh, Arvin...</h3>
-                            <p class="channel-name">Goldmines ✔</p>
-                            <p>▷ 54m</p>
-                        </div>
-                        <button class="dots-btn">⋮</button>
-                    </div>
-
-                    <div class="hist-item" data-category="videos" data-title="Vikramarkudu Telugu Full Length Movie | Ravi Teja, Anushka, Prakash Raj | Sri Balaji Video">
-                        <div class="thumb">
-                            <img src="https://picsum.photos/seed/vikram/300/180" alt="">
-                            <span class="dur">2:41:10</span>
-                        </div>
-                        <div class="hist-info">
-                            <h3>Vikramarkudu Telugu Full Length Movie | Ravi Teja, Anushka, Prakash Raj | Sri Balaji Video</h3>
-                            <p class="channel-name">Sri Balaji Action ✔</p>
-                            <p>▷ 19m</p>
-                        </div>
-                        <button class="dots-btn">⋮</button>
-                    </div>
                 </div>
 
-                <p class="empty-state" id="emptyState" style="display:none;">Videos you watch will appear here.</p>
+
+                <!-- EMPTY STATE -->
+
+                <p class="empty-state" id="emptyState" style="display:none;">
+
+                    Videos you watch will appear here.
+
+                </p>
+
             </div>
 
-            <!-- Right rail -->
+
+            <!-- ================= RIGHT SIDE ================= -->
+
             <div class="history-side">
+
+
+                <!-- History Search -->
+
                 <div class="side-search">
+
                     <input type="text" id="historySearch" placeholder="Search watch history">
-                    <span class="search-ico">🔍</span>
+
+                    <span class="search-ico">
+                        🔍
+                    </span>
+
                 </div>
 
-                <div class="side-action" id="clearAllBtn"><span class="ico">🗑</span>Clear all watch history</div>
-                <div class="side-action" id="pauseBtn"><span class="ico">⏸</span><span id="pauseLabel">Pause watch history</span></div>
-                <div class="side-action" id="manageBtn"><span class="ico">⚙</span>Manage all history</div>
+
+                <!-- Clear History -->
+
+                <div class="side-action" id="clearAllBtn">
+
+                    <span class="ico">
+                        🗑
+                    </span>
+
+                    Clear all watch history
+
+                </div>
+
+
+                <!-- Pause -->
+
+                <div class="side-action" id="pauseBtn">
+
+                    <span class="ico">
+                        ⏸
+                    </span>
+
+                    <span id="pauseLabel">
+                        Pause watch history
+                    </span>
+
+                </div>
+
+
+                <!-- Manage -->
+
+                <div class="side-action" id="manageBtn">
+
+                    <span class="ico">
+                        ⚙
+                    </span>
+
+                    Manage all history
+
+                </div>
+
 
                 <div class="side-sub">
-                    <a href="#">Comments</a>
-                    <a href="#">Posts</a>
-                    <a href="#">Live chat</a>
+
+                    <a href="#">
+                        Comments
+                    </a>
+
+                    <a href="#">
+                        Posts
+                    </a>
+
+                    <a href="#">
+                        Live chat
+                    </a>
+
                 </div>
+
             </div>
+
         </div>
+
     </main>
 
+
+    <!-- ================= FOOTER ================= -->
+
     <footer>
-        <p>&copy; 2026 RTube. This is a dummy webpage created for learning purposes.</p>
+
+        <p>
+            &copy; 2026 RTube.
+            This is a dummy webpage created for learning purposes.
+        </p>
+
     </footer>
+
+
+    <!-- HISTORY JAVASCRIPT -->
+
+    <script src="history.js"></script>
 
 </body>
 
