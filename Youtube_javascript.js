@@ -16,16 +16,47 @@ const SEARCH_API_URL = "http://localhost:8080/api/videos/search";
 const LIKED_VIDEOS_KEY = "likedVideoIds";
 
 function getLikedVideoIds() {
-  try {
-    return JSON.parse(localStorage.getItem(LIKED_VIDEOS_KEY) || "[]");
-  } catch (error) {
-    console.error("Error reading liked videos:", error);
-    return [];
-  }
+    try {
+        return JSON.parse(
+            localStorage.getItem(LIKED_VIDEOS_KEY) || "[]"
+        );
+    } catch (error) {
+        console.error("Error reading liked videos:", error);
+        return [];
+    }
 }
 
-function saveLikedVideoIds(likedIds) {
-  localStorage.setItem(LIKED_VIDEOS_KEY, JSON.stringify(likedIds));
+function saveLikedVideoIds(ids) {
+    localStorage.setItem(
+        LIKED_VIDEOS_KEY,
+        JSON.stringify(ids)
+    );
+}
+
+// =====================================================
+// UPDATE LIKED VIDEOS COUNT
+// =====================================================
+
+function updateLikedVideosCount() {
+  const likedVideoIds = getLikedVideoIds();
+
+  const count = likedVideoIds.length;
+
+  // Support different possible IDs used in HTML
+  const countElements = [
+    document.getElementById("likedVideosCount"),
+    document.getElementById("likedVideoCount"),
+    document.getElementById("liked-count"),
+    document.getElementById("likedCount"),
+  ];
+
+  countElements.forEach(function (element) {
+    if (element) {
+      element.textContent = count;
+    }
+  });
+
+  console.log("Liked videos count:", count);
 }
 
 // =====================================================
@@ -52,7 +83,9 @@ async function loadVideosFromAPI() {
     const response = await fetch(API_URL);
 
     if (!response.ok) {
-      throw new Error("API request failed. Status: " + response.status);
+      throw new Error(
+        "API request failed. Status: " + response.status
+      );
     }
 
     const data = await response.json();
@@ -68,14 +101,27 @@ async function loadVideosFromAPI() {
     const likedVideoIds = getLikedVideoIds();
 
     videos.forEach(function (video) {
-      video.liked = likedVideoIds.includes(String(video.id));
+      video.liked = likedVideoIds.includes(
+        String(video.id)
+      );
     });
 
+    // =================================================
+    // UPDATE LIKED VIDEOS COUNT
+    // =================================================
+
+    updateLikedVideosCount();
+
     renderVideos();
+
   } catch (error) {
-    console.error("Error loading videos from API:", error);
+    console.error(
+      "Error loading videos from API:",
+      error
+    );
 
     showAPIError();
+
   } finally {
     if (spinner) {
       spinner.style.display = "none";
@@ -175,7 +221,8 @@ function createVideoCard(video) {
 // =====================================================
 
 async function toggleLikeVideo(videoId, likeButton) {
-  const isCurrentlyLiked = likeButton.classList.contains("liked");
+  const isCurrentlyLiked =
+    likeButton.classList.contains("liked");
 
   try {
     likeButton.disabled = true;
@@ -187,15 +234,24 @@ async function toggleLikeVideo(videoId, likeButton) {
     // =================================================
 
     if (isCurrentlyLiked) {
+
       // UNLIKE
-      response = await fetch(`${API_URL}/${videoId}/like`, {
-        method: "DELETE",
-      });
+      response = await fetch(
+        `${API_URL}/${videoId}/like`,
+        {
+          method: "DELETE",
+        }
+      );
+
     } else {
+
       // LIKE
-      response = await fetch(`${API_URL}/${videoId}/like`, {
-        method: "POST",
-      });
+      response = await fetch(
+        `${API_URL}/${videoId}/like`,
+        {
+          method: "POST",
+        }
+      );
     }
 
     // =================================================
@@ -203,7 +259,10 @@ async function toggleLikeVideo(videoId, likeButton) {
     // =================================================
 
     if (!response.ok) {
-      throw new Error("Like API failed. Status: " + response.status);
+      throw new Error(
+        "Like API failed. Status: " +
+        response.status
+      );
     }
 
     // =================================================
@@ -212,13 +271,20 @@ async function toggleLikeVideo(videoId, likeButton) {
 
     let updatedVideo = null;
 
-    const contentType = response.headers.get("content-type");
+    const contentType =
+      response.headers.get("content-type");
 
-    if (contentType && contentType.includes("application/json")) {
+    if (
+      contentType &&
+      contentType.includes("application/json")
+    ) {
       updatedVideo = await response.json();
     }
 
-    console.log("Like API response:", updatedVideo);
+    console.log(
+      "Like API response:",
+      updatedVideo
+    );
 
     // =================================================
     // NEW LIKE STATUS
@@ -230,58 +296,105 @@ async function toggleLikeVideo(videoId, likeButton) {
     // UPDATE LOCAL VIDEO ARRAY
     // =================================================
 
-    const videoIndex = videos.findIndex(function (video) {
-      return String(video.id) === String(videoId);
-    });
+    const videoIndex = videos.findIndex(
+      function (video) {
+        return (
+          String(video.id) === String(videoId)
+        );
+      }
+    );
 
     if (videoIndex !== -1) {
-      videos[videoIndex].liked = newLikeStatus;
+      videos[videoIndex].liked =
+        newLikeStatus;
     }
 
     // =================================================
     // UPDATE LOCAL STORAGE
     // =================================================
 
-    let likedVideoIds = getLikedVideoIds();
+    let likedVideoIds =
+      getLikedVideoIds();
 
     if (newLikeStatus) {
+
       // =========================
       // LIKE
       // =========================
 
-      if (!likedVideoIds.includes(String(videoId))) {
-        likedVideoIds.push(String(videoId));
+      if (
+        !likedVideoIds.includes(
+          String(videoId)
+        )
+      ) {
+        likedVideoIds.push(
+          String(videoId)
+        );
       }
+
     } else {
+
       // =========================
       // UNLIKE
       // =========================
 
-      likedVideoIds = likedVideoIds.filter(function (id) {
-        return String(id) !== String(videoId);
-      });
+      likedVideoIds =
+        likedVideoIds.filter(
+          function (id) {
+            return (
+              String(id) !==
+              String(videoId)
+            );
+          }
+        );
     }
 
-    saveLikedVideoIds(likedVideoIds);
+    saveLikedVideoIds(
+      likedVideoIds
+    );
+
+    // =================================================
+    // UPDATE LIKED VIDEOS COUNT
+    // =================================================
+
+    updateLikedVideosCount();
 
     // =================================================
     // UPDATE BUTTON UI
     // =================================================
 
     if (newLikeStatus) {
-      likeButton.classList.add("liked");
 
-      likeButton.innerHTML = "♥ Liked";
+      likeButton.classList.add(
+        "liked"
+      );
+
+      likeButton.innerHTML =
+        "♥ Liked";
+
     } else {
-      likeButton.classList.remove("liked");
 
-      likeButton.innerHTML = "♡ Like";
+      likeButton.classList.remove(
+        "liked"
+      );
+
+      likeButton.innerHTML =
+        "♡ Like";
     }
-  } catch (error) {
-    console.error("Like/Unlike error:", error);
 
-    alert("Unable to update like status.");
+  } catch (error) {
+
+    console.error(
+      "Like/Unlike error:",
+      error
+    );
+
+    alert(
+      "Unable to update like status."
+    );
+
   } finally {
+
     likeButton.disabled = false;
   }
 }
@@ -291,13 +404,25 @@ async function toggleLikeVideo(videoId, likeButton) {
 // =====================================================
 
 function renderVideos() {
-  const recommendedContainer = document.getElementById("recommendedVideos");
+  const recommendedContainer =
+    document.getElementById(
+      "recommendedVideos"
+    );
 
-  const trendingContainer = document.getElementById("trendingVideos");
+  const trendingContainer =
+    document.getElementById(
+      "trendingVideos"
+    );
 
-  const musicContainer = document.getElementById("musicVideos");
+  const musicContainer =
+    document.getElementById(
+      "musicVideos"
+    );
 
-  const moviesContainer = document.getElementById("movieVideos");
+  const moviesContainer =
+    document.getElementById(
+      "movieVideos"
+    );
 
   if (
     !recommendedContainer ||
@@ -305,7 +430,9 @@ function renderVideos() {
     !musicContainer ||
     !moviesContainer
   ) {
-    console.error("Video containers are missing from HTML.");
+    console.error(
+      "Video containers are missing from HTML."
+    );
 
     return;
   }
@@ -316,20 +443,48 @@ function renderVideos() {
   moviesContainer.innerHTML = "";
 
   videos.forEach(function (video) {
-    const card = createVideoCard(video);
 
-    if (video.category === "recommended") {
-      recommendedContainer.innerHTML += card;
-    } else if (video.category === "trending") {
-      trendingContainer.innerHTML += card;
-    } else if (video.category === "music") {
-      musicContainer.innerHTML += card;
-    } else if (video.category === "movies") {
-      moviesContainer.innerHTML += card;
+    const card =
+      createVideoCard(video);
+
+    if (
+      video.category ===
+      "recommended"
+    ) {
+
+      recommendedContainer.innerHTML +=
+        card;
+
+    } else if (
+      video.category ===
+      "trending"
+    ) {
+
+      trendingContainer.innerHTML +=
+        card;
+
+    } else if (
+      video.category ===
+      "music"
+    ) {
+
+      musicContainer.innerHTML +=
+        card;
+
+    } else if (
+      video.category ===
+      "movies"
+    ) {
+
+      moviesContainer.innerHTML +=
+        card;
     }
   });
 
   attachVideoEvents();
+
+  // Keep count synchronized
+  updateLikedVideosCount();
 }
 
 // =====================================================
@@ -337,64 +492,109 @@ function renderVideos() {
 // =====================================================
 
 function attachVideoEvents() {
-  const articles = document.querySelectorAll(
-    "#recommendedVideos article, " +
+
+  const articles =
+    document.querySelectorAll(
+      "#recommendedVideos article, " +
       "#trendingVideos article, " +
       "#musicVideos article, " +
-      "#movieVideos article",
-  );
+      "#movieVideos article"
+    );
 
   articles.forEach(function (article) {
-    article.style.cursor = "pointer";
+
+    article.style.cursor =
+      "pointer";
 
     // =================================================
     // VIDEO CLICK
     // =================================================
 
-    article.addEventListener("click", function (event) {
-      // Do NOT open video when Like button is clicked
-      if (event.target.closest(".like-btn")) {
-        return;
+    article.addEventListener(
+      "click",
+      function (event) {
+
+        // Do NOT open video when Like button is clicked
+        if (
+          event.target.closest(
+            ".like-btn"
+          )
+        ) {
+          return;
+        }
+
+        const id =
+          article.dataset.id;
+
+        console.log(
+          "Opening video:",
+          id
+        );
+
+        window.open(
+          "video.html?id=" +
+          encodeURIComponent(id),
+          "_blank"
+        );
       }
-
-      const id = article.dataset.id;
-
-      console.log("Opening video:", id);
-
-      window.open("video.html?id=" + encodeURIComponent(id), "_blank");
-    });
+    );
 
     // =================================================
     // LIKE BUTTON
     // =================================================
 
-    const likeButton = article.querySelector(".like-btn");
+    const likeButton =
+      article.querySelector(
+        ".like-btn"
+      );
 
     if (likeButton) {
-      likeButton.addEventListener("click", function (event) {
-        event.preventDefault();
 
-        event.stopPropagation();
+      likeButton.addEventListener(
+        "click",
+        function (event) {
 
-        const videoId = this.dataset.id;
+          event.preventDefault();
 
-        console.log("Like button clicked:", videoId);
+          event.stopPropagation();
 
-        toggleLikeVideo(videoId, this);
-      });
+          const videoId =
+            this.dataset.id;
+
+          console.log(
+            "Like button clicked:",
+            videoId
+          );
+
+          toggleLikeVideo(
+            videoId,
+            this
+          );
+        }
+      );
     }
 
     // =================================================
     // HOVER EFFECT
     // =================================================
 
-    article.addEventListener("mouseenter", function () {
-      article.style.transform = "scale(1.02)";
-    });
+    article.addEventListener(
+      "mouseenter",
+      function () {
 
-    article.addEventListener("mouseleave", function () {
-      article.style.transform = "scale(1)";
-    });
+        article.style.transform =
+          "scale(1.02)";
+      }
+    );
+
+    article.addEventListener(
+      "mouseleave",
+      function () {
+
+        article.style.transform =
+          "scale(1)";
+      }
+    );
   });
 }
 
@@ -403,21 +603,43 @@ function attachVideoEvents() {
 // =====================================================
 
 function getActiveCategory() {
-  const trendingSection = document.getElementById("trending-section");
 
-  const musicSection = document.getElementById("music-section");
+  const trendingSection =
+    document.getElementById(
+      "trending-section"
+    );
 
-  const moviesSection = document.getElementById("movies");
+  const musicSection =
+    document.getElementById(
+      "music-section"
+    );
 
-  if (trendingSection && trendingSection.style.display !== "none") {
+  const moviesSection =
+    document.getElementById(
+      "movies"
+    );
+
+  if (
+    trendingSection &&
+    trendingSection.style.display !==
+      "none"
+  ) {
     return "trending";
   }
 
-  if (musicSection && musicSection.style.display !== "none") {
+  if (
+    musicSection &&
+    musicSection.style.display !==
+      "none"
+  ) {
     return "music";
   }
 
-  if (moviesSection && moviesSection.style.display !== "none") {
+  if (
+    moviesSection &&
+    moviesSection.style.display !==
+      "none"
+  ) {
     return "movies";
   }
 
@@ -429,27 +651,37 @@ function getActiveCategory() {
 // =====================================================
 
 async function searchVideos() {
+
   if (!searchInput) {
     return;
   }
 
-  const value = searchInput.value.trim();
+  const value =
+    searchInput.value.trim();
 
   // =================================================
   // EMPTY SEARCH
   // =================================================
 
   if (value === "") {
+
     resetSearch();
 
     return;
   }
 
-  const activeCategory = getActiveCategory();
+  const activeCategory =
+    getActiveCategory();
 
-  console.log("Searching for:", value);
+  console.log(
+    "Searching for:",
+    value
+  );
 
-  console.log("Active category:", activeCategory);
+  console.log(
+    "Active category:",
+    activeCategory
+  );
 
   // =================================================
   // BUILD SEARCH API URL
@@ -460,59 +692,92 @@ async function searchVideos() {
     "?query=" +
     encodeURIComponent(value) +
     "&category=" +
-    encodeURIComponent(activeCategory);
+    encodeURIComponent(
+      activeCategory
+    );
 
-  console.log("Search API:", searchURL);
+  console.log(
+    "Search API:",
+    searchURL
+  );
 
   // =================================================
   // SHOW SPINNER
   // =================================================
 
   if (spinner) {
-    spinner.style.display = "flex";
+    spinner.style.display =
+      "flex";
   }
 
   try {
+
     // =================================================
     // CALL SPRING BOOT SEARCH API
     // =================================================
 
-    const response = await fetch(searchURL);
+    const response =
+      await fetch(searchURL);
 
     if (!response.ok) {
-      throw new Error("Search API request failed. Status: " + response.status);
+      throw new Error(
+        "Search API request failed. Status: " +
+        response.status
+      );
     }
 
     // =================================================
     // CONVERT RESPONSE TO JSON
     // =================================================
 
-    const searchResults = await response.json();
+    const searchResults =
+      await response.json();
 
-    console.log("Search results received from API:", searchResults);
+    console.log(
+      "Search results received from API:",
+      searchResults
+    );
 
     // =================================================
     // RESTORE LIKE STATUS
     // =================================================
 
-    const likedVideoIds = getLikedVideoIds();
+    const likedVideoIds =
+      getLikedVideoIds();
 
-    searchResults.forEach(function (video) {
-      video.liked = likedVideoIds.includes(String(video.id));
-    });
+    searchResults.forEach(
+      function (video) {
+
+        video.liked =
+          likedVideoIds.includes(
+            String(video.id)
+          );
+      }
+    );
 
     // =================================================
     // DISPLAY SEARCH RESULTS
     // =================================================
 
-    renderSearchResults(searchResults, activeCategory);
+    renderSearchResults(
+      searchResults,
+      activeCategory
+    );
+
   } catch (error) {
-    console.error("Search API error:", error);
+
+    console.error(
+      "Search API error:",
+      error
+    );
 
     renderSearchAPIError();
+
   } finally {
+
     if (spinner) {
-      spinner.style.display = "none";
+      spinner.style.display =
+        "none";
     }
   }
 }
@@ -521,21 +786,43 @@ async function searchVideos() {
 // RENDER SEARCH RESULTS
 // =====================================================
 
-function renderSearchResults(videoList, category) {
+function renderSearchResults(
+  videoList,
+  category
+) {
+
   const containers = {
-    recommended: document.getElementById("recommendedVideos"),
 
-    trending: document.getElementById("trendingVideos"),
+    recommended:
+      document.getElementById(
+        "recommendedVideos"
+      ),
 
-    music: document.getElementById("musicVideos"),
+    trending:
+      document.getElementById(
+        "trendingVideos"
+      ),
 
-    movies: document.getElementById("movieVideos"),
+    music:
+      document.getElementById(
+        "musicVideos"
+      ),
+
+    movies:
+      document.getElementById(
+        "movieVideos"
+      ),
   };
 
-  const container = containers[category];
+  const container =
+    containers[category];
 
   if (!container) {
-    console.error("Container not found:", category);
+
+    console.error(
+      "Container not found:",
+      category
+    );
 
     return;
   }
@@ -550,7 +837,11 @@ function renderSearchResults(videoList, category) {
   // NO RESULTS
   // =================================================
 
-  if (!videoList || videoList.length === 0) {
+  if (
+    !videoList ||
+    videoList.length === 0
+  ) {
+
     container.innerHTML = `
 
       <div class="no-results">
@@ -574,15 +865,22 @@ function renderSearchResults(videoList, category) {
   // DISPLAY SEARCH RESULTS
   // =================================================
 
-  videoList.forEach(function (video) {
-    container.innerHTML += createVideoCard(video);
-  });
+  videoList.forEach(
+    function (video) {
+
+      container.innerHTML +=
+        createVideoCard(video);
+    }
+  );
 
   // =================================================
   // ATTACH EVENTS
   // =================================================
 
   attachVideoEvents();
+
+  // Keep count synchronized
+  updateLikedVideosCount();
 }
 
 // =====================================================
@@ -590,19 +888,35 @@ function renderSearchResults(videoList, category) {
 // =====================================================
 
 function renderSearchAPIError() {
-  const category = getActiveCategory();
+
+  const category =
+    getActiveCategory();
 
   const containers = {
-    recommended: document.getElementById("recommendedVideos"),
 
-    trending: document.getElementById("trendingVideos"),
+    recommended:
+      document.getElementById(
+        "recommendedVideos"
+      ),
 
-    music: document.getElementById("musicVideos"),
+    trending:
+      document.getElementById(
+        "trendingVideos"
+      ),
 
-    movies: document.getElementById("movieVideos"),
+    music:
+      document.getElementById(
+        "musicVideos"
+      ),
+
+    movies:
+      document.getElementById(
+        "movieVideos"
+      ),
   };
 
-  const container = containers[category];
+  const container =
+    containers[category];
 
   if (!container) {
     return;
@@ -638,9 +952,14 @@ function renderSearchAPIError() {
 // =====================================================
 
 if (searchBtn) {
-  searchBtn.addEventListener("click", function () {
-    searchVideos();
-  });
+
+  searchBtn.addEventListener(
+    "click",
+    function () {
+
+      searchVideos();
+    }
+  );
 }
 
 // =====================================================
@@ -648,15 +967,24 @@ if (searchBtn) {
 // =====================================================
 
 if (searchInput) {
-  searchInput.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      searchVideos();
-    }
-  });
 
-  searchInput.addEventListener("input", function () {
-    toggleClearButton();
-  });
+  searchInput.addEventListener(
+    "keydown",
+    function (event) {
+
+      if (event.key === "Enter") {
+        searchVideos();
+      }
+    }
+  );
+
+  searchInput.addEventListener(
+    "input",
+    function () {
+
+      toggleClearButton();
+    }
+  );
 }
 
 // =====================================================
@@ -664,14 +992,26 @@ if (searchInput) {
 // =====================================================
 
 function toggleClearButton() {
-  if (!searchInput || !clearBtn) {
+
+  if (
+    !searchInput ||
+    !clearBtn
+  ) {
     return;
   }
 
-  if (searchInput.value.trim() !== "") {
-    clearBtn.style.display = "flex";
+  if (
+    searchInput.value.trim() !==
+    ""
+  ) {
+
+    clearBtn.style.display =
+      "flex";
+
   } else {
-    clearBtn.style.display = "none";
+
+    clearBtn.style.display =
+      "none";
   }
 }
 
@@ -680,6 +1020,7 @@ function toggleClearButton() {
 // =====================================================
 
 function clearSearch() {
+
   if (!searchInput) {
     return;
   }
@@ -689,22 +1030,38 @@ function clearSearch() {
   toggleClearButton();
 
   if (spinner) {
-    spinner.style.display = "none";
+    spinner.style.display =
+      "none";
   }
 
-  const category = getActiveCategory();
+  const category =
+    getActiveCategory();
 
-  const filteredVideos = videos.filter(function (video) {
-    return video.category === category;
-  });
+  const filteredVideos =
+    videos.filter(
+      function (video) {
 
-  renderSearchResults(filteredVideos, category);
+        return (
+          video.category ===
+          category
+        );
+      }
+    );
+
+  renderSearchResults(
+    filteredVideos,
+    category
+  );
 
   searchInput.focus();
 }
 
 if (clearBtn) {
-  clearBtn.addEventListener("click", clearSearch);
+
+  clearBtn.addEventListener(
+    "click",
+    clearSearch
+  );
 }
 
 // =====================================================
@@ -712,6 +1069,7 @@ if (clearBtn) {
 // =====================================================
 
 function resetSearch() {
+
   if (searchInput) {
     searchInput.value = "";
   }
@@ -719,38 +1077,73 @@ function resetSearch() {
   toggleClearButton();
 
   if (spinner) {
-    spinner.style.display = "none";
+    spinner.style.display =
+      "none";
   }
 
   renderVideos();
+
+  // Keep liked count synchronized
+  updateLikedVideosCount();
 }
 
 // =====================================================
 // PROFILE MENU
 // =====================================================
 
-const profileBtn = document.getElementById("profileBtn");
+const profileBtn =
+  document.getElementById(
+    "profileBtn"
+  );
 
-const profileMenu = document.getElementById("profileMenu");
+const profileMenu =
+  document.getElementById(
+    "profileMenu"
+  );
 
-if (profileBtn && profileMenu) {
-  profileBtn.addEventListener("click", function (event) {
-    event.stopPropagation();
+if (
+  profileBtn &&
+  profileMenu
+) {
 
-    if (profileMenu.style.display === "block") {
-      profileMenu.style.display = "none";
-    } else {
-      profileMenu.style.display = "block";
+  profileBtn.addEventListener(
+    "click",
+    function (event) {
+
+      event.stopPropagation();
+
+      if (
+        profileMenu.style.display ===
+        "block"
+      ) {
+
+        profileMenu.style.display =
+          "none";
+
+      } else {
+
+        profileMenu.style.display =
+          "block";
+      }
     }
-  });
+  );
 
-  profileMenu.addEventListener("click", function (event) {
-    event.stopPropagation();
-  });
+  profileMenu.addEventListener(
+    "click",
+    function (event) {
 
-  document.addEventListener("click", function () {
-    profileMenu.style.display = "none";
-  });
+      event.stopPropagation();
+    }
+  );
+
+  document.addEventListener(
+    "click",
+    function () {
+
+      profileMenu.style.display =
+        "none";
+    }
+  );
 }
 
 // =====================================================
@@ -758,261 +1151,555 @@ if (profileBtn && profileMenu) {
 // =====================================================
 
 (function () {
-  const profileContainer = document.querySelector(".profile-container");
+
+  const profileContainer =
+    document.querySelector(
+      ".profile-container"
+    );
 
   if (!profileContainer) {
     return;
   }
 
-  const helpBtn = profileContainer.querySelector("#helpBtn");
+  const helpBtn =
+    profileContainer.querySelector(
+      "#helpBtn"
+    );
 
-  const helpMenu = profileContainer.querySelector("#helpMenu");
+  const helpMenu =
+    profileContainer.querySelector(
+      "#helpMenu"
+    );
 
-  const closeHelp = profileContainer.querySelector("#closeHelp");
+  const closeHelp =
+    profileContainer.querySelector(
+      "#closeHelp"
+    );
 
-  const helpSearch = profileContainer.querySelector("#helpSearch");
+  const helpSearch =
+    profileContainer.querySelector(
+      "#helpSearch"
+    );
 
   if (!helpBtn || !helpMenu) {
     return;
   }
 
-  helpBtn.addEventListener("click", function (event) {
-    event.stopPropagation();
+  helpBtn.addEventListener(
+    "click",
+    function (event) {
 
-    const open = helpMenu.classList.contains("is-open");
-
-    if (open) {
-      helpMenu.classList.remove("is-open");
-
-      helpMenu.setAttribute("aria-hidden", "true");
-    } else {
-      helpMenu.classList.add("is-open");
-
-      helpMenu.setAttribute("aria-hidden", "false");
-
-      if (helpSearch) {
-        helpSearch.focus();
-      }
-    }
-  });
-
-  helpMenu.addEventListener("click", function (event) {
-    event.stopPropagation();
-  });
-
-  if (closeHelp) {
-    closeHelp.addEventListener("click", function (event) {
       event.stopPropagation();
 
-      helpMenu.classList.remove("is-open");
+      const open =
+        helpMenu.classList.contains(
+          "is-open"
+        );
 
-      helpMenu.setAttribute("aria-hidden", "true");
-    });
+      if (open) {
+
+        helpMenu.classList.remove(
+          "is-open"
+        );
+
+        helpMenu.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+      } else {
+
+        helpMenu.classList.add(
+          "is-open"
+        );
+
+        helpMenu.setAttribute(
+          "aria-hidden",
+          "false"
+        );
+
+        if (helpSearch) {
+          helpSearch.focus();
+        }
+      }
+    }
+  );
+
+  helpMenu.addEventListener(
+    "click",
+    function (event) {
+
+      event.stopPropagation();
+    }
+  );
+
+  if (closeHelp) {
+
+    closeHelp.addEventListener(
+      "click",
+      function (event) {
+
+        event.stopPropagation();
+
+        helpMenu.classList.remove(
+          "is-open"
+        );
+
+        helpMenu.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+      }
+    );
   }
 
-  document.addEventListener("click", function () {
-    if (helpMenu.classList.contains("is-open")) {
-      helpMenu.classList.remove("is-open");
+  document.addEventListener(
+    "click",
+    function () {
 
-      helpMenu.setAttribute("aria-hidden", "true");
+      if (
+        helpMenu.classList.contains(
+          "is-open"
+        )
+      ) {
+
+        helpMenu.classList.remove(
+          "is-open"
+        );
+
+        helpMenu.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+      }
     }
-  });
+  );
 
   if (helpSearch) {
-    helpSearch.addEventListener("input", function () {
-      const q = helpSearch.value.trim().toLowerCase();
 
-      const items = helpMenu.querySelectorAll(".help-item");
+    helpSearch.addEventListener(
+      "input",
+      function () {
 
-      items.forEach(function (item) {
-        const text = item.textContent.trim().toLowerCase();
+        const q =
+          helpSearch.value
+            .trim()
+            .toLowerCase();
 
-        item.style.display = text.includes(q) ? "flex" : "none";
-      });
-    });
+        const items =
+          helpMenu.querySelectorAll(
+            ".help-item"
+          );
+
+        items.forEach(
+          function (item) {
+
+            const text =
+              item.textContent
+                .trim()
+                .toLowerCase();
+
+            item.style.display =
+              text.includes(q)
+                ? "flex"
+                : "none";
+          }
+        );
+      }
+    );
   }
+
 })();
 
 // =====================================================
 // WATCH LATER
 // =====================================================
 
-const watchLaterBtn = document.getElementById("watchLaterBtn");
+const watchLaterBtn =
+  document.getElementById(
+    "watchLaterBtn"
+  );
 
 if (watchLaterBtn) {
-  watchLaterBtn.addEventListener("click", function () {
-    window.location.href = "watchlater.html";
-  });
+
+  watchLaterBtn.addEventListener(
+    "click",
+    function () {
+
+      window.location.href =
+        "watchlater.html";
+    }
+  );
 }
 
 // =====================================================
 // SIDEBAR
 // =====================================================
 
-const menuItems = document.querySelectorAll("aside li");
+const menuItems =
+  document.querySelectorAll(
+    "aside li"
+  );
 
-menuItems.forEach(function (item) {
-  item.addEventListener("click", function () {
-    menuItems.forEach(function (li) {
-      li.style.background = "";
-    });
+menuItems.forEach(
+  function (item) {
 
-    this.style.background = "red";
-  });
-});
+    item.addEventListener(
+      "click",
+      function () {
+
+        menuItems.forEach(
+          function (li) {
+
+            li.style.background =
+              "";
+          }
+        );
+
+        this.style.background =
+          "red";
+      }
+    );
+  }
+);
 
 // =====================================================
 // THEME / APPEARANCE
 // =====================================================
 
-document.addEventListener("DOMContentLoaded", function () {
-  const appearanceBtn = document.getElementById("appearanceBtn");
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
 
-  const appearanceMenu = document.getElementById("appearanceMenu");
+    const appearanceBtn =
+      document.getElementById(
+        "appearanceBtn"
+      );
 
-  const backAppearance = document.getElementById("backAppearance");
+    const appearanceMenu =
+      document.getElementById(
+        "appearanceMenu"
+      );
 
-  if (appearanceBtn && appearanceMenu) {
-    appearanceBtn.addEventListener("click", function () {
-      appearanceMenu.style.display = "block";
-    });
-  }
+    const backAppearance =
+      document.getElementById(
+        "backAppearance"
+      );
 
-  if (backAppearance && appearanceMenu) {
-    backAppearance.addEventListener("click", function () {
-      appearanceMenu.style.display = "none";
-    });
-  }
+    if (
+      appearanceBtn &&
+      appearanceMenu
+    ) {
 
-  document.querySelectorAll('input[name="theme"]').forEach(function (item) {
-    item.addEventListener("change", function () {
-      if (this.value === "dark") {
-        document.body.classList.add("dark-mode");
-      } else if (this.value === "light") {
-        document.body.classList.remove("dark-mode");
-      } else {
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          document.body.classList.add("dark-mode");
-        } else {
-          document.body.classList.remove("dark-mode");
+      appearanceBtn.addEventListener(
+        "click",
+        function () {
+
+          appearanceMenu.style.display =
+            "block";
         }
-      }
-    });
-  });
-});
+      );
+    }
+
+    if (
+      backAppearance &&
+      appearanceMenu
+    ) {
+
+      backAppearance.addEventListener(
+        "click",
+        function () {
+
+          appearanceMenu.style.display =
+            "none";
+        }
+      );
+    }
+
+    document
+      .querySelectorAll(
+        'input[name="theme"]'
+      )
+      .forEach(
+        function (item) {
+
+          item.addEventListener(
+            "change",
+            function () {
+
+              if (
+                this.value ===
+                "dark"
+              ) {
+
+                document.body.classList.add(
+                  "dark-mode"
+                );
+
+              } else if (
+                this.value ===
+                "light"
+              ) {
+
+                document.body.classList.remove(
+                  "dark-mode"
+                );
+
+              } else {
+
+                if (
+                  window.matchMedia(
+                    "(prefers-color-scheme: dark)"
+                  ).matches
+                ) {
+
+                  document.body.classList.add(
+                    "dark-mode"
+                  );
+
+                } else {
+
+                  document.body.classList.remove(
+                    "dark-mode"
+                  );
+                }
+              }
+            }
+          );
+        }
+      );
+  }
+);
 
 // =====================================================
 // SIDEBAR TOGGLE
 // =====================================================
 
-const menuBtn = document.getElementById("menuBtn");
+const menuBtn =
+  document.getElementById(
+    "menuBtn"
+  );
 
-const sidebar = document.getElementById("sidebar");
+const sidebar =
+  document.getElementById(
+    "sidebar"
+  );
 
-const hideItems = document.querySelectorAll(".hide-item");
+const hideItems =
+  document.querySelectorAll(
+    ".hide-item"
+  );
 
 if (menuBtn && sidebar) {
-  menuBtn.addEventListener("click", function () {
-    sidebar.classList.toggle("small");
 
-    hideItems.forEach(function (item) {
-      if (item.style.display === "none") {
-        item.style.display = "block";
-      } else {
-        item.style.display = "none";
-      }
-    });
-  });
+  menuBtn.addEventListener(
+    "click",
+    function () {
+
+      sidebar.classList.toggle(
+        "small"
+      );
+
+      hideItems.forEach(
+        function (item) {
+
+          if (
+            item.style.display ===
+            "none"
+          ) {
+
+            item.style.display =
+              "block";
+
+          } else {
+
+            item.style.display =
+              "none";
+          }
+        }
+      );
+    }
+  );
 }
 
 // =====================================================
 // NOTIFICATION POPUP
 // =====================================================
 
-const notificationBtn = document.getElementById("notificationBtn");
-
-const notificationPopup = document.getElementById("notificationPopup");
-
-const notificationContainer = document.querySelector(".notification-container");
-
-if (notificationBtn && notificationPopup) {
-  notificationBtn.addEventListener("click", function (event) {
-    event.stopPropagation();
-
-    notificationPopup.classList.toggle("show");
-  });
-
-  notificationPopup.addEventListener("click", function (event) {
-    event.stopPropagation();
-  });
-
-  document.addEventListener("click", function (event) {
-    if (
-      notificationContainer &&
-      !notificationContainer.contains(event.target)
-    ) {
-      notificationPopup.classList.remove("show");
-    }
-  });
-
-  const otherHeaderButtons = document.querySelectorAll(
-    "header button:not(#notificationBtn)",
+const notificationBtn =
+  document.getElementById(
+    "notificationBtn"
   );
 
-  otherHeaderButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      notificationPopup.classList.remove("show");
-    });
-  });
+const notificationPopup =
+  document.getElementById(
+    "notificationPopup"
+  );
+
+const notificationContainer =
+  document.querySelector(
+    ".notification-container"
+  );
+
+if (
+  notificationBtn &&
+  notificationPopup
+) {
+
+  notificationBtn.addEventListener(
+    "click",
+    function (event) {
+
+      event.stopPropagation();
+
+      notificationPopup.classList.toggle(
+        "show"
+      );
+    }
+  );
+
+  notificationPopup.addEventListener(
+    "click",
+    function (event) {
+
+      event.stopPropagation();
+    }
+  );
+
+  document.addEventListener(
+    "click",
+    function (event) {
+
+      if (
+        notificationContainer &&
+        !notificationContainer.contains(
+          event.target
+        )
+      ) {
+
+        notificationPopup.classList.remove(
+          "show"
+        );
+      }
+    }
+  );
+
+  const otherHeaderButtons =
+    document.querySelectorAll(
+      "header button:not(#notificationBtn)"
+    );
+
+  otherHeaderButtons.forEach(
+    function (button) {
+
+      button.addEventListener(
+        "click",
+        function () {
+
+          notificationPopup.classList.remove(
+            "show"
+          );
+        }
+      );
+    }
+  );
 }
 
 // =====================================================
 // HEADER BUTTONS
 // =====================================================
 
-const headerButtons = document.querySelectorAll("header button");
+const headerButtons =
+  document.querySelectorAll(
+    "header button"
+  );
 
-headerButtons.forEach(function (btn) {
-  btn.addEventListener("click", function () {
-    if (this.innerHTML.includes("🔔")) {
-      // Notification popup handles it
-    }
+headerButtons.forEach(
+  function (btn) {
 
-    if (this.innerHTML.includes("👤")) {
-      console.log("User Profile");
-    }
-  });
-});
+    btn.addEventListener(
+      "click",
+      function () {
+
+        if (
+          this.innerHTML.includes(
+            "🔔"
+          )
+        ) {
+          // Notification popup handles it
+        }
+
+        if (
+          this.innerHTML.includes(
+            "👤"
+          )
+        ) {
+
+          console.log(
+            "User Profile"
+          );
+        }
+      }
+    );
+  }
+);
 
 // =====================================================
 // HOME / TRENDING / MUSIC / MOVIES
 // =====================================================
 
 function showSection(sectionName) {
-  const recommendedSection = document.getElementById("recommended-section");
 
-  const trendingSection = document.getElementById("trending-section");
+  const recommendedSection =
+    document.getElementById(
+      "recommended-section"
+    );
 
-  const musicSection = document.getElementById("music-section");
+  const trendingSection =
+    document.getElementById(
+      "trending-section"
+    );
 
-  const moviesSection = document.getElementById("movies");
+  const musicSection =
+    document.getElementById(
+      "music-section"
+    );
+
+  const moviesSection =
+    document.getElementById(
+      "movies"
+    );
 
   if (recommendedSection) {
+
     recommendedSection.style.display =
-      sectionName === "recommended" ? "block" : "none";
+      sectionName === "recommended"
+        ? "block"
+        : "none";
   }
 
   if (trendingSection) {
+
     trendingSection.style.display =
-      sectionName === "trending" ? "block" : "none";
+      sectionName === "trending"
+        ? "block"
+        : "none";
   }
 
   if (musicSection) {
-    musicSection.style.display = sectionName === "music" ? "block" : "none";
+
+    musicSection.style.display =
+      sectionName === "music"
+        ? "block"
+        : "none";
   }
 
   if (moviesSection) {
-    moviesSection.style.display = sectionName === "movies" ? "block" : "none";
+
+    moviesSection.style.display =
+      sectionName === "movies"
+        ? "block"
+        : "none";
   }
 
   resetSearch();
@@ -1022,324 +1709,599 @@ function showSection(sectionName) {
 // HOME
 // =====================================================
 
-const homeBtn = document.getElementById("home");
+const homeBtn =
+  document.getElementById(
+    "home"
+  );
 
 if (homeBtn) {
-  homeBtn.addEventListener("click", function () {
-    showSection("recommended");
-  });
+
+  homeBtn.addEventListener(
+    "click",
+    function () {
+
+      showSection(
+        "recommended"
+      );
+    }
+  );
 }
 
 // =====================================================
 // TRENDING
 // =====================================================
 
-const trendingBtn = document.getElementById("trending");
+const trendingBtn =
+  document.getElementById(
+    "trending"
+  );
 
 if (trendingBtn) {
-  trendingBtn.addEventListener("click", function () {
-    showSection("trending");
-  });
+
+  trendingBtn.addEventListener(
+    "click",
+    function () {
+
+      showSection(
+        "trending"
+      );
+    }
+  );
 }
 
 // =====================================================
 // MUSIC
 // =====================================================
 
-const musicBtn = document.getElementById("music");
+const musicBtn =
+  document.getElementById(
+    "music"
+  );
 
 if (musicBtn) {
-  musicBtn.addEventListener("click", function () {
-    showSection("music");
-  });
+
+  musicBtn.addEventListener(
+    "click",
+    function () {
+
+      showSection(
+        "music"
+      );
+    }
+  );
 }
 
 // =====================================================
 // MOVIES
 // =====================================================
 
-const moviesBtn = document.getElementById("moviesBtn");
+const moviesBtn =
+  document.getElementById(
+    "moviesBtn"
+  );
 
 if (moviesBtn) {
-  moviesBtn.addEventListener("click", function () {
-    showSection("movies");
-  });
+
+  moviesBtn.addEventListener(
+    "click",
+    function () {
+
+      showSection(
+        "movies"
+      );
+    }
+  );
 }
 
 // =====================================================
 // FOOTER
 // =====================================================
 
-const footerText = document.querySelector("footer p");
+const footerText =
+  document.querySelector(
+    "footer p"
+  );
 
 if (footerText) {
-  footerText.innerHTML = `&copy; ${new Date().getFullYear()} RTube. This is a dummy webpage created for learning purposes.`;
+
+  footerText.innerHTML =
+    `&copy; ${new Date().getFullYear()} RTube. This is a dummy webpage created for learning purposes.`;
 }
 
 // =====================================================
 // VOICE SEARCH
 // =====================================================
 
-const voiceBtn = document.getElementById("voiceBtn");
+const voiceBtn =
+  document.getElementById(
+    "voiceBtn"
+  );
 
 const SpeechRecognition =
-  window.SpeechRecognition || window.webkitSpeechRecognition;
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
 
-if (voiceBtn && SpeechRecognition) {
-  const recognition = new SpeechRecognition();
+if (
+  voiceBtn &&
+  SpeechRecognition
+) {
 
-  recognition.lang = "en-US";
+  const recognition =
+    new SpeechRecognition();
 
-  recognition.interimResults = false;
+  recognition.lang =
+    "en-US";
 
-  recognition.maxAlternatives = 1;
+  recognition.interimResults =
+    false;
 
-  voiceBtn.addEventListener("click", function () {
-    recognition.start();
+  recognition.maxAlternatives =
+    1;
 
-    voiceBtn.innerHTML = "🎙️";
-  });
+  voiceBtn.addEventListener(
+    "click",
+    function () {
 
-  recognition.addEventListener("result", function (event) {
-    const transcript = event.results[0][0].transcript;
+      recognition.start();
 
-    if (searchInput) {
-      searchInput.value = transcript;
-
-      toggleClearButton();
-
-      // Voice search also uses Search API
-      searchVideos();
+      voiceBtn.innerHTML =
+        "🎙️";
     }
-  });
+  );
 
-  recognition.addEventListener("end", function () {
-    voiceBtn.innerHTML = "🎤";
-  });
+  recognition.addEventListener(
+    "result",
+    function (event) {
 
-  recognition.addEventListener("error", function () {
-    voiceBtn.innerHTML = "🎤";
+      const transcript =
+        event.results[0][0]
+          .transcript;
 
-    alert("Voice recognition failed.");
-  });
+      if (searchInput) {
+
+        searchInput.value =
+          transcript;
+
+        toggleClearButton();
+
+        // Voice search also uses Search API
+        searchVideos();
+      }
+    }
+  );
+
+  recognition.addEventListener(
+    "end",
+    function () {
+
+      voiceBtn.innerHTML =
+        "🎤";
+    }
+  );
+
+  recognition.addEventListener(
+    "error",
+    function () {
+
+      voiceBtn.innerHTML =
+        "🎤";
+
+      alert(
+        "Voice recognition failed."
+      );
+    }
+  );
+
 } else if (voiceBtn) {
-  voiceBtn.style.display = "none";
+
+  voiceBtn.style.display =
+    "none";
 }
 
 // =====================================================
 // LOGOUT
 // =====================================================
 
-const logoutBtn = document.getElementById("logoutBtn");
+const logoutBtn =
+  document.getElementById(
+    "logoutBtn"
+  );
 
 if (logoutBtn) {
-  logoutBtn.addEventListener("click", function (event) {
-    event.preventDefault();
 
-    const confirmLogout = confirm("Are you sure you want to logout?");
+  logoutBtn.addEventListener(
+    "click",
+    function (event) {
 
-    if (confirmLogout) {
-      localStorage.removeItem("isLoggedIn");
+      event.preventDefault();
 
-      localStorage.removeItem("username");
+      const confirmLogout =
+        confirm(
+          "Are you sure you want to logout?"
+        );
 
-      localStorage.removeItem("userEmail");
+      if (confirmLogout) {
 
-      window.open("about:blank", "_blank");
+        localStorage.removeItem(
+          "isLoggedIn"
+        );
+
+        localStorage.removeItem(
+          "username"
+        );
+
+        localStorage.removeItem(
+          "userEmail"
+        );
+
+        window.open(
+          "about:blank",
+          "_blank"
+        );
+      }
     }
-  });
+  );
 }
 
 // =====================================================
 // CREATE MENU
 // =====================================================
 
-const createBtn = document.getElementById("createBtn");
+const createBtn =
+  document.getElementById(
+    "createBtn"
+  );
 
-const createMenu = document.getElementById("createMenu");
+const createMenu =
+  document.getElementById(
+    "createMenu"
+  );
 
-if (createBtn && createMenu) {
-  createBtn.addEventListener("click", function (event) {
-    event.stopPropagation();
+if (
+  createBtn &&
+  createMenu
+) {
 
-    createMenu.classList.toggle("show");
-  });
+  createBtn.addEventListener(
+    "click",
+    function (event) {
 
-  createMenu.addEventListener("click", function (event) {
-    event.stopPropagation();
-  });
+      event.stopPropagation();
 
-  document.addEventListener("click", function () {
-    createMenu.classList.remove("show");
-  });
+      createMenu.classList.toggle(
+        "show"
+      );
+    }
+  );
+
+  createMenu.addEventListener(
+    "click",
+    function (event) {
+
+      event.stopPropagation();
+    }
+  );
+
+  document.addEventListener(
+    "click",
+    function () {
+
+      createMenu.classList.remove(
+        "show"
+      );
+    }
+  );
 }
 
 // =====================================================
 // UPLOAD VIDEO
 // =====================================================
 
-const uploadVideoBtn = document.getElementById("uploadVideoBtn");
+const uploadVideoBtn =
+  document.getElementById(
+    "uploadVideoBtn"
+  );
 
 if (uploadVideoBtn) {
-  uploadVideoBtn.addEventListener("click", function () {
-    window.location.href = "upload.html";
-  });
+
+  uploadVideoBtn.addEventListener(
+    "click",
+    function () {
+
+      window.location.href =
+        "upload.html";
+    }
+  );
 }
 
 // =====================================================
 // GO LIVE
 // =====================================================
 
-const goLiveBtn = document.getElementById("goLiveBtn");
+const goLiveBtn =
+  document.getElementById(
+    "goLiveBtn"
+  );
 
 if (goLiveBtn) {
-  goLiveBtn.addEventListener("click", function () {
-    window.location.href = "live.html";
-  });
+
+  goLiveBtn.addEventListener(
+    "click",
+    function () {
+
+      window.location.href =
+        "live.html";
+    }
+  );
 }
 
 // =====================================================
 // CREATE POST
 // =====================================================
 
-const createPostBtn = document.getElementById("createPostBtn");
+const createPostBtn =
+  document.getElementById(
+    "createPostBtn"
+  );
 
 if (createPostBtn) {
-  createPostBtn.addEventListener("click", function () {
-    window.location.href = "create-post.html";
-  });
+
+  createPostBtn.addEventListener(
+    "click",
+    function () {
+
+      window.location.href =
+        "create-post.html";
+    }
+  );
 }
 
 // =====================================================
 // WATCH HISTORY
 // =====================================================
 
-const chips = document.querySelectorAll(".chip");
+const chips =
+  document.querySelectorAll(
+    ".chip"
+  );
 
-const items = document.querySelectorAll(".hist-item");
+const items =
+  document.querySelectorAll(
+    ".hist-item"
+  );
 
-const emptyState = document.getElementById("emptyState");
+const emptyState =
+  document.getElementById(
+    "emptyState"
+  );
 
 function applyFilter(filter) {
+
   let visibleCount = 0;
 
-  items.forEach(function (item) {
-    const match = filter === "all" || item.dataset.category === filter;
+  items.forEach(
+    function (item) {
 
-    item.style.display = match ? "flex" : "none";
+      const match =
+        filter === "all" ||
+        item.dataset.category ===
+          filter;
 
-    if (match) {
-      visibleCount++;
+      item.style.display =
+        match
+          ? "flex"
+          : "none";
+
+      if (match) {
+        visibleCount++;
+      }
     }
-  });
+  );
 
   if (emptyState) {
-    emptyState.style.display = visibleCount === 0 ? "block" : "none";
+
+    emptyState.style.display =
+      visibleCount === 0
+        ? "block"
+        : "none";
   }
 }
 
-chips.forEach(function (chip) {
-  chip.addEventListener("click", function () {
-    chips.forEach(function (c) {
-      c.classList.remove("active");
-    });
+chips.forEach(
+  function (chip) {
 
-    chip.classList.add("active");
+    chip.addEventListener(
+      "click",
+      function () {
 
-    applyFilter(chip.dataset.filter);
-  });
-});
+        chips.forEach(
+          function (c) {
+
+            c.classList.remove(
+              "active"
+            );
+          }
+        );
+
+        chip.classList.add(
+          "active"
+        );
+
+        applyFilter(
+          chip.dataset.filter
+        );
+      }
+    );
+  }
+);
 
 // =====================================================
 // HISTORY SEARCH
 // =====================================================
 
-const historySearch = document.getElementById("historySearch");
+const historySearch =
+  document.getElementById(
+    "historySearch"
+  );
 
 if (historySearch) {
-  historySearch.addEventListener("input", function (e) {
-    const q = e.target.value.trim().toLowerCase();
 
-    let visibleCount = 0;
+  historySearch.addEventListener(
+    "input",
+    function (e) {
 
-    items.forEach(function (item) {
-      const title = item.dataset.title || "";
+      const q =
+        e.target.value
+          .trim()
+          .toLowerCase();
 
-      const match = title.toLowerCase().includes(q);
+      let visibleCount = 0;
 
-      item.style.display = match ? "flex" : "none";
+      items.forEach(
+        function (item) {
 
-      if (match) {
-        visibleCount++;
+          const title =
+            item.dataset.title ||
+            "";
+
+          const match =
+            title
+              .toLowerCase()
+              .includes(q);
+
+          item.style.display =
+            match
+              ? "flex"
+              : "none";
+
+          if (match) {
+            visibleCount++;
+          }
+        }
+      );
+
+      if (emptyState) {
+
+        emptyState.style.display =
+          visibleCount === 0
+            ? "block"
+            : "none";
       }
-    });
-
-    if (emptyState) {
-      emptyState.style.display = visibleCount === 0 ? "block" : "none";
     }
-  });
+  );
 }
 
 // =====================================================
 // CLEAR ALL HISTORY
 // =====================================================
 
-const clearAllBtn = document.getElementById("clearAllBtn");
+const clearAllBtn =
+  document.getElementById(
+    "clearAllBtn"
+  );
 
 if (clearAllBtn) {
-  clearAllBtn.addEventListener("click", function () {
-    if (confirm("Clear all watch history? This cannot be undone.")) {
-      items.forEach(function (item) {
-        item.remove();
-      });
 
-      if (emptyState) {
-        emptyState.style.display = "block";
+  clearAllBtn.addEventListener(
+    "click",
+    function () {
+
+      if (
+        confirm(
+          "Clear all watch history? This cannot be undone."
+        )
+      ) {
+
+        items.forEach(
+          function (item) {
+
+            item.remove();
+          }
+        );
+
+        if (emptyState) {
+
+          emptyState.style.display =
+            "block";
+        }
       }
     }
-  });
+  );
 }
 
 // =====================================================
 // PAUSE / RESUME HISTORY
 // =====================================================
 
-const pauseBtn = document.getElementById("pauseBtn");
+const pauseBtn =
+  document.getElementById(
+    "pauseBtn"
+  );
 
-const pauseLabel = document.getElementById("pauseLabel");
+const pauseLabel =
+  document.getElementById(
+    "pauseLabel"
+  );
 
 let paused = false;
 
 if (pauseBtn) {
-  pauseBtn.addEventListener("click", function () {
-    paused = !paused;
 
-    if (pauseLabel) {
-      pauseLabel.textContent = paused
-        ? "Resume watch history"
-        : "Pause watch history";
+  pauseBtn.addEventListener(
+    "click",
+    function () {
+
+      paused = !paused;
+
+      if (pauseLabel) {
+
+        pauseLabel.textContent =
+          paused
+            ? "Resume watch history"
+            : "Pause watch history";
+      }
     }
-  });
+  );
 }
 
 // =====================================================
 // MANAGE HISTORY
 // =====================================================
 
-const manageBtn = document.getElementById("manageBtn");
+const manageBtn =
+  document.getElementById(
+    "manageBtn"
+  );
 
 if (manageBtn) {
-  manageBtn.addEventListener("click", function () {
-    alert("Manage all history settings would open here.");
-  });
+
+  manageBtn.addEventListener(
+    "click",
+    function () {
+
+      alert(
+        "Manage all history settings would open here."
+      );
+    }
+  );
 }
 
 // =====================================================
 // INITIALIZE APPLICATION
 // =====================================================
 
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("RTube frontend loaded.");
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
 
-  loadVideosFromAPI();
-});
+    console.log(
+      "RTube frontend loaded."
+    );
+
+    // Update count immediately
+    updateLikedVideosCount();
+
+    // Load videos
+    loadVideosFromAPI();
+  }
+);
