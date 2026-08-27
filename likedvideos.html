@@ -14,16 +14,15 @@
         href="https://www.freepnglogos.com/uploads/youtube-logo-png/youtube-transparent-youtube-icon-download-clipart-with-transparent-25.png">
 
     <style>
+
         /* =====================================================
            BODY
         ===================================================== */
 
         body {
-
             font-family: Arial, Helvetica, sans-serif;
             margin: 0;
             background: #fff;
-
         }
 
 
@@ -32,11 +31,9 @@
         ===================================================== */
 
         .liked-container {
-
             display: flex;
             padding: 25px;
             gap: 35px;
-
         }
 
 
@@ -45,12 +42,13 @@
         ===================================================== */
 
         .playlist-card {
-
             width: 350px;
 
             background:
-                linear-gradient(#8b5d3d,
-                    #5b3822);
+                linear-gradient(
+                    #8b5d3d,
+                    #5b3822
+                );
 
             border-radius: 18px;
 
@@ -65,43 +63,34 @@
             height: 730px;
 
             box-sizing: border-box;
-
         }
 
 
         .playlist-card img {
-
             width: 100%;
 
             border-radius: 15px;
 
             display: block;
-
         }
 
 
         .playlist-card h1 {
-
             margin-top: 20px;
 
             font-size: 42px;
-
         }
 
 
         .playlist-card h3 {
-
             font-size: 22px;
 
             margin-bottom: 10px;
-
         }
 
 
         .playlist-card p {
-
             font-size: 17px;
-
         }
 
 
@@ -110,18 +99,15 @@
         ===================================================== */
 
         .play-buttons {
-
             display: flex;
 
             gap: 15px;
 
             margin-top: 25px;
-
         }
 
 
         .play-buttons button {
-
             padding: 15px 30px;
 
             border: none;
@@ -134,31 +120,26 @@
 
             font-weight: bold;
 
+            transition: transform 0.2s ease;
         }
 
 
         .play {
-
             background: white;
 
             color: black;
-
         }
 
 
         .shuffle {
-
             background: #6c4b34;
 
             color: white;
-
         }
 
 
         .play-buttons button:hover {
-
             transform: scale(1.03);
-
         }
 
 
@@ -167,11 +148,9 @@
         ===================================================== */
 
         .right-area {
-
             flex: 1;
 
             min-width: 0;
-
         }
 
 
@@ -180,18 +159,15 @@
         ===================================================== */
 
         .filter {
-
             display: flex;
 
             gap: 10px;
 
             margin-bottom: 25px;
-
         }
 
 
         .filter button {
-
             padding: 10px 18px;
 
             border: none;
@@ -204,22 +180,19 @@
 
             font-size: 15px;
 
+            transition: background 0.2s ease;
         }
 
 
         .filter button:hover {
-
             background: #ddd;
-
         }
 
 
         .filter .active {
-
             background: black;
 
             color: white;
-
         }
 
 
@@ -228,7 +201,6 @@
         ===================================================== */
 
         .video-item {
-
             display: flex;
 
             margin-bottom: 22px;
@@ -250,16 +222,13 @@
             transition:
                 background 0.2s ease,
                 transform 0.2s ease;
-
         }
 
 
         .video-item:hover {
-
             background: #f2f2f2;
 
             transform: scale(1.01);
-
         }
 
 
@@ -267,8 +236,7 @@
            VIDEO THUMBNAIL
         ===================================================== */
 
-        .video-item>img {
-
+        .video-item > img {
             width: 250px !important;
 
             height: 140px !important;
@@ -282,7 +250,6 @@
             object-fit: cover;
 
             display: block;
-
         }
 
 
@@ -290,8 +257,7 @@
            VIDEO DURATION
         ===================================================== */
 
-        .video-item>.dur {
-
+        .video-item > .dur {
             position: absolute;
 
             left: 198px;
@@ -325,7 +291,6 @@
             box-sizing: border-box;
 
             z-index: 10;
-
         }
 
 
@@ -334,33 +299,27 @@
         ===================================================== */
 
         .video-info {
-
             margin-left: 15px;
 
             padding-top: 0;
-
         }
 
 
         .video-info h3 {
-
             margin: 0;
 
             font-size: 22px;
 
             line-height: 1.3;
-
         }
 
 
         .video-info p {
-
             margin: 8px 0;
 
             color: gray;
 
             font-size: 15px;
-
         }
 
 
@@ -369,7 +328,6 @@
         ===================================================== */
 
         .loading {
-
             padding: 50px;
 
             text-align: center;
@@ -377,7 +335,6 @@
             color: #666;
 
             font-size: 18px;
-
         }
 
 
@@ -386,29 +343,23 @@
         ===================================================== */
 
         .no-results {
-
             padding: 60px 20px;
 
             text-align: center;
 
             color: #666;
-
         }
 
 
         .no-results h2 {
-
             margin-bottom: 10px;
 
             color: #222;
-
         }
 
 
         .no-results p {
-
             color: #777;
-
         }
 
 
@@ -419,14 +370,11 @@
         @media (max-width: 900px) {
 
             .liked-container {
-
                 flex-direction: column;
-
             }
 
 
             .playlist-card {
-
                 width: 100%;
 
                 position: relative;
@@ -434,14 +382,11 @@
                 top: 0;
 
                 height: auto;
-
             }
 
 
             .playlist-card img {
-
                 max-width: 400px;
-
             }
 
         }
@@ -450,21 +395,16 @@
         @media (max-width: 650px) {
 
             .liked-container {
-
                 padding: 15px;
-
             }
 
 
             .video-item {
-
                 flex-direction: column;
-
             }
 
 
-            .video-item>img {
-
+            .video-item > img {
                 width: 100% !important;
 
                 max-width: 100%;
@@ -474,12 +414,10 @@
                 height: auto !important;
 
                 aspect-ratio: 16 / 9;
-
             }
 
 
-            .video-item>.dur {
-
+            .video-item > .dur {
                 left: auto;
 
                 right: 8px;
@@ -487,33 +425,27 @@
                 bottom: auto;
 
                 top: 115px;
-
             }
 
 
             .video-info {
-
                 margin-left: 0;
 
                 padding-top: 10px;
-
             }
 
 
             .video-info h3 {
-
                 font-size: 18px;
-
             }
 
 
             .play-buttons {
-
                 flex-wrap: wrap;
-
             }
 
         }
+
     </style>
 
 </head>
@@ -535,8 +467,10 @@
 
         <div class="playlist-card">
 
-
-            <img src="images/liked-banner.jpg" alt="Liked Videos">
+            <img
+                src="images/liked-banner.jpg"
+                alt="Liked Videos"
+            >
 
 
             <h1>
@@ -549,7 +483,10 @@
             </h3>
 
 
-            <!-- This number will be updated by API -->
+            <!--
+                Count is updated from localStorage.
+                Key: likedVideoIds
+            -->
 
             <p id="likedVideoCount">
                 0 Videos
@@ -558,23 +495,24 @@
 
             <div class="play-buttons">
 
-
-                <button class="play" id="playAllBtn" type="button">
-
+                <button
+                    class="play"
+                    id="playAllBtn"
+                    type="button"
+                >
                     ▶ Play All
-
                 </button>
 
 
-                <button class="shuffle" id="shuffleBtn" type="button">
-
+                <button
+                    class="shuffle"
+                    id="shuffleBtn"
+                    type="button"
+                >
                     🔀 Shuffle
-
                 </button>
-
 
             </div>
-
 
         </div>
 
@@ -592,27 +530,29 @@
 
             <div class="filter">
 
-
-                <button class="active" id="allBtn" type="button">
-
+                <button
+                    class="active"
+                    id="allBtn"
+                    type="button"
+                >
                     All
-
                 </button>
 
 
-                <button id="videosBtn" type="button">
-
+                <button
+                    id="videosBtn"
+                    type="button"
+                >
                     Videos
-
                 </button>
 
 
-                <button id="shortsBtn" type="button">
-
+                <button
+                    id="shortsBtn"
+                    type="button"
+                >
                     Shorts
-
                 </button>
-
 
             </div>
 
@@ -620,25 +560,19 @@
             <!-- =================================================
                  LIKED VIDEOS CONTAINER
 
-                 Videos will be inserted here from:
+                 Data comes from:
                  GET /api/videos/liked
             ================================================== -->
 
             <div id="likedVideosContainer">
 
-
                 <div class="loading">
-
                     Loading liked videos...
-
                 </div>
-
 
             </div>
 
-
         </div>
-
 
     </div>
 
@@ -656,6 +590,14 @@
 
         const LIKED_VIDEOS_API =
             "http://localhost:8080/api/videos/liked";
+
+
+        // =====================================================
+        // LOCAL STORAGE KEY
+        // =====================================================
+
+        const LIKED_VIDEOS_KEY =
+            "likedVideoIds";
 
 
         // =====================================================
@@ -712,14 +654,79 @@
 
 
         // =====================================================
-        // LOAD LIKED VIDEOS FROM SPRING BOOT
+        // GET LIKED VIDEO IDS FROM LOCAL STORAGE
+        // =====================================================
+
+        function getLikedVideoIds() {
+
+            try {
+
+                const storedIds =
+                    localStorage.getItem(
+                        LIKED_VIDEOS_KEY
+                    );
+
+
+                if (!storedIds) {
+                    return [];
+                }
+
+
+                const parsedIds =
+                    JSON.parse(storedIds);
+
+
+                return Array.isArray(parsedIds)
+                    ? parsedIds
+                    : [];
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Error reading liked video IDs:",
+                    error
+                );
+
+                return [];
+            }
+        }
+
+
+        // =====================================================
+        // UPDATE LIKED VIDEO COUNT
+        // =====================================================
+
+        function updateLikedVideoCount() {
+
+            if (!likedVideoCount) {
+                return;
+            }
+
+
+            const likedVideoIds =
+                getLikedVideoIds();
+
+
+            const count =
+                likedVideoIds.length;
+
+
+            likedVideoCount.textContent =
+                count === 1
+                    ? "1 Video"
+                    : count + " Videos";
+        }
+
+
+        // =====================================================
+        // LOAD LIKED VIDEOS FROM SPRING BOOT API
         // =====================================================
 
         async function loadLikedVideos() {
 
-
             try {
-
 
                 console.log(
                     "Fetching liked videos..."
@@ -729,18 +736,21 @@
                 // Show loading
 
                 likedVideosContainer.innerHTML = `
-
                     <div class="loading">
-
                         Loading liked videos...
-
                     </div>
-
                 `;
 
 
                 // =================================================
-                // CALL API
+                // UPDATE COUNT FIRST
+                // =================================================
+
+                updateLikedVideoCount();
+
+
+                // =================================================
+                // CALL SPRING BOOT API
                 // =================================================
 
                 const response =
@@ -759,7 +769,6 @@
                         "Liked videos API failed. Status: "
                         + response.status
                     );
-
                 }
 
 
@@ -767,8 +776,16 @@
                 // CONVERT RESPONSE TO JSON
                 // =================================================
 
-                likedVideos =
+                const data =
                     await response.json();
+
+
+                // Make sure API response is an array
+
+                likedVideos =
+                    Array.isArray(data)
+                        ? data
+                        : [];
 
 
                 console.log(
@@ -778,36 +795,29 @@
 
 
                 // =================================================
-                // UPDATE COUNT
+                // UPDATE COUNT AGAIN
                 // =================================================
 
-                likedVideoCount.textContent =
-                    likedVideos.length
-                    + " Videos";
+                updateLikedVideoCount();
 
 
                 // =================================================
-                // DISPLAY ALL LIKED VIDEOS
+                // DISPLAY LIKED VIDEOS
                 // =================================================
 
                 renderLikedVideos(
                     likedVideos
                 );
 
-
             }
-            catch (error) {
 
+            catch (error) {
 
                 console.error(
                     "Error loading liked videos:",
                     error
                 );
 
-
-                // =================================================
-                // ERROR MESSAGE
-                // =================================================
 
                 likedVideosContainer.innerHTML = `
 
@@ -830,9 +840,7 @@
                     </div>
 
                 `;
-
             }
-
         }
 
 
@@ -841,7 +849,6 @@
         // =====================================================
 
         function renderLikedVideos(videoList) {
-
 
             likedVideosContainer.innerHTML = "";
 
@@ -854,7 +861,6 @@
                 !Array.isArray(videoList) ||
                 videoList.length === 0
             ) {
-
 
                 likedVideosContainer.innerHTML = `
 
@@ -872,9 +878,7 @@
 
                 `;
 
-
                 return;
-
             }
 
 
@@ -884,7 +888,6 @@
 
             videoList.forEach(
                 function (video) {
-
 
                     const videoItem =
                         document.createElement(
@@ -896,7 +899,7 @@
                         "video-item";
 
 
-                    // Store category for filtering
+                    // Store category
 
                     videoItem.dataset.category =
                         video.category || "videos";
@@ -947,7 +950,6 @@
                         "click",
                         function () {
 
-
                             console.log(
                                 "Opening video:",
                                 video.id
@@ -962,21 +964,18 @@
                                 "_blank"
                             );
 
-
                         }
                     );
 
 
-                    // Add to container
+                    // Add video to container
 
                     likedVideosContainer.appendChild(
                         videoItem
                     );
 
-
                 }
             );
-
         }
 
 
@@ -985,7 +984,6 @@
         // =====================================================
 
         function setActiveButton(activeButton) {
-
 
             allBtn.classList.remove(
                 "active"
@@ -1005,7 +1003,6 @@
             activeButton.classList.add(
                 "active"
             );
-
         }
 
 
@@ -1015,8 +1012,7 @@
 
         function filterLikedVideos(filter) {
 
-
-            let filteredVideos;
+            let filteredVideos = [];
 
 
             // =================================================
@@ -1027,7 +1023,6 @@
 
                 filteredVideos =
                     likedVideos;
-
             }
 
 
@@ -1047,7 +1042,6 @@
 
                         }
                     );
-
             }
 
 
@@ -1067,14 +1061,16 @@
 
                         }
                     );
-
             }
 
+
+            // =================================================
+            // RENDER FILTERED RESULTS
+            // =================================================
 
             renderLikedVideos(
                 filteredVideos
             );
-
         }
 
 
@@ -1092,13 +1088,13 @@
                         allBtn
                     );
 
+
                     filterLikedVideos(
                         "all"
                     );
 
                 }
             );
-
         }
 
 
@@ -1116,13 +1112,13 @@
                         videosBtn
                     );
 
+
                     filterLikedVideos(
                         "videos"
                     );
 
                 }
             );
-
         }
 
 
@@ -1140,13 +1136,13 @@
                         shortsBtn
                     );
 
+
                     filterLikedVideos(
                         "shorts"
                     );
 
                 }
             );
-
         }
 
 
@@ -1170,7 +1166,6 @@
                         );
 
                         return;
-
                     }
 
 
@@ -1188,10 +1183,8 @@
                         "_blank"
                     );
 
-
                 }
             );
-
         }
 
 
@@ -1215,7 +1208,6 @@
                         );
 
                         return;
-
                     }
 
 
@@ -1246,36 +1238,64 @@
                         "_blank"
                     );
 
-
                 }
             );
-
         }
 
 
         // =====================================================
-        // INITIALIZE
+        // UPDATE PAGE WHEN USER RETURNS TO THIS TAB
+        // =====================================================
+
+        window.addEventListener(
+            "pageshow",
+            function () {
+
+                console.log(
+                    "Liked Videos page shown."
+                );
+
+
+                /*
+                 * Read the latest localStorage value.
+                 * This ensures the count is updated if the
+                 * user liked/unliked a video on video.html
+                 * and then returned here.
+                 */
+
+                updateLikedVideoCount();
+
+            }
+        );
+
+
+        // =====================================================
+        // INITIALIZE PAGE
         // =====================================================
 
         document.addEventListener(
             "DOMContentLoaded",
             function () {
 
-
                 console.log(
                     "Liked Videos page loaded."
                 );
 
 
-                loadLikedVideos();
+                // Update count immediately
 
+                updateLikedVideoCount();
+
+
+                // Load videos from backend
+
+                loadLikedVideos();
 
             }
         );
 
 
     </script>
-
 
 </body>
 
