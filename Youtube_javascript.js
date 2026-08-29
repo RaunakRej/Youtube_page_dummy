@@ -4,10 +4,9 @@
 
 let videos = [];
 
-const API_URL = "http://localhost:8080/api/videos";
-
+const API_URL = "/api/videos";
 // Search API
-const SEARCH_API_URL = "http://localhost:8080/api/videos/search";
+const SEARCH_API_URL = "/api/videos/search";
 
 // =====================================================
 // LOCAL STORAGE KEYS
