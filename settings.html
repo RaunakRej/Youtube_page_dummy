@@ -1,110 +1,623 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
+    ```
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>YouTube Settings</title>
+    <title>RTube Settings</title>
 
     <link rel="stylesheet" href="settings.css">
+
     <link rel="icon" type="image/png"
         href="https://www.freepnglogos.com/uploads/youtube-logo-png/youtube-transparent-youtube-icon-download-clipart-with-transparent-25.png">
-
+    ```
 
 </head>
 
 <body>
 
+    ```
+    <!-- =====================================================
+     HEADER
+====================================================== -->
+
     <header>
 
         <div class="logo">
 
-            <button onclick="window.location.href='youtube_mainhtml.html'">☰</button>
+            <button id="homeBtn" type="button" aria-label="Go to home">
+                ☰
+            </button>
 
-            <h2 style="color: red;">▶ Raunak Dummy YouTube</h2>
+            <h2>▶ Raunak Dummy YouTube</h2>
 
         </div>
 
-        <input type="text" placeholder="Search">
+        <div class="header-search">
+
+            <input id="settingsSearch" type="text" placeholder="Search settings..." autocomplete="off">
+
+        </div>
 
         <img class="profile"
-            src="https://yt3.ggpht.com/seoNK1MlktRZw8GEsZMOElBRtVl6kKZ81d6hCmcFkUjf-pJ1jsKyAmCoxCi_DvO9O91PSFSJ=s88-c-k-c0x00ffffff-no-rj">
+            src="https://yt3.ggpht.com/seoNK1MlktRZw8GEsZMOElBRtVl6kKZ81d6hCmcFkUjf-pJ1jsKyAmCoxCi_DvO9O91PSFSJ=s88-c-k-c0x00ffffff-no-rj"
+            alt="Profile">
 
     </header>
 
+
+    <!-- =====================================================
+     MAIN CONTAINER
+====================================================== -->
+
     <div class="container">
+
+
+        <!-- =================================================
+         SETTINGS SIDEBAR
+    ================================================== -->
 
         <aside>
 
             <h2>Settings</h2>
 
-            <ul>
+            <ul id="settingsMenu">
 
-                <li class="active">Account</li>
+                <li class="active" data-section="account">
+                    👤 Account
+                </li>
 
-                <li>Notifications</li>
+                <li data-section="notifications">
+                    🔔 Notifications
+                </li>
 
-                <li>Playback and performance</li>
+                <li data-section="playback">
+                    ▶️ Playback and performance
+                </li>
 
-                <li>Downloads</li>
+                <li data-section="downloads">
+                    📥 Downloads
+                </li>
 
-                <li>Privacy</li>
+                <li data-section="privacy">
+                    🔒 Privacy
+                </li>
 
-                <li>Connected apps</li>
+                <li data-section="connected">
+                    🔗 Connected apps
+                </li>
 
-                <li>Billing and payments</li>
+                <li data-section="billing">
+                    💳 Billing and payments
+                </li>
 
-                <li>Advanced settings</li>
+                <li data-section="advanced">
+                    ⚙️ Advanced settings
+                </li>
 
             </ul>
 
         </aside>
 
+
+        <!-- =================================================
+         SETTINGS CONTENT
+    ================================================== -->
+
         <main>
 
-            <h3>Account</h3>
 
-            <h1>Choose how you appear and what you see on YouTube</h1>
+            <!-- =================================================
+             ACCOUNT
+        ================================================== -->
 
-            <p>Signed in as web.raunakrej275@gmail.com</p>
+            <section class="settings-section active-section" id="account">
 
-            <hr>
+                <h3>Account</h3>
 
-            <h2>Your YouTube Channel</h2>
+                <h1>Choose how you appear and what you see on YouTube</h1>
 
-            <div class="channel">
+                <p class="description">
+                    Manage your RTube account and channel information.
+                </p>
 
-                <img
-                    src="https://yt3.ggpht.com/seoNK1MlktRZw8GEsZMOElBRtVl6kKZ81d6hCmcFkUjf-pJ1jsKyAmCoxCi_DvO9O91PSFSJ=s88-c-k-c0x00ffffff-no-rj">
+                <hr>
 
-                <div>
+                <h2>Your YouTube Channel</h2>
 
-                    <h3>Raunak Rej</h3>
+                <div class="channel">
 
-                    <p class="link">Channel status and features</p>
+                    <img src="https://yt3.ggpht.com/seoNK1MlktRZw8GEsZMOElBRtVl6kKZ81d6hCmcFkUjf-pJ1jsKyAmCoxCi_DvO9O91PSFSJ=s88-c-k-c0x00ffffff-no-rj"
+                        alt="Channel">
 
-                    <p class="link">Create a new channel</p>
+                    <div>
 
-                    <p class="link">View advanced settings</p>
+                        <h3>Raunak Rej</h3>
+
+                        <p class="link" data-message="Channel status and features">
+                            Channel status and features
+                        </p>
+
+                        <p class="link" data-message="Create a new channel">
+                            Create a new channel
+                        </p>
+
+                        <p class="link" data-message="Advanced channel settings">
+                            View advanced settings
+                        </p>
+
+                    </div>
 
                 </div>
 
-            </div>
+                <hr>
 
-            <hr>
+                <h2>Your Account</h2>
 
-            <h2>Your Account</h2>
+                <p class="account-info">
+                    RTube Dummy Account
+                </p>
 
-            <p class="link">View or change your Google Account settings</p>
+                <p class="link" data-message="Google Account settings">
+                    View or change your account settings
+                </p>
 
-            <p class="link">Manage kids' profiles and features for teens</p>
+            </section>
+
+
+            <!-- =================================================
+             NOTIFICATIONS
+        ================================================== -->
+
+            <section class="settings-section" id="notifications">
+
+                <h3>Notifications</h3>
+
+                <h1>Notification settings</h1>
+
+                <p class="description">
+                    Choose which notifications you want to receive.
+                </p>
+
+                <div class="setting-card">
+
+                    <div>
+                        <h3>Allow notifications</h3>
+
+                        <p>
+                            Receive notifications about new videos,
+                            subscriptions and activity.
+                        </p>
+                    </div>
+
+                    <label class="switch">
+
+                        <input type="checkbox" id="notificationsToggle">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+                <div class="setting-card">
+
+                    <div>
+                        <h3>Recommended videos</h3>
+
+                        <p>
+                            Get notifications about videos you may like.
+                        </p>
+                    </div>
+
+                    <label class="switch">
+
+                        <input type="checkbox" id="recommendedToggle">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+             PLAYBACK
+        ================================================== -->
+
+            <section class="settings-section" id="playback">
+
+                <h3>Playback and performance</h3>
+
+                <h1>Playback preferences</h1>
+
+                <p class="description">
+                    Control how videos behave when you watch them.
+                </p>
+
+                <div class="setting-card">
+
+                    <div>
+
+                        <h3>Autoplay</h3>
+
+                        <p>
+                            Automatically play another video after
+                            the current video ends.
+                        </p>
+
+                    </div>
+
+                    <label class="switch">
+
+                        <input type="checkbox" id="autoplayToggle">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+                <div class="setting-card">
+
+                    <div>
+
+                        <h3>Video quality</h3>
+
+                        <p>
+                            Default video quality for playback.
+                        </p>
+
+                    </div>
+
+                    <select id="qualitySelect">
+
+                        <option value="auto">Auto</option>
+
+                        <option value="1080p">1080p</option>
+
+                        <option value="720p">720p</option>
+
+                        <option value="480p">480p</option>
+
+                    </select>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+             DOWNLOADS
+        ================================================== -->
+
+            <section class="settings-section" id="downloads">
+
+                <h3>Downloads</h3>
+
+                <h1>Download preferences</h1>
+
+                <p class="description">
+                    Manage your dummy download preferences.
+                </p>
+
+                <div class="setting-card">
+
+                    <div>
+
+                        <h3>Download over Wi-Fi only</h3>
+
+                        <p>
+                            Only allow downloads when connected to Wi-Fi.
+                        </p>
+
+                    </div>
+
+                    <label class="switch">
+
+                        <input type="checkbox" id="wifiToggle">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+                <div class="setting-card">
+
+                    <div>
+
+                        <h3>Download quality</h3>
+
+                        <p>
+                            Select your preferred download quality.
+                        </p>
+
+                    </div>
+
+                    <select id="downloadQuality">
+
+                        <option value="720p">720p</option>
+
+                        <option value="480p">480p</option>
+
+                        <option value="360p">360p</option>
+
+                    </select>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+             PRIVACY
+        ================================================== -->
+
+            <section class="settings-section" id="privacy">
+
+                <h3>Privacy</h3>
+
+                <h1>Your privacy settings</h1>
+
+                <p class="description">
+                    Manage your watch history and search history.
+                </p>
+
+                <div class="privacy-card">
+
+                    <div>
+
+                        <h3>Watch history</h3>
+
+                        <p id="historyStatus">
+                            Your watch history is active.
+                        </p>
+
+                    </div>
+
+                    <button class="secondary-btn" id="pauseHistoryBtn" type="button">
+                        Pause history
+                    </button>
+
+                </div>
+
+                <div class="privacy-card">
+
+                    <div>
+
+                        <h3>Clear watch history</h3>
+
+                        <p>
+                            Delete all videos currently stored in
+                            your watch history.
+                        </p>
+
+                    </div>
+
+                    <button class="danger-btn" id="clearHistoryBtn" type="button">
+                        Clear history
+                    </button>
+
+                </div>
+
+                <div class="privacy-card">
+
+                    <div>
+
+                        <h3>Clear search history</h3>
+
+                        <p>
+                            Delete saved search information from
+                            this browser.
+                        </p>
+
+                    </div>
+
+                    <button class="danger-btn" id="clearSearchHistoryBtn" type="button">
+                        Clear search history
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+             CONNECTED APPS
+        ================================================== -->
+
+            <section class="settings-section" id="connected">
+
+                <h3>Connected apps</h3>
+
+                <h1>Apps connected to RTube</h1>
+
+                <p class="description">
+                    Manage applications connected to your account.
+                </p>
+
+                <div class="info-card">
+
+                    <h3>🎵 Music Player</h3>
+
+                    <p>
+                        Connected application
+                    </p>
+
+                    <button class="secondary-btn" data-message="Music Player disconnected">
+                        Disconnect
+                    </button>
+
+                </div>
+
+                <div class="info-card">
+
+                    <h3>📱 Mobile Application</h3>
+
+                    <p>
+                        No active connection
+                    </p>
+
+                    <button class="secondary-btn" data-message="No application is currently connected">
+                        Manage
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+             BILLING
+        ================================================== -->
+
+            <section class="settings-section" id="billing">
+
+                <h3>Billing and payments</h3>
+
+                <h1>Payments</h1>
+
+                <p class="description">
+                    Manage your dummy RTube payment information.
+                </p>
+
+                <div class="info-card">
+
+                    <h3>💳 Payment methods</h3>
+
+                    <p>
+                        No payment methods have been added.
+                    </p>
+
+                    <button class="primary-btn" data-message="Payment method management is not available in this demo">
+                        Add payment method
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+             ADVANCED
+        ================================================== -->
+
+            <section class="settings-section" id="advanced">
+
+                <h3>Advanced settings</h3>
+
+                <h1>Advanced preferences</h1>
+
+                <p class="description">
+                    Additional settings for your RTube experience.
+                </p>
+
+                <div class="setting-card">
+
+                    <div>
+
+                        <h3>Use experimental features</h3>
+
+                        <p>
+                            Enable experimental features in this demo.
+                        </p>
+
+                    </div>
+
+                    <label class="switch">
+
+                        <input type="checkbox" id="experimentalToggle">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+                <div class="setting-card">
+
+                    <div>
+
+                        <h3>Reset all settings</h3>
+
+                        <p>
+                            Restore all RTube settings to their defaults.
+                        </p>
+
+                    </div>
+
+                    <button class="danger-btn" id="resetSettingsBtn" type="button">
+                        Reset settings
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+             APPEARANCE
+        ================================================== -->
+
+            <section class="settings-section" id="appearance">
+
+                <h3>Appearance</h3>
+
+                <h1>Choose your appearance</h1>
+
+                <p class="description">
+                    Select how RTube should look.
+                </p>
+
+                <div class="appearance-options">
+
+                    <label class="theme-option">
+
+                        <input type="radio" name="theme" value="light">
+
+                        <span>☀️ Light</span>
+
+                    </label>
+
+                    <label class="theme-option">
+
+                        <input type="radio" name="theme" value="dark">
+
+                        <span>🌙 Dark</span>
+
+                    </label>
+
+                    <label class="theme-option">
+
+                        <input type="radio" name="theme" value="system">
+
+                        <span>💻 System default</span>
+
+                    </label>
+
+                </div>
+
+            </section>
 
         </main>
 
     </div>
+
+
+    <!-- =====================================================
+     SETTINGS JAVASCRIPT
+====================================================== -->
+
+    <script src="settings.js"></script>
+    ```
 
 </body>
 
